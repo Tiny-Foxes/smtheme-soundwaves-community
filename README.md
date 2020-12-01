@@ -24,5 +24,3 @@ Please see LICENSE.md
 
 ### Third-party attributions
 Menu music is Effects of Elevation (Citizen) / Revolution Void [CC-BY 3.0] https://freemusicarchive.org/music/Revolution_Void/Effects_of_Elevation/
-
-Narumi (mascot) art by leojiaz https://twitter.com/leojiaz
