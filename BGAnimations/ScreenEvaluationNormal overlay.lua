@@ -14,13 +14,13 @@ for p in ivalues(PlayerNumber) do
 					self:zoomto(336,61):vertalign(top) 
 					self:diffuse(PlayerColor(p)):diffuserightedge(PlayerCompColor(p)):diffusealpha(0.96)
 				end;
-				OnCommand=function(self) self:zoomto(336,0):sleep(0.5):decelerate(0.7):zoomto(336,61) end;
+				OnCommand=function(self) self:zoomto(336,0):decelerate(0.3):zoomto(336,61) end;
 				OffCommand=function(self) self:sleep(0.175):decelerate(0.4):addy(-105) end;
 			 };
 			 -- Avatar and name
 			Def.ActorFrame {
 				OnCommand=function(self) 
-					self:diffusealpha(0):sleep(0.5+0.7):decelerate(0.2):diffusealpha(1) 
+					self:diffusealpha(0):sleep(0.3):decelerate(0.2):diffusealpha(1) 
 				end;
 				Def.Sprite {
 					InitCommand=function(self) self:horizalign(left):vertalign(top):xy(-164,5) end;
@@ -54,13 +54,13 @@ for p in ivalues(PlayerNumber) do
 					self:zoomto(336,61):vertalign(top) 
 					self:diffuse( ColorDarkTone(PlayerColor(p)) ):diffusealpha(0.96)
 				end;
-				OnCommand=function(self) self:zoomto(336,0):sleep(0.5):decelerate(0.7):zoomto(336,61) end;
+				OnCommand=function(self) self:zoomto(336,0):decelerate(0.3):zoomto(336,61) end;
 				OffCommand=function(self) self:sleep(0.175):decelerate(0.4):addy(-105) end;
 			},
 		
 			Def.ActorFrame {
 				OnCommand=function(self) 
-					self:diffusealpha(0):sleep(0.5+0.7):decelerate(0.2):diffusealpha(1) 
+					self:diffusealpha(0):sleep(0.3):decelerate(0.3):diffusealpha(1) 
 				end;
 				Def.BitmapText {
 					Text=ToUpper(Screen.String("RecentlyPlayed")),
@@ -87,14 +87,14 @@ if not GAMESTATE:IsCourseMode() then
 	t[#t+1] = Def.ActorFrame {
 		LoadActor(THEME:GetPathG("ScreenEvaluation", "StageDisplay")) .. {
 			InitCommand=function(self) self:x(SCREEN_CENTER_X):y(SCREEN_TOP+76):zoom(0.8):visible(not GAMESTATE:HasEarnedExtraStage()) end;
-			OnCommand=function(self) self:diffusealpha(0):sleep(0.3):decelerate(0.4):diffusealpha(1) end;
+			OnCommand=function(self) self:diffusealpha(0):sleep(0.3):decelerate(0.3):diffusealpha(1) end;
 			OffCommand=function(self) self:sleep(0.175):decelerate(0.4):diffusealpha(0) end;
 		}
 	}
 else
 	t[#t+1] =  Def.ActorFrame {
 		InitCommand=function(self) self:x(SCREEN_CENTER_X):y(SCREEN_TOP+76):zoom(0.8) end;
-		OnCommand=function(self) self:diffusealpha(0):sleep(0.3):decelerate(0.4):diffusealpha(1) end;
+		OnCommand=function(self) self:diffusealpha(0):sleep(0.3):decelerate(0.3):diffusealpha(1) end;
 		OffCommand=function(self) self:sleep(0.175):decelerate(0.4):diffusealpha(0) end;
 				Def.BitmapText {
 				Font="_Bold";

@@ -3,7 +3,7 @@ local t = Def.ActorFrame {};
 local grade_area_offset = 16
 local fade_out_speed = 0.2
 local fade_out_pause = 0.1
-local off_wait = 0.75
+local off_wait = 0.4
 local EvalPages = 4
 local nativeTitle = PREFSMAN:GetPreference("ShowNativeLanguage")
 

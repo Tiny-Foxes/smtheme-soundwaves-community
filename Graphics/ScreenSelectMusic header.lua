@@ -9,12 +9,11 @@ Def.ActorFrame {
 		self:vertalign(top)
 	end;
 	OnCommand=function(self)
-		self:addy(-104):decelerate(0.5):addy(104)
+		self:addy(-104):decelerate(0.3):addy(104)
 	end,
 	OffCommand=function(self)
-		self:sleep(0.175):decelerate(0.4):addy(-105)
+		self:sleep(0.175):decelerate(0.3):addy(-105)
 	end;
-		
 		Def.Quad {
 			InitCommand=function(self)
 				self:vertalign(top):horizalign(left):zoomto(SCREEN_WIDTH,64):x(0)
@@ -22,8 +21,7 @@ Def.ActorFrame {
 			OnCommand=function(self)
 				self:diffuse(ColorTable["swmeHF"])
 			end,
-		},
-		
+		},	
 		-- BG for sort region
 		Def.Quad {
 			InitCommand=function(self)
@@ -37,7 +35,6 @@ Def.ActorFrame {
 				:decelerate(0.4):diffusealpha(0):diffuse(ColorTable["headerSortB"])
 			end;
 		},
-
 		-- Stripe
 		Def.Quad {
 			InitCommand=function(self)
@@ -58,7 +55,7 @@ Def.ActorFrame {
 			self:xy(SCREEN_LEFT+25,32):horizalign(left):diffuse( ColorTable["headerTextColor"] ):diffusebottomedge( ColorTable["headerTextGradient"] ):skewx(-0.15):zoom(0.8)
 		end;
 		OnCommand=function(self)
-			self:diffusealpha(0):sleep(0.5):smooth(0.3):diffusealpha(1)
+			self:diffusealpha(0):sleep(0.3):smooth(0.2):diffusealpha(1)
 			if SCREENMAN:GetTopScreen():GetName() == "ScreenSelectMusic" then
 				self:maxwidth( WideScale(10,240) )
 			end

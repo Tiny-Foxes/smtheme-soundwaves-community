@@ -8,10 +8,10 @@ Def.ActorFrame {
 		self:vertalign(top)
 	end;
 	OnCommand=function(self)
-		self:addy(-104):decelerate(0.5):addy(104)
+		self:addy(-104):decelerate(0.3):addy(104)
 	end,
 	OffCommand=function(self)
-		self:sleep(0.175):decelerate(0.4):addy(-105)
+		self:sleep(0.175):decelerate(0.3):addy(-105)
 	end;
 	Def.Quad {
 		InitCommand=function(self)
@@ -42,7 +42,7 @@ Def.BitmapText {
 		:diffuse( ColorTable["headerTextColor"] ):diffusebottomedge( ColorTable["headerTextGradient"] ):skewx(-0.15)
 	end;
 	OnCommand=function(self)
-		self:diffusealpha(0):sleep(0.5):smooth(0.3):diffusealpha(1)
+		self:diffusealpha(0):sleep(0.3):smooth(0.2):diffusealpha(1)
 		if SCREENMAN:GetTopScreen() and SCREENMAN:GetTopScreen():GetName() == "ScreenSelectMusic" then
 			self:maxwidth( WideScale(10,240) )
 		end
