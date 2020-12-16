@@ -14,10 +14,10 @@ return Def.ActorFrame {
 	Def.StepsDisplayList {
 		Name="StepsDisplayListRow";
 		OnCommand=function(self)
-		self:diffusealpha(0):zoomx(0.65):decelerate(0.4):zoomx(1):diffusealpha(1)
+		self:diffusealpha(0):decelerate(0.3):diffusealpha(1)
 		end;
 		OffCommand=function(self)
-		self:decelerate(0.3):zoomx(0.65):diffusealpha(0)
+		self:decelerate(0.3):diffusealpha(0)
 		end;
 		CursorP1 = Def.ActorFrame {
 			InitCommand=function(self) self:x(-87):player(PLAYER_1) end;
