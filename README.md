@@ -14,7 +14,7 @@ It has a clean and modern feel with influence from flat design, whilst still hav
 ## Contributors
 
 * ry00001 (measure counter)
-
+* [Color Scheme Contributors](https://github.com/Tiny-Foxes/SoundWaves-Colors/blob/master/CREDITS.md)
 ## Acknowledgements 
 * Everyone who has provided feedback for Soundwaves during development.
 * dbk2 (some of the features present in Simply Love for SM5 influenced some of our feature goals for Soundwaves)

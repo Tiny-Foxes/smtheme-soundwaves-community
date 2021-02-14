@@ -377,8 +377,8 @@ return {
 	SoundwavesSubTheme =
 	{
 		Default = 1,
-		Choices = { OptionNameString('swClassic'), OptionNameString('swVaporwave'), OptionNameString('swGrass'), OptionNameString('swRetro'), OptionNameString('swFire'), "Dark", "Chaos", "Ice", "Wave", "Alien Alien", "BISTRO", "Invert Standard", "Rainbow FUN", "Baby Pink", "Sunny Day", "The Blood"},
-		Values = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16}
+		Choices = { OptionNameString('swClassic'), OptionNameString('swVaporwave'), OptionNameString('swGrass'), OptionNameString('swRetro'), OptionNameString('swFire'), "Dark", "Chaos", "Ice", "Wave", "Alien Alien", "BISTRO", "Invert Standard", "Rainbow FUN", "Baby Pink", "Sunny Day", "The Blood", "Virtual LED", "Night Emotions", "Cool Blues"},
+		Values = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19}
 	},
 	LifeType =
 	{

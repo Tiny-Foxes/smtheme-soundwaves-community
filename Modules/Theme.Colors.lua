@@ -430,7 +430,7 @@ return function( Index )
 			["menuTextLoseFocus"] = color("#FFFFFF"),
 			["optionExplanationBG"] = color("#00000050")
 		},
-		{ -- BISTRO
+		{ -- (11) BISTRO
             ["titleBGA"] = color("#FFFFFF"),
             ["titleBGB"] = color("#0488ff"),
             ["titleBGPattern"] = color("#FFDC00"),
@@ -473,7 +473,7 @@ return function( Index )
             ["menuTextLoseFocus"] = color("#8a878a"),
             ["optionExplanationBG"] = color("#4C4C4C")
         }, -- end BISTRO
-	{  -- Invert Standard
+		{  -- (12) Invert Standard
 			["titleBGA"] = color("#FCEDA2"),
 			["titleBGB"] = color("#FFBA71"),
 			["titleBGPattern"] = color("#7A4800"),
@@ -515,8 +515,8 @@ return function( Index )
 			["menuTextGainFocus"] = color("#463202"),
 			["menuTextLoseFocus"] = color("#380600"),
 			["optionExplanationBG"] = color("#FFFFFF50")
-	}, -- End of Invert Standard
-	{  -- Rainbow FUN
+		}, -- End of Invert Standard
+		{  -- (13) Rainbow FUN
 			["titleBGA"] = color("#9E0000"),
 			["titleBGB"] = color("#DB9F00"),
 			["titleBGPattern"] = color("#007B00"),
@@ -558,8 +558,8 @@ return function( Index )
 			["menuTextGainFocus"] = color("#00DA54"),
 			["menuTextLoseFocus"] = color("#FFFFFF"),
 			["optionExplanationBG"] = color("#FF000050")
-	}, -- End of Rainbow FUN
-	{  -- Baby Pink
+		}, -- End of Rainbow FUN
+		{  -- (14) Baby Pink
 			["titleBGA"] = color("#E7B6FE"),
 			["titleBGB"] = color("#CEE2FE"),
 			["titleBGPattern"] = color("#b956ac"),
@@ -601,8 +601,8 @@ return function( Index )
 			["menuTextGainFocus"] = color("#d3dfd1"),
 			["menuTextLoseFocus"] = color("#bccbba"),
 			["optionExplanationBG"] = color("#e394e3")
-	}, -- end Baby Pink
-	{  -- Sunny Day
+		}, -- end Baby Pink
+		{  -- (15) Sunny Day
 			["titleBGA"] = color("#FFAA00"),
 			["titleBGB"] = color("#FFD500"),
 			["titleBGPattern"] = color("#FFFF00"),
@@ -644,8 +644,8 @@ return function( Index )
 			["menuTextGainFocus"] = color("#FFFF00"),
 			["menuTextLoseFocus"] = color("#000000"),
 			["optionExplanationBG"] = color("#00000050")
-	}, -- End of Sunny Day
-	{  -- The Blood
+		}, -- End of Sunny Day
+		{  -- (16) The Blood
 			["titleBGA"] = color("#470000"),
 			["titleBGB"] = color("#780000"),
 			["titleBGPattern"] = color("#A10000"),
@@ -687,7 +687,136 @@ return function( Index )
 			["menuTextGainFocus"] = color("#FFFFFF"),
 			["menuTextLoseFocus"] = color("#FF0000"),
 			["optionExplanationBG"] = color("#00000050")
-	}, -- End of The Blood
+		}, -- End of The Blood
+		{ -- (17) Virtual LED
+            ["titleBGA"] = color("#000000"),
+            ["titleBGB"] = color("#100000"),
+            ["titleBGPattern"] = color("#C70000"),
+            ["swmeHF"] = color("#000000"),
+            ["swmeFooter"] = color("#000000"),
+            ["swmeBGA"] = color("#000000"),
+            ["swmeBGB"] = color("#000000"),
+            ["swmeGrid"] = color("#000000"),
+            ["swmePattern"] = color("#C70000FF"),
+            ["serviceBG"] = color("#100000"),
+            ["playModeIconsBaseColor"] = color("#000000FF"),
+            ["playModeIconsBaseGradient"] = color("#C00000FF"),
+            ["playModeIconsEmblem"] = color("#FFFFFF75"),
+            ["headerTextColor"] = color("#FFFFFFFF"),
+            ["headerTextGradient"] = color("#68758F"),
+            ["midShadeA"] = color("#100000"),
+            ["headerSortA"] = color("#200000"),
+            ["headerSortB"] = color("#100000"),
+            ["headerStripeA"] = color("#C70000"),
+            ["headerStripeB"] = color("#900000"),
+            ["promptBG"] = color("#050000"),
+            ["wheelHighlightFade"] = color("#40000050"),
+            ["wheelHighlightA"] = color("#900000"),
+            ["wheelHighlightB"] = color("#C70000"),
+            ["wheelSongItem"] = color("#000000"),		
+            ["wheelSectionItemA"] = color("#200000"),			
+            ["wheelSectionItemB"] = color("#600000"),				
+            ["SSMHelpPopup"] = color("#000000"),
+            ["gameplayHeader"] = color("#000000"),
+            ["gameplayTitle"] = color("#1c0000"),
+            ["gameplayMeter"] = color("#C70000"),
+            ["lifeFrame"] = color("#400000"),
+            ["lifeMeter"] = color("#800000"),
+            ["menuBlockBase"] = color("#100000"),
+            ["menuBlockGlow"] = color("#000000"),
+            ["titlemenuBlockGlow"] = color("#000000"),
+            ["menuBlockHighlightA"] = color("#C70000"),
+            ["menuBlockHighlightB"] = color("#C70000"),
+            ["menuTextGainFocus"] = color("#FFFFFF"),
+            ["menuTextLoseFocus"] = color("#FFFFFF"),
+            ["optionExplanationBG"] = color("#00000050")
+        }, -- end Virtual LED
+		{ -- (18) Night Emotions
+            ["titleBGA"] = color("#000000"),
+            ["titleBGB"] = color("#040d59"),
+            ["titleBGPattern"] = color("#00AEFF"),
+            ["swmeHF"] = color("#000020"),
+            ["swmeFooter"] = color("#000000"),
+            ["swmeBGA"] = color("#040D59"),
+            ["swmeBGB"] = color("#000000"),
+            ["swmeGrid"] = color("#00000F"),
+            ["swmePattern"] = color("#0080FF50"),
+            ["serviceBG"] = color("#000212"),
+            ["playModeIconsBaseColor"] = color("#000000FF"),
+            ["playModeIconsBaseGradient"] = color("#0314ADFF"),
+            ["playModeIconsEmblem"] = color("#FFFFFF75"),
+            ["headerTextColor"] = color("#FFFFFFFF"),
+            ["headerTextGradient"] = color("#5C88C4"),
+            ["midShadeA"] = color("#000000"),
+            ["headerSortA"] = color("#000040"),
+            ["headerSortB"] = color("#000030"),
+            ["headerStripeA"] = color("#0314FF"),
+            ["headerStripeB"] = color("#0314AD"),
+            ["promptBG"] = color("#000000B0"),
+            ["wheelHighlightFade"] = color("#0080F050"),
+            ["wheelHighlightA"] = color("#0030F0"),
+            ["wheelHighlightB"] = color("#0080FF"),
+            ["wheelSongItem"] = color("#000000"),		
+            ["wheelSectionItemA"] = color("#000020"),			
+            ["wheelSectionItemB"] = color("#0314AD"),				
+            ["SSMHelpPopup"] = color("#000000B0"),
+            ["gameplayHeader"] = color("#000000D0"),
+            ["gameplayTitle"] = color("#1E2338"),
+            ["gameplayMeter"] = color("#0314ADD0"),
+            ["lifeFrame"] = color("#001033"),
+            ["lifeMeter"] = color("#0314AD"),
+            ["menuBlockBase"] = color("#000000"),
+            ["menuBlockGlow"] = color("#0314AD"),
+            ["titlemenuBlockGlow"] = color("#0314AD"),
+            ["menuBlockHighlightA"] = color("#0040F0"),
+            ["menuBlockHighlightB"] = color("#0080FF"),
+            ["menuTextGainFocus"] = color("#FFFFFF"),
+            ["menuTextLoseFocus"] = color("#FFFFFF"),
+            ["optionExplanationBG"] = color("#00000050")
+        }, -- end Night Emotions
+		{  -- (19) Cool Blues
+			["titleBGA"] = color("#0000CC"),
+			["titleBGB"] = color("#0066CC"),
+			["titleBGPattern"] = color("#0000FF"),
+			["swmeHF"] = color("#0000CC"),
+			["swmeFooter"] = color("#0000CC"),
+			["swmeBGA"] = color("#000099"),
+			["swmeBGB"] = color("#003399"),
+			["swmeGrid"] = color("#0000FF"),
+			["swmePattern"] = color("#0000FF55"),
+			["serviceBG"] = color("#000066"),
+			["playModeIconsBaseColor"] = color("#0000FF"),
+			["playModeIconsBaseGradient"] = color("#6600FF"),
+			["playModeIconsEmblem"] = color("#FFFFFF75"),
+			["headerTextColor"] = color("#FFFFFF"),
+			["headerTextGradient"] = color("#CCCCFF"),
+			["midShadeA"] = color("#000099"),
+			["headerSortA"] = color("#00009999"),
+			["headerSortB"] = color("#00009955"),
+			["headerStripeA"] = color("#0000CC"),
+			["headerStripeB"] = color("#0000CC"),
+			["promptBG"] = color("#000099"),
+			["wheelHighlightFade"] = color("#0099FF50"),
+			["wheelHighlightA"] = color("#0033FF"),
+			["wheelHighlightB"] = color("#0066FF"),
+			["wheelSongItem"] = color("#0000CC"),
+			["wheelSectionItemA"] = color("#0000CC"),			
+			["wheelSectionItemB"] = color("#000099"),	
+			["SSMHelpPopup"] = color("#000066"),
+			["gameplayHeader"] = color("#000033"),
+			["gameplayTitle"] = color("#000099"),
+			["gameplayMeter"] = color("#0000CC"),
+			["lifeFrame"] = color("#000099"),
+			["lifeMeter"] = color("#0000FF"),
+			["menuBlockBase"] = color("#0099FF"),
+			["menuBlockGlow"] = color("#00CCFF"),
+			["titlemenuBlockGlow"] = color("#0066FF"),
+			["menuBlockHighlightA"] = color("#0000CC"),
+			["menuBlockHighlightB"] = color("#000099"),
+			["menuTextGainFocus"] = color("#FFFFFF"),
+			["menuTextLoseFocus"] = color("#CCCCFF"),
+			["optionExplanationBG"] = color("#00000050")
+		}, -- End of Cool Blues
     }
     return Index and Items[tonumber(Index)] or Items[1]
 end
