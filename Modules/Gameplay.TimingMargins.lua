@@ -6,19 +6,13 @@ return function()
     local CurPrefTiming = LoadModule("Config.Load.lua")("SmartTimings","Save/OutFoxPrefs.ini")
     local LowestWindow = nil
     local HighestWindow = nil
-    local n,Timings
-    -- First, check the timings from our current timing window.
-    for k,v in pairs( TimingWindow ) do
-        n,Timings = TimingWindow[k]()
-        if CurPrefTiming == n then break end
-    end
-
-    rec_print_table(Timings)
+    local n = LoadModule( "Options.ReturnCurrentTiming.lua" )()
 
     -- Now, calculate the lowest.
     for k,v in pairs( JudgNames ) do
-        if Timings[ "TapNoteScore_"..v ] > 0 then
-            local ConvertedTime = GetWindowSeconds(Timings[ "TapNoteScore_"..v ], 1, 0)
+        -- lua.ReportScriptError( v )
+        if n.Timings[ "TapNoteScore_"..v ] > 0 then
+            local ConvertedTime = GetWindowSeconds(n.Timings[ "TapNoteScore_"..v ], 1, 0)
             if not HighestWindow then HighestWindow = ConvertedTime end
             LowestWindow = ConvertedTime
         end
