@@ -394,6 +394,7 @@ local function GetJLineValue(line, pl)
 	return "???"
 end
 
+local CurPrefTiming = LoadModule("Options.ReturnCurrentTiming.lua")().Name
 local Name,Length = LoadModule("Options.SmartTapNoteScore.lua")()
 local DLW = LoadModule("Config.Load.lua")("DisableLowerWindows","Save/OutFoxPrefs.ini") or false
 table.sort(Name)

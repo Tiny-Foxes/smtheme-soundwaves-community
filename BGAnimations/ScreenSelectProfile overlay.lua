@@ -15,7 +15,7 @@ function GetLocalProfiles()
 				OffCommand=function(self) self:linear(0.3):diffusealpha(0) end;
 			};
 			Def.BitmapText {
-				Font="_Condensed Medium";
+				Font="_Medium";
 				InitCommand=function(self) self:horizalign(left):shadowlength(1):xy(-120,12):zoom(0.6):vertspacing(-8):ztest(true) end;
 				BeginCommand=function(self)
 					local numSongsPlayed = profile:GetNumTotalSongsPlayed();
