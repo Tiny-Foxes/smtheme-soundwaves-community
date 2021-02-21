@@ -401,6 +401,40 @@ t[#t+1] = Def.ActorFrame {
 		OffCommand=function(s) s:finishtweening() end,
 		ShowAMVCommand=function(s) s:linear(0.2):diffusealpha(1) end,
 		LoadActor("NPSDiagram.lua",{pn,p2paneoffset()}),
+	},
+
+	Def.Sprite {
+		Texture=THEME:GetPathG("ScreenSelectMusic","readyplayer"),
+		InitCommand=function(self) 
+			self:zoom(0.75):horizalign(center):xy((p2paneoffset())/2,120) 
+			:diffuse(PlayerColor(pn)):diffuserightedge(PlayerCompColor(pn)):diffusealpha(0)
+		end,
+		StepsChosenMessageCommand=function(self,param)
+			if param.Player == pn then
+				self:zoom(1):easeoutcubic(0.2):zoom(0.75):diffusealpha(1)
+			end
+		end,
+		StepsUnchosenMessageCommand=function(self)
+			self:zoom(0.75):easeoutcubic(0.2):zoom(1):diffusealpha(0)
+		end
+	},
+	Def.Sprite {
+		Texture=THEME:GetPathG("ScreenSelectMusic","pumpstart"),
+		InitCommand=function(self) 
+			self:zoom(1):horizalign(center):xy((p2paneoffset())/2,120):diffusealpha(0)
+		end,
+		SongChosenMessageCommand=function(self)
+			self:bob():effectmagnitude(0,6,0):effectperiod(2)
+			self:zoom(1.2):easeoutelastic(0.6):zoom(1):diffusealpha(0.75)
+		end,
+		StepsChosenMessageCommand=function(self,param)
+			if param.Player == pn then
+				self:easeoutcubic(0.2):zoom(0.75):diffusealpha(0)
+			end
+		end,
+		StepsUnchosenMessageCommand=function(self)
+			self:easeoutcubic(0.2):zoom(1):diffusealpha(0.75)
+		end
 	}
 };
 

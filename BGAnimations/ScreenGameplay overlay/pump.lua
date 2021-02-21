@@ -98,6 +98,7 @@ end
 					playerpos = SCREENMAN:GetTopScreen():GetChild("Player"..ToEnumShortString(pn)):GetX()
 				end
 				self:xy(playerpos-180,SCREEN_TOP+28):halign(0):customtexturerect(0,0,1,1):texcoordvelocity(1,0):cropbottom(0.08):zoomx(0.826)
+				self:diffuse(ColorLightTone(PlayerColor(pn))):diffusebottomedge(PlayerCompColor(pn))
 				self:addy(-75):sleep(barSleepIn):decelerate(0.5):addy(75)
 			end,
 			LifeChangedMessageCommand=function(s,param)
@@ -110,7 +111,7 @@ end
 		}
 
 		t[#t+1] = Def.BitmapText {
-			Font="_Plex Numbers 60px",
+			Font="_Plex Numbers 40px",
 			InitCommand=function(self)
 				self:shadowlength(1):zoom(0.75)
 				:horizalign(center):maxwidth(SCREEN_WIDTH*0.2234375)
@@ -121,7 +122,7 @@ end
 				end
 			end,
 			OnCommand=function(self)
-				self:xy(playerpos,30)
+				self:xy(playerpos,26)
 				self:addy(-75):sleep(barSleepIn):decelerate(0.5):addy(75)
 				if GAMESTATE:GetPlayMode() == "PlayMode_Endless" then
 					self:queuecommand("UpdateTimer")

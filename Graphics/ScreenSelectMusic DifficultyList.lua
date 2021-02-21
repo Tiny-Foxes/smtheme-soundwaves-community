@@ -19,6 +19,9 @@ return Def.ActorFrame {
 		OffCommand=function(self)
 		self:decelerate(0.3):diffusealpha(0)
 		end;
+		SongChosenMessageCommand=function(self)
+			self:zoomx(0.8):glow(1,1,1,0.4):easeoutback(0.25):diffusealpha(1):zoomx(1):glow(1,1,1,0)
+		end;
 		CursorP1 = Def.ActorFrame {
 			InitCommand=function(self) self:x(-87):player(PLAYER_1) end;
 			PlayerJoinedMessageCommand=function(self, params)
