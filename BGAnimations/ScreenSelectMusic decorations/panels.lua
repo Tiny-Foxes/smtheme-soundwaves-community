@@ -415,7 +415,7 @@ t[#t+1] = Def.ActorFrame {
 			end
 		end,
 		StepsUnchosenMessageCommand=function(self)
-			self:zoom(0.75):easeoutcubic(0.2):zoom(0.75):diffusealpha(1)
+			self:zoom(0.75):easeoutcubic(0.2):zoom(1):diffusealpha(0)
 		end
 	},
 	Def.Sprite {
