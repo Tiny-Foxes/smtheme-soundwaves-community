@@ -13,12 +13,7 @@ local sm = LoadModule("Gameplay.Median.lua")( p, OffsetTable, graphsizes )
 -- Load Timing information
 local f = LoadModule("Config.Load.lua")("SmartTimings","Save/OutFoxPrefs.ini")
 local JudgNames = {"ProW1","ProW2","ProW3","ProW4","ProW5","W1","W2","W3","W4","W5"}
-local Name,Timings
-
-for i = 1,#TimingWindow do
-    Name,Timings = TimingWindow[i]()
-    if f == Name then break end
-end
+local n = LoadModule("Options.ReturnCurrentTiming.lua")()
 
 ------------------------------------------
 -- Header Title
@@ -26,7 +21,7 @@ end
 t[#t+1] = Def.BitmapText {
     Font = "_Bold",
     InitCommand=function(self)
-        self:zoom(1.25):xy(_screen.cx +(eval_part_offs),_screen.cy-165+70):maxwidth(260):horizalign(center)
+        self:zoom(1):xy(_screen.cx +(eval_part_offs),_screen.cy-165+70):maxwidth(260):horizalign(center)
         self:diffuse(Color.White):diffusebottomedge(ColorLightTone(PlayerCompColor(p)))
     end,
     OffCommand=function(self)
@@ -64,11 +59,11 @@ t[#t+1] = Def.Quad{
 		s:sleep(0.2):decelerate(0.3):y( _screen.cy+192-80 ):sleep(0.1):accelerate(0.3):cropleft(1)
 	end,
 }
-local CurPrefTiming = LoadModule("Config.Load.lua")("SmartTimings","Save/OutFoxPrefs.ini")
+local CurPrefTiming = LoadModule("Options.ReturnCurrentTiming.lua")().Name
 
 for k,v in pairs( sm.TimingList[1] ) do
-	if Timings[ "TapNoteScore_"..v ] > 0 then
-		local position = scale( Timings[ "TapNoteScore_"..v ], sm.HighWindow ,sm.LowWindow, 0, graphsizes[1]*.528 )
+	if n.Timings[ "TapNoteScore_"..v ] > 0 then
+		local position = scale( n.Timings[ "TapNoteScore_"..v ], sm.HighWindow ,sm.LowWindow, 0, graphsizes[1]*.528 )
 		for i=1,2 do
 			t[#t+1] = Def.Quad{
 				OnCommand=function(s)

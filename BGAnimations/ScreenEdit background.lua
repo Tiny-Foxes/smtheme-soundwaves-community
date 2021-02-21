@@ -1,6 +1,7 @@
 local ColorTable = LoadModule("Theme.Colors.lua")( LoadModule("Config.Load.lua")("SoundwavesSubTheme","Save/OutFoxPrefs.ini") );
 return Def.ActorFrame {
 	LoadModule("Options.SmartTiming.lua"),
+	LoadModule("Options.SmartScoring.lua"),
 	Def.Quad {
 		InitCommand=function(self) self:scaletoclipped(SCREEN_WIDTH,SCREEN_HEIGHT):xy(SCREEN_CENTER_X,SCREEN_CENTER_Y) end,
 		OnCommand=function(self) self:diffuse(color("#000000")):diffusebottomedge( ColorTable["serviceBG"] )  end

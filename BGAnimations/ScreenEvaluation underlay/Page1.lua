@@ -3,7 +3,7 @@ local p = ...
 local fade_out_speed = 0.2
 local fade_out_pause = 0.1
 local off_wait = 0.75
-local CurPrefTiming = LoadModule("Options.OverwriteTiming.lua")()
+local CurPrefTiming = LoadModule("Options.ReturnCurrentTiming.lua")().Name
 local SelJudg = {2,4,5}
 
 local eval_radar = {
@@ -59,8 +59,11 @@ local Name,Length = LoadModule("Options.SmartTapNoteScore.lua")()
 local DLW = LoadModule("Config.Load.lua")("DisableLowerWindows","Save/OutFoxPrefs.ini") or false
 table.sort(Name)
 Name[#Name+1] = "Miss"
+Length = Length + 1
+local DoubleSet = Length*2
 Name[#Name+1] = "MaxCombo"
-Length = Length + 2
+Length = Length + 1
+
 for i,v in ipairs( Name ) do
 	local Con = Def.ActorFrame{
 		OffCommand=function(self)
@@ -105,26 +108,18 @@ for i,v in ipairs( Name ) do
 			Texture=LoadModule("Options.SmartJudgments.lua")()[LoadModule("Options.ChoiceToValue.lua")(LoadModule("Options.SmartJudgments.lua")("Show"),LoadModule("Config.Load.lua")("SmartJudgments",CheckIfUserOrMachineProfile(string.sub(p,-1)-1).."/OutFoxPrefs.ini"))],
 			InitCommand=function(self)
 				local int = i-1
-				if self:GetNumStates() ~= 6 and self:GetNumStates() ~= 11 then int = 2*int end
+				-- lua.ReportScriptError( self:GetNumStates() .. " . ".. DoubleSet )
+				if self:GetNumStates() == DoubleSet then
+					int = (i-1)*2
+				end
+				-- lua.ReportScriptError(int)
     	    	self:xy(SCREEN_CENTER_X+(eval_part_offs-80),SCREEN_CENTER_Y-80+((44-(Length*2))*i)):zoom(1.275-(Length*0.075)):animate(0):setstate(int)
 		    end,
 			OnCommand=function(self)
 				local sizemargin = 160
 				local height = self:GetHeight()
 				local width = self:GetWidth()
-				if height >= sizemargin and width >= sizemargin then
-					if height >= width then
-						self:zoom(sizemargin/height)
-					else
-						self:zoom(sizemargin/width)
-					end
-				elseif height >= sizemargin then
-					self:zoom(sizemargin/height)
-				elseif width >= sizemargin then
-					self:zoom(sizemargin/width)
-				else 
-					self:zoom(1)
-				end
+				self:zoom( LoadModule("Lua.Resize.lua")(width, height, 160, 160) )
 				self:diffusealpha(0):sleep(0.1 * i):decelerate(0.6):diffusealpha(0.86)
 			end
 		}

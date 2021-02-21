@@ -645,22 +645,15 @@ return {
 		Choices = {"GLAD", "OpenGL"},
 		Values = {"glad", "opengl"},
 		LoadFunction = function(self,list)
-			--local Renderer = 
 			local savedRender = PREFSMAN:GetPreference("VideoRenderers")
 			for i,v2 in ipairs(self.Values) do
-				if string.gmatch(savedRender, v2) then
-					list[i] = true
-					return
-				end
+				if savedRender == v2 then list[i] = true return end
 			end
 			list[1] = true
 		end,
 		SaveFunction = function(self,list)
 			for i,v2 in ipairs(self.Values) do
-				if list[i] then
-					PREFSMAN:SetPreference("VideoRenderers",v2)
-					return
-				end
+				if list[i] then PREFSMAN:SetPreference("VideoRenderers",v2) return end
 			end
 		end
 	}

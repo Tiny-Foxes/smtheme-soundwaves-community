@@ -12,12 +12,7 @@ return function( player, offsetInfo, dimensions )
     -- We need to check what is the worst window available.
     local CurPrefTiming = LoadModule("Config.Load.lua")("SmartTimings","Save/OutFoxPrefs.ini")
     local LowestWindow, HighestWindow = LoadModule("Gameplay.TimingMargins.lua")()
-    local n,Timings
-    -- First, check the timings from our current timing window.
-    for k,v in pairs( TimingWindow ) do
-        n,Timings = TimingWindow[k]()
-        if CurPrefTiming == n then break end
-    end
+    local n = LoadModule( "Options.ReturnCurrentTiming.lua" )()
     
     -- Ok, Now that we're done with that, calculate the secuence of offsets.
     local offsets = {}
@@ -140,7 +135,7 @@ return function( player, offsetInfo, dimensions )
 
     local function TimingWindowByValue(time)
         for k,v in pairs(JudgNames) do
-            if math.abs(time) <= Timings[ "TapNoteScore_"..v ] then
+            if math.abs(time) <= n.Timings[ "TapNoteScore_"..v ] then
                 -- lua.ReportScriptError( "Timing ".. v .. " (".. Timings[ "TapNoteScore_"..v ] .. ") matches ".. math.abs(time) )
                 return v
             end
@@ -172,7 +167,7 @@ return function( player, offsetInfo, dimensions )
     end
 
     return {
-        TimingList = {JudgNames,Timings},
+        TimingList = {JudgNames,n.Timings},
         HighWindow = HighestWindow,
         LowWindow = LowestWindow,
         Vertex = verts,

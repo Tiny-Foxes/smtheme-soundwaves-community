@@ -5,7 +5,6 @@
 	the z field changes on the current Aspect Ratio, so correct that.
 ]]
 local background = Def.ActorFrame { Name="YOU_WISH_YOU_WERE_PLAYING_BEATMANIA_RIGHT_NOW",
-	LoadModule("Options.SmartTiming.lua"),
 	UpdateDiscordInfoCommand=function(s)
 		local player = GAMESTATE:GetMasterPlayerNumber()
 		if GAMESTATE:GetCurrentSong() then
