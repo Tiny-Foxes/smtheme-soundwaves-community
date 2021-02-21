@@ -416,8 +416,7 @@ t[#t+1] = Def.ActorFrame {
 		end,
 		StepsUnchosenMessageCommand=function(self)
 			self:zoom(0.75):easeoutcubic(0.2):zoom(0.75):diffusealpha(1)
-		end,
-	end,
+		end
 	},
 	Def.Sprite {
 		Texture=THEME:GetPathG("ScreenSelectMusic","pumpstart"),
