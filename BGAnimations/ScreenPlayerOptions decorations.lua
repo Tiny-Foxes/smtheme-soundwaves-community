@@ -41,9 +41,9 @@ t[#t+1] = Def.ActorFrame{
 			self:draworder(160):FullScreen():diffuse(color("0,0,0,1")):diffusealpha(0)
 		end,
 		-- Not implemented fully yet, just do this instead.
-		ShowPressStartForOptionsCommand=function(self) self:decelerate(0.2):diffusealpha(0.3):sleep(1):decelerate(0.2):diffusealpha(0) end,
-		-- ShowEnteringOptionsCommand=function(self) self:sleep(0.4):decelerate(0.3):diffusealpha(0) end;
-		-- HidePressStartForOptionsCommand=function(self) self:sleep(0.4):decelerate(0.3):diffusealpha(0) end;
+		ShowPressStartForOptionsCommand=function(self) self:easeoutcubic(0.2):diffusealpha(0.3):sleep(1):easeoutcubic(0.2):diffusealpha(0) end,
+		-- ShowEnteringOptionsCommand=function(self) self:sleep(0.4):easeoutsine(0.3):diffusealpha(0) end;
+		-- HidePressStartForOptionsCommand=function(self) self:sleep(0.4):easeoutsine(0.3):diffusealpha(0) end;
 	},
 
 	Def.ActorFrame {
@@ -53,8 +53,8 @@ t[#t+1] = Def.ActorFrame{
 		AskForGoToOptionsCommand=function(self)
 			if showmessage then
 				setenv("NewOptions","Main")
-				self:visible(true):diffusealpha(0):vertalign(bottom):y(SCREEN_BOTTOM+120):decelerate(0.2):addy(-118):diffusealpha(1) 
-				self:sleep(1):decelerate(0.2):addy(118):diffusealpha(0)
+				self:visible(true):diffusealpha(0):vertalign(bottom):y(SCREEN_BOTTOM+120):easeoutcubic(0.2):addy(-118):diffusealpha(1) 
+				self:sleep(1):easeoutcubic(0.2):addy(118):diffusealpha(0)
 			end
 		end,
 		GoToOptionsCommand=function(s)
@@ -67,8 +67,8 @@ t[#t+1] = Def.ActorFrame{
 			GAMESTATE:Env()["PlayerOptionsNextScreen"] = param.choice == 5 and SelectMusicOrCourse() or param.choicename
 			SCREENMAN:GetTopScreen():SetNextScreenName( GAMESTATE:Env()["PlayerOptionsNextScreen"] )
 		end,
-		-- ShowEnteringOptionsCommand=function(self) self:sleep(0.4):decelerate(0.3):addy(120):diffusealpha(0) end;
-		-- HidePressStartForOptionsCommand=function(self) self:sleep(0.4):decelerate(0.3):addy(120):diffusealpha(0) end;
+		-- ShowEnteringOptionsCommand=function(self) self:sleep(0.4):easeoutsine(0.3):addy(120):diffusealpha(0) end;
+		-- HidePressStartForOptionsCommand=function(self) self:sleep(0.4):easeoutsine(0.3):addy(120):diffusealpha(0) end;
 		
 		Def.Quad{
 			InitCommand=function(self) self:vertalign(bottom):zoomto(SCREEN_WIDTH,120):x(SCREEN_CENTER_X):diffuse(ColorTable["promptBG"]):diffusealpha(0) end,

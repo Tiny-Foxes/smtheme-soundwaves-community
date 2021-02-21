@@ -12,7 +12,7 @@ local t = Def.ActorFrame{
         local Sel = s:GetChild("Selector")
         local CImg = s:GetChild("InfoFrame"):GetChild("CurImage")
         local CTex = s:GetChild("InfoFrame"):GetChild("CurText")
-        Sel:stoptweening():decelerate(0.1):xy(
+        Sel:stoptweening():easeoutsine(0.1):xy(
             50+math.mod( c-1, maximum_array_size )*spacingxscale, 
             SCREEN_CENTER_Y-120+(
                 math.mod( c > maximum_array_size*6 and maximum_array_size*5 or c-1, maximum_array_size*6)
@@ -28,7 +28,7 @@ local t = Def.ActorFrame{
 
 local ImgGrid = Def.ActorFrame{
     ScrollGridMessageCommand=function(s,param)
-        s:stoptweening():decelerate(0.2):y( -80*(param.tileoffset-5) )
+        s:stoptweening():easeoutsine(0.2):y( -80*(param.tileoffset-5) )
     end,
 }
 if #img_cache > 0 then
@@ -41,7 +41,7 @@ if #img_cache > 0 then
             end,
             Def.Sprite{
                 Texture=v[2],
-                OnCommand=function(s)s:setsize(64,64):diffusealpha(0):addy(20):sleep(0.004*i):decelerate(0.1):addy(-20):diffusealpha(1) end,
+                OnCommand=function(s)s:setsize(64,64):diffusealpha(0):addy(20):sleep(0.004*i):easeoutsine(0.1):addy(-20):diffusealpha(1) end,
                 OffCommand=function(s) s:stoptweening():sleep( 0.004*i):accelerate(0.1):addy(20):diffusealpha(0) end,
             },
         }
@@ -66,7 +66,7 @@ t[#t+1] = Def.Quad{
 t[#t+1] = Def.ActorFrame{
     Name="InfoFrame",
     OnCommand=function(s)
-        s:diffusealpha(0):addy(-20):decelerate(0.2):addy(20):diffusealpha(1)
+        s:diffusealpha(0):addy(-20):easeoutsine(0.2):addy(20):diffusealpha(1)
     end,
     OffCommand=function(s)
         s:accelerate(0.2):addy(-20):diffusealpha(0)

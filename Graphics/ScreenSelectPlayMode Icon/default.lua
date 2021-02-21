@@ -7,8 +7,8 @@ local ColorTable = LoadModule("Theme.Colors.lua")( LoadModule("Config.Load.lua")
 
 return Def.ActorFrame {
 	Def.ActorFrame {
-		OnCommand=function(self) self:diffusealpha(0):decelerate(0.15):diffusealpha(1) end;
-		OffCommand=function(self) self:decelerate(0.15):diffusealpha(0) end;
+		OnCommand=function(self) self:diffusealpha(0):easeoutsine(0.15):diffusealpha(1) end;
+		OffCommand=function(self) self:easeoutsine(0.15):diffusealpha(0) end;
 		Def.Quad {
 		InitCommand=function(self) self:zoomto(item_width,item_height):diffuse( ColorTable["menuBlockBase"] ):diffusealpha(0.6) end;
 		},

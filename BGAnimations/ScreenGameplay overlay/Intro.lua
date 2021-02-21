@@ -20,8 +20,8 @@ local t = Def.ActorFrame {};
         end,
         OnCommand=function(self)
             self:diffusealpha(0):sleep(titleFadeIn)
-            :decelerate(titleAnimLength):diffusealpha(1)
-            :sleep(titleWait):decelerate(0.5):diffusealpha(0)
+            :easeoutsine(titleAnimLength):diffusealpha(1)
+            :sleep(titleWait):easeoutsine(0.5):diffusealpha(0)
         end
     };
 
@@ -39,8 +39,8 @@ local t = Def.ActorFrame {};
 		InitCommand=function(self) self:xy(credit_position,SCREEN_BOTTOM-130) end;
 		OnCommand=function(self)
 			self:diffusealpha(0):addx(credit_x_start):sleep(titleFadeIn)
-            :decelerate(titleAnimLength):diffusealpha(1):addx(20*credit_x_add)
-			:sleep(titleWait):decelerate(0.5):diffusealpha(0) 
+            :easeoutsine(titleAnimLength):diffusealpha(1):addx(20*credit_x_add)
+			:sleep(titleWait):easeoutsine(0.5):diffusealpha(0) 
 		end;
 			Def.Sprite {
 				InitCommand=function(self) self:horizalign(credit_alignment):y(10) end;
@@ -116,8 +116,8 @@ t[#t+1] = Def.ActorFrame {
 	end;
 	OnCommand=function(self)
 		self:diffusealpha(0):addx(20)
-		:sleep(titleFadeIn):decelerate(titleAnimLength):diffusealpha(1):addx(-20)
-        :sleep(titleWait):decelerate(0.5):diffusealpha(0)
+		:sleep(titleFadeIn):easeoutsine(titleAnimLength):diffusealpha(1):addx(-20)
+        :sleep(titleWait):easeoutsine(0.5):diffusealpha(0)
 	end;
 	Def.BitmapText {
 		Font="SongSubTitle font";
@@ -192,8 +192,8 @@ t[#t+1] = stage_num_actor .. {
 		:zoom(1):diffusealpha(1) 
 	end;
 	OnCommand=function(self) 
-		self:diffusealpha(0):addx(-20):sleep(titleFadeIn):decelerate(titleAnimLength):diffusealpha(1):addx(20)
-        :sleep(titleWait):decelerate(0.5):diffusealpha(0)
+		self:diffusealpha(0):addx(-20):sleep(titleFadeIn):easeoutsine(titleAnimLength):diffusealpha(1):addx(20)
+        :sleep(titleWait):easeoutsine(0.5):diffusealpha(0)
 	end;
 };
 

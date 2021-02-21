@@ -112,8 +112,8 @@ end
 
 -- Shared portion.
 local mid_pane = Def.ActorFrame {
-	OnCommand=function(self) self:diffusealpha(0):sleep(0.3):decelerate(0.4):diffusealpha(1) end;
-	OffCommand=function(self) self:decelerate(0.3):diffusealpha(0) end;
+	OnCommand=function(self) self:diffusealpha(0):sleep(0.3):easeoutsine(0.4):diffusealpha(1) end;
+	OffCommand=function(self) self:easeoutsine(0.3):diffusealpha(0) end;
 	-- Song/course banner.
 	Def.ActorFrame {
 	InitCommand=function(self) self:xy(_screen.cx,_screen.cy-26) end;
@@ -167,9 +167,9 @@ local mid_pane = Def.ActorFrame {
 				else
 					self:settext( GAMESTATE:GetCurrentCourse():GetDisplayFullTitle() )
 				end
-				self:diffusealpha(0):sleep(1.0):decelerate(0.4):diffusealpha(1)
+				self:diffusealpha(0):sleep(1.0):easeoutsine(0.4):diffusealpha(1)
 			end;
-			OffCommand=function(self) self:decelerate(0.4):diffusealpha(0) end;
+			OffCommand=function(self) self:easeoutsine(0.4):diffusealpha(0) end;
 		},
 		Def.BitmapText {
 			Font="SongSubTitle font",
@@ -178,9 +178,9 @@ local mid_pane = Def.ActorFrame {
 			end;
 			Text=GAMESTATE:IsCourseMode() and ""  or nativeTitle and GAMESTATE:GetCurrentSong():GetDisplaySubTitle() or GAMESTATE:GetCurrentSong():GetTranslitSubTitle();
 			OnCommand=function(self)
-				self:diffusealpha(0):sleep(1.0):decelerate(0.4):diffusealpha(1)
+				self:diffusealpha(0):sleep(1.0):easeoutsine(0.4):diffusealpha(1)
 			end;
-			OffCommand=function(self) self:decelerate(0.4):diffusealpha(0) end;
+			OffCommand=function(self) self:easeoutsine(0.4):diffusealpha(0) end;
 		},
 		Def.BitmapText {
 			Font="SongTitle font",
@@ -197,9 +197,9 @@ local mid_pane = Def.ActorFrame {
 						end;
 					end
 				end;
-				self:diffusealpha(0):sleep(1.0):decelerate(0.4):diffusealpha(1)
+				self:diffusealpha(0):sleep(1.0):easeoutsine(0.4):diffusealpha(1)
 			end;
-			OffCommand=function(self) self:decelerate(0.4):diffusealpha(0) end;
+			OffCommand=function(self) self:easeoutsine(0.4):diffusealpha(0) end;
 		}				
 	}
 }
@@ -247,7 +247,7 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 				self:diffuse(ColorDarkTone(PlayerColor(p))):diffuserightedge(ColorDarkTone(PlayerCompColor(p))):diffusealpha(0.6)
 			end;
 			OnCommand=function(self)
-				self:zoomto(panel_width,1):decelerate(0.5):zoomto(panel_width,52)
+				self:zoomto(panel_width,1):easeoutsine(0.5):zoomto(panel_width,52)
 			end;
 			OffCommand=function(self)
 				self:linear(0.2):diffusealpha(0)
@@ -265,17 +265,17 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 			local hasPersonalRecord = record ~= -1
 			self:visible(hasPersonalRecord);
 			local text = string.format(THEME:GetString("ScreenEvaluation", "PersonalRecord"), record+1)
-			self:settext(text):diffusealpha(0):sleep(0.9):decelerate(0.3):diffusealpha(1)
+			self:settext(text):diffusealpha(0):sleep(0.9):easeoutsine(0.3):diffusealpha(1)
 		end;
 		OffCommand=function(self)
-			 self:decelerate(0.3):diffusealpha(0)
+			 self:easeoutsine(0.3):diffusealpha(0)
 		end;
 		},
 
 		-- FC?
 		Def.ActorFrame {
 		InitCommand=function(self) self:vertalign(top):x(_screen.cx + eval_part_offs):y(SCREEN_TOP) end;
-		OffCommand=function(self) self:decelerate(0.2):diffusealpha(0) end;
+		OffCommand=function(self) self:easeoutsine(0.2):diffusealpha(0) end;
 		OnCommand=function(self)
 			local ColorGradients = {
 				color("#A0DBF1"),
@@ -352,7 +352,7 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 		end;
 		PageUpdatedMessageCommand=function(self,player)
 			local match = (PageInd[p] == i)
-			self:stoptweening():decelerate(fade_out_speed):diffusealpha( match and 1 or 0 )
+			self:stoptweening():easeoutsine(fade_out_speed):diffusealpha( match and 1 or 0 )
 		end;
 		};
 	end
@@ -363,15 +363,15 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 		InitCommand=function(self) self:xy(_screen.cx + eval_part_offs,_screen.cy-225) end;
 		LoadActor(THEME:GetPathG("GradeDisplay", "Grade " .. p_grade)) .. {
 			OnCommand=function(self)
-			        self:diffusealpha(0):zoom(1.0):sleep(0.63):decelerate(0.4):zoom(0.8):diffusealpha(1)
+			        self:diffusealpha(0):zoom(1.0):sleep(0.63):easeoutsine(0.4):zoom(0.8):diffusealpha(1)
 					if STATSMAN:GetCurStageStats():GetPlayerStageStats(p):GetStageAward() then
-					  self:sleep(0.1):decelerate(0.4):addy(-7);
+					  self:sleep(0.1):easeoutsine(0.4):addy(-7);
 					else
 					 self:addy(0);
 					end;
 			end;
 			OffCommand=function(self)
-			    self:decelerate(0.3):diffusealpha(0)
+			    self:easeoutsine(0.3):diffusealpha(0)
 			end;
 		},
 
@@ -383,11 +383,11 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 			OnCommand=function(self)
 				if STATSMAN:GetCurStageStats():GetPlayerStageStats(p):GetStageAward() then
 					self:settext(THEME:GetString( "StageAward", ToEnumShortString(STATSMAN:GetCurStageStats():GetPlayerStageStats(p):GetStageAward()) ))
-					self:diffusealpha(0):sleep(1.2):decelerate(0.4):diffusealpha(1)
+					self:diffusealpha(0):sleep(1.2):easeoutsine(0.4):diffusealpha(1)
 				end;
 			end;
 			OffCommand=function(self)
-			    self:decelerate(0.3):diffusealpha(0)
+			    self:easeoutsine(0.3):diffusealpha(0)
 			end;		
 		},
 	}
@@ -397,12 +397,12 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 			InitCommand=function(self)
 				self:vertalign(top):x(_screen.cx + eval_part_offs):y(SCREEN_CENTER_Y-276):visible(not GAMESTATE:IsCourseMode())
 			end;
-			OffCommand=function(self) self:decelerate(0.4):diffusealpha(0) end;
+			OffCommand=function(self) self:easeoutsine(0.4):diffusealpha(0) end;
 			["CurrentSteps"..ToEnumShortString(p).."ChangedMessageCommand"]=function(self) MESSAGEMAN:Broadcast("Set") end;
 
 			  Def.Quad {
 			  	InitCommand=function(self) self:zoomto(336,24):vertalign(bottom) end;
-				OnCommand=function(self) self:playcommand("Set"):zoomto(336,1):decelerate(0.5):zoomto(336,24) end;
+				OnCommand=function(self) self:playcommand("Set"):zoomto(336,1):easeoutsine(0.5):zoomto(336,24) end;
 				["CurrentSteps"..ToEnumShortString(p).."ChangedMessageCommand"]=function(self) self:playcommand("Set") end;
 				SetCommand=function(self)
 				local steps_data = GAMESTATE:GetCurrentSteps(p)
@@ -418,7 +418,7 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 			  };
 			  Def.Sprite {
 				InitCommand=function(self) self:halign(0):x(-155):y(-11) end;
-				OnCommand=function(self) self:queuecommand("Set"):diffusealpha(0):sleep(0.5):decelerate(0.4):diffusealpha(0.75) end; 
+				OnCommand=function(self) self:queuecommand("Set"):diffusealpha(0):sleep(0.5):easeoutsine(0.4):diffusealpha(0.75) end; 
 				SetCommand=function(self)
 					local stepsData = GAMESTATE:GetCurrentSteps(p)
 					local song = GAMESTATE:GetCurrentSong();
@@ -434,7 +434,7 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 		Def.BitmapText {
 				Font="_Bold";
 				InitCommand=function(self) self:zoom(0.75):horizalign(left):x(-110):y(-10):diffuse(Color.White):maxwidth(200) end;
-					OnCommand=function(self) self:playcommand("Set"):diffusealpha(0):sleep(0.5):decelerate(0.4):diffusealpha(1) end;
+					OnCommand=function(self) self:playcommand("Set"):diffusealpha(0):sleep(0.5):easeoutsine(0.4):diffusealpha(1) end;
 					["CurrentSteps"..ToEnumShortString(p).."ChangedMessageCommand"]=function(self) self:playcommand("Set") end;
 					SetCommand=function(self)
 					local steps_data = GAMESTATE:GetCurrentSteps(p)
@@ -457,9 +457,9 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 						if song and steps_data ~= nil then
 						  local stepauthor = steps_data:GetAuthorCredit()
 							if stepauthor ~= "" then
-								self:settext(stepauthor):diffusealpha(0):sleep(0.7):decelerate(0.4):diffusealpha(1)
+								self:settext(stepauthor):diffusealpha(0):sleep(0.7):easeoutsine(0.4):diffusealpha(1)
 							else
-								self:settext(THEME:GetString("ScreenSelectMusic","NoAuthor")):diffusealpha(0):sleep(0.7):decelerate(0.4):diffusealpha(0.4)
+								self:settext(THEME:GetString("ScreenSelectMusic","NoAuthor")):diffusealpha(0):sleep(0.7):easeoutsine(0.4):diffusealpha(0.4)
 							end
 						end
 					end
@@ -470,11 +470,11 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 			InitCommand=function(self)
 				self:vertalign(top):x(_screen.cx + eval_part_offs):y(SCREEN_CENTER_Y-276)
 			end;
-			OffCommand=function(self) self:decelerate(0.4):diffusealpha(0) end;
+			OffCommand=function(self) self:easeoutsine(0.4):diffusealpha(0) end;
 			["CurrentSteps"..ToEnumShortString(p).."ChangedMessageCommand"]=function(self) MESSAGEMAN:Broadcast("Set") end;
 			  Def.Quad {
 			  	InitCommand=function(self) self:zoomto(336,24):vertalign(bottom) end;
-				OnCommand=function(self) self:playcommand("Set"):zoomto(336,1):decelerate(0.5):zoomto(336,24) end;
+				OnCommand=function(self) self:playcommand("Set"):zoomto(336,1):easeoutsine(0.5):zoomto(336,24) end;
 				["CurrentSteps"..ToEnumShortString(p).."ChangedMessageCommand"]=function(self) self:playcommand("Set") end;
 				SetCommand=function(self)
 				local course = GAMESTATE:GetCurrentCourse();
@@ -491,7 +491,7 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 				Def.BitmapText {
 					Font="_Medium";
 					InitCommand=function(self) self:zoom(0.75):horizalign(left):x(-160):y(-11):diffuse(Color.White):maxwidth(200) end;
-					OnCommand=function(self) self:playcommand("Set"):diffusealpha(0):sleep(0.5):decelerate(0.4):diffusealpha(1) end;
+					OnCommand=function(self) self:playcommand("Set"):diffusealpha(0):sleep(0.5):easeoutsine(0.4):diffusealpha(1) end;
 					["CurrentSteps"..ToEnumShortString(p).."ChangedMessageCommand"]=function(self) self:playcommand("Set") end;
 					SetCommand=function(self)
 					local course = GAMESTATE:GetCurrentCourse();
@@ -515,10 +515,10 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 			self:diffuse(ColorLightTone(PlayerColor(p))):diffusetopedge(ColorLightTone(PlayerCompColor(p)))
 		end;
 		OnCommand=function(self)
-			self:settext(GetPlScore(p, "primary")):diffusealpha(0):sleep(0.8):decelerate(0.3):diffusealpha(1)
+			self:settext(GetPlScore(p, "primary")):diffusealpha(0):sleep(0.8):easeoutsine(0.3):diffusealpha(1)
 		end;
 		OffCommand=function(self)
-			self:decelerate(0.3):diffusealpha(0)
+			self:easeoutsine(0.3):diffusealpha(0)
 		end;
 	}
 	-- Secondary score.
@@ -534,10 +534,10 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 			if hasPersonalRecord == false then
 				self:addy(10)
 			end;
-			self:settext(GetPlScore(p, "secondary")):diffusealpha(0):sleep(0.85):decelerate(0.3):diffusealpha(1)
+			self:settext(GetPlScore(p, "secondary")):diffusealpha(0):sleep(0.85):easeoutsine(0.3):diffusealpha(1)
 		end;
 		OffCommand=function(self)
-			self:sleep(0.1):decelerate(0.3):diffusealpha(0)
+			self:sleep(0.1):easeoutsine(0.3):diffusealpha(0)
 		end;
 	};
 
@@ -549,15 +549,15 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 				:fadetop(0.2)
 			end;
 			OnCommand=function(self)
-				self:zoomy(0):sleep(1.2):decelerate(0.4):zoomy(80)
+				self:zoomy(0):sleep(1.2):easeoutsine(0.4):zoomy(80)
 			end;
 			OffCommand=function(self)
-				self:sleep(fade_out_pause):decelerate(fade_out_speed):zoomy(0)
+				self:sleep(fade_out_pause):easeoutsine(fade_out_speed):zoomy(0)
 			end;
 			PageUpdatedMessageCommand=function(self)
 				local PageInd = getenv("PageIndex")
 				print( p.." - "..PageInd[p] )
-				self:finishtweening():decelerate(0.2):zoomy(0)
+				self:finishtweening():easeoutsine(0.2):zoomy(0)
 				:zoomy( PageInd[p] < 3 and 80 or 0 )
 			end;
 			ScatterZoomMessageCommand=function(s,param)
@@ -577,10 +577,10 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 			self:Set(stageStats, playerStageStats)
 		end,
 		OnCommand=function(self)
-			self:diffusealpha(0):sleep(1.2):decelerate(0.4):diffusealpha(1)
+			self:diffusealpha(0):sleep(1.2):easeoutsine(0.4):diffusealpha(1)
 		end;
 		OffCommand=function(self)
-			self:sleep(fade_out_pause):decelerate(fade_out_speed):diffusealpha(0)
+			self:sleep(fade_out_pause):easeoutsine(fade_out_speed):diffusealpha(0)
 		end;
 	};
 
@@ -593,10 +593,10 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 		end;
 		OnCommand=function(self)
 			self:settext(GAMESTATE:GetPlayerState(p):GetPlayerOptionsString(0))
-			self:diffusealpha(0):sleep(0.8):decelerate(0.6):diffusealpha(1)
+			self:diffusealpha(0):sleep(0.8):easeoutsine(0.6):diffusealpha(1)
 			end;
 		OffCommand=function(self)
-			self:sleep(0.1):decelerate(0.3):diffusealpha(0)
+			self:sleep(0.1):easeoutsine(0.3):diffusealpha(0)
 		end;
 		};
 end
@@ -607,9 +607,9 @@ if #ttb > 0 then
 	t[#t+1]= Def.ActorFrame {
 		InitCommand=function(self) self:xy(SCREEN_CENTER_X,SCREEN_CENTER_Y-200) end;
 		OnCommand=function(self)
-			self:diffusealpha(0):sleep(0.8):decelerate(0.6):diffusealpha(1)
+			self:diffusealpha(0):sleep(0.8):easeoutsine(0.6):diffusealpha(1)
 		end;
-		OffCommand=function(self) self:sleep(0.1):decelerate(0.3):diffusealpha(0) end;
+		OffCommand=function(self) self:sleep(0.1):easeoutsine(0.3):diffusealpha(0) end;
 		Def.Quad {
 			InitCommand=function(self) 
 				self:zoomto(150,36):diffuse(color("#a50909"))
@@ -715,9 +715,9 @@ t[#t+1] = Def.BitmapText {
 	InitCommand=function(self) self:zoom(0.75):maxwidth(200/0.75):diffuse(color("#FFFFFF")):x(SCREEN_CENTER_X):y(SCREEN_BOTTOM-120) end,
 	OnCommand=function(self) 
 		self:settext(ProductVersion() .. " (" .. VersionDate() .. ")") 
-		:diffusealpha(0):sleep(1.2):decelerate(0.3):diffusealpha(0.4)
+		:diffusealpha(0):sleep(1.2):easeoutsine(0.3):diffusealpha(0.4)
 	end,
-	OffCommand=function(self) self:decelerate(0.3):diffusealpha(0) end
+	OffCommand=function(self) self:easeoutsine(0.3):diffusealpha(0) end
 };
 	
 return t;

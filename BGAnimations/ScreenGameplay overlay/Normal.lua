@@ -56,7 +56,7 @@ end
 	-- Colors for each player
 	local quads = Def.ActorFrame {
 		OnCommand=function(self) 
-			self:diffusealpha(0):sleep(barSleepIn+0.8):linear(0.2):diffusealpha(0.9):decelerate(2):diffusealpha(0.7)
+			self:diffusealpha(0):sleep(barSleepIn+0.8):linear(0.2):diffusealpha(0.9):easeoutsine(2):diffusealpha(0.7)
 		end
 	}
 
@@ -72,8 +72,8 @@ end
 	end
 
 	t[#t+1] = Def.ActorFrame {
-		OnCommand=function(self) self:addy(-75):sleep(barSleepIn):decelerate(0.5):addy(75) end,
-		OffCommand=function(self) self:sleep(0.15):decelerate(0.3):addy(-75) end,
+		OnCommand=function(self) self:addy(-75):sleep(barSleepIn):easeoutsine(0.5):addy(75) end,
+		OffCommand=function(self) self:sleep(0.15):easeoutsine(0.3):addy(-75) end,
 		Def.Quad {
 			InitCommand=function(self) self:align(0,0):zoomto(SCREEN_WIDTH,56) end,
 			OnCommand=function(self) self:diffuse(ColorTable["gameplayHeader"]) end
@@ -86,7 +86,7 @@ end
 				Def.Quad {
 					InitCommand=function(self) self:align(0.5,0):xy(songareapos,0):zoomto(0,56) end,
 					OnCommand=function(self)
-						self:sleep(barSleepIn+0.3):decelerate(0.6):zoomto(songAreaWidth,56)
+						self:sleep(barSleepIn+0.3):easeoutsine(0.6):zoomto(songAreaWidth,56)
 					end,
 					SetMessageCommand=function(self)
 						local curStage = GAMESTATE:GetCurrentStage()
@@ -102,7 +102,7 @@ end
 				Def.Quad {
 					InitCommand=function(self) self:xy(songareapos,56):align(0.5,1) end,
 					OnCommand=function(self)
-						self:zoomto(0,7):sleep(barSleepIn+0.3):decelerate(0.6):zoomto(songAreaWidth,7)
+						self:zoomto(0,7):sleep(barSleepIn+0.3):easeoutsine(0.6):zoomto(songAreaWidth,7)
 					end,
 					SetMessageCommand=function(self)
 						local curStage = GAMESTATE:GetCurrentStage()
@@ -127,7 +127,7 @@ end
 					self:x(songareapos+(SCREEN_WIDTH*0.21)):y(26):zoom(1):maxwidth(SCREEN_WIDTH*0.421875):diffuse(color("#FFFFFF")):horizalign(right)
 				end,
 				OnCommand=function(self)
-					self:diffusealpha(0):sleep(barSleepIn+0.3+0.9):decelerate(0.7):diffusealpha(1)
+					self:diffusealpha(0):sleep(barSleepIn+0.3+0.9):easeoutsine(0.7):diffusealpha(1)
 				end,
 				SetMessageCommand=function(self)
 					   	local song = GAMESTATE:GetCurrentSong()
@@ -144,7 +144,7 @@ end
 					self:xy(songareapos+(SCREEN_WIDTH*0.21),26+6):zoom(0.6):maxwidth(SCREEN_WIDTH*0.578125):diffuse(color("#FFFFFF")):horizalign(right)
 				end,
 				OnCommand=function(self)
-					self:diffusealpha(0):sleep(barSleepIn+0.3+0.9):decelerate(0.7):diffusealpha(1)
+					self:diffusealpha(0):sleep(barSleepIn+0.3+0.9):easeoutsine(0.7):diffusealpha(1)
 				end,
 				SetMessageCommand=function(self)
 					local song = GAMESTATE:GetCurrentSong()
@@ -161,7 +161,7 @@ end
 					self:x(songareapos-(SCREEN_WIDTH*( IsWidescreen() and 0.18 or 0.17)))
 				end,
 				OnCommand=function(self)
-					self:diffusealpha(0):sleep(barSleepIn+0.3+0.7):decelerate(0.7):diffusealpha(1)
+					self:diffusealpha(0):sleep(barSleepIn+0.3+0.7):easeoutsine(0.7):diffusealpha(1)
 				end,
 					Def.BitmapText {
 					Font="_Bold",
@@ -230,16 +230,16 @@ end
 			t[#t+1] = Def.Quad{
 				OnCommand=function(s)
 					s:zoomto( maxwidth, maxheight*2 ):MaskDest():halign(0):diffuse( color("#222222") ):xy( ppos+( SctMargin.Left ), 21 ):playcommand("Update")
-					s:addy(-75):sleep(barSleepIn):decelerate(0.5):addy(75)
+					s:addy(-75):sleep(barSleepIn):easeoutsine(0.5):addy(75)
 				end,
-				OffCommand=function(self) self:sleep(0.15):decelerate(0.3):addy(-75) end
+				OffCommand=function(self) self:sleep(0.15):easeoutsine(0.3):addy(-75) end
 			}
 	
 			t[#t+1] = Def.ActorMultiVertex{   
 				OnCommand=function(s)
 					s:xy( ppos, 20 )
 					s:MaskDest():SetDrawState{Mode="DrawMode_QuadStrip"}
-					:addy(-75):sleep(barSleepIn):decelerate(0.5):addy(75)
+					:addy(-75):sleep(barSleepIn):easeoutsine(0.5):addy(75)
 				end,
 				CurrentSongChangedMessageCommand=function(s)
 					if GAMESTATE:GetCurrentSong() then
@@ -274,7 +274,7 @@ end
 						end
 					end
 				end,
-				OffCommand=function(self) self:sleep(0.15):decelerate(0.3):addy(-75) end
+				OffCommand=function(self) self:sleep(0.15):easeoutsine(0.3):addy(-75) end
 			}
 
 			t[#t+1] = Def.Quad{
@@ -295,7 +295,7 @@ end
 					end
 					s:sleep(1/20):queuecommand("Update")
 				end,
-				OffCommand=function(self) self:sleep(0.15):decelerate(0.3):addy(-75) end
+				OffCommand=function(self) self:sleep(0.15):easeoutsine(0.3):addy(-75) end
 			}
 		end
 
@@ -307,7 +307,7 @@ end
 				if stp then
 					self:playcommand("CheckForTime")
 				end
-				self:addy(-75):sleep(barSleepIn):decelerate(0.5):addy(75)
+				self:addy(-75):sleep(barSleepIn):easeoutsine(0.5):addy(75)
 			end,
 			CheckForTimeCommand=function(s)
 				if GAMESTATE:GetCurMusicSeconds() > GAMESTATE:GetCurrentSong():GetLastSecond()*.6 and not alreadyfadedpercentage then
@@ -340,7 +340,7 @@ end
 						self:finishtweening():sleep(0.01):queuecommand("RedrawScore") end
 					end,
 					RedrawScoreCommand=function(self) self:settext(GetPlScore(pn)) end,
-					OffCommand=function(self) self:sleep(0.15):decelerate(0.3):addy(-75) end
+					OffCommand=function(self) self:sleep(0.15):easeoutsine(0.3):addy(-75) end
 				},
 
 				Def.BitmapText {
@@ -358,16 +358,16 @@ end
 						self:finishtweening():settext( SecondsToMMSSMsMs( vStats:GetAliveSeconds() ) )
 						:sleep(1/60):queuecommand("UpdateTimer")
 					end,
-					OffCommand=function(self) self:sleep(0.15):decelerate(0.3):addy(-75) end
+					OffCommand=function(self) self:sleep(0.15):easeoutsine(0.3):addy(-75) end
 				}
 		}
 		
 
 		t[#t+1] = Def.ActorFrame {
-		OffCommand=function(self) self:sleep(0.15):decelerate(0.3):addy(-75) end,
+		OffCommand=function(self) self:sleep(0.15):easeoutsine(0.3):addy(-75) end,
 			Def.ActorFrame {
 				InitCommand=function(self) self:xy(life_x_position,SCREEN_TOP+28) end,
-				OnCommand=function(self) self:addy(-75):sleep(barSleepIn):decelerate(0.5):addy(75) end,
+				OnCommand=function(self) self:addy(-75):sleep(barSleepIn):easeoutsine(0.5):addy(75) end,
 				-- Quad
 				Def.ActorFrame {
 					["CurrentSteps"..ToEnumShortString(pn).."ChangedMessageCommand"]=function(self) self:playcommand("Set") end;

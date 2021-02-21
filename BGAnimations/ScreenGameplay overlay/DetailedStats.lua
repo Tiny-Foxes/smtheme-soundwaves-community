@@ -18,7 +18,7 @@ local t = Def.ActorFrame{
         end
     end,
     OffCommand=function(self)
-        self:sleep(0.75):decelerate(0.3):addy(75):diffusealpha(0)
+        self:sleep(0.75):easeoutsine(0.3):addy(75):diffusealpha(0)
     end,
     ["CurrentSteps"..ToEnumShortString(player).."ChangedMessageCommand"]=function(self) self:playcommand("Set") end
 }
@@ -60,7 +60,7 @@ t[#t+1] = Def.Quad{
 t[#t+1] = Def.ActorFrame {
         Def.ActorFrame {
             InitCommand=function(self) self:xy(-170,SCREEN_TOP+100) end,
-            OffCommand=function(self) self:sleep(0.05):decelerate(0.3):diffusealpha(0) end,
+            OffCommand=function(self) self:sleep(0.05):easeoutsine(0.3):diffusealpha(0) end,
             -- Quad
             Def.ActorFrame {
                 ["CurrentSteps"..ToEnumShortString(player).."ChangedMessageCommand"]=function(self) self:playcommand("Set") end,
@@ -104,7 +104,7 @@ t[#t+1] = Def.BitmapText{
         s:xy( -130,85 )
         s:halign(0):maxwidth(340):playcommand("Set")
     end,
-    OffCommand=function(self) self:sleep(0.1):decelerate(0.3):diffusealpha(0) end,
+    OffCommand=function(self) self:sleep(0.1):easeoutsine(0.3):diffusealpha(0) end,
     SetCommand=function(s)
         local dialog = "N/A"
         if GAMESTATE:GetCurrentSteps(player) then
@@ -121,7 +121,7 @@ t[#t+1] = Def.BitmapText{
         s:xy( -130,115 ):visible(false)
         s:halign(0):maxwidth(340):playcommand("Set")
     end,
-    OffCommand=function(self) self:sleep(0.1):decelerate(0.3):diffusealpha(0) end,
+    OffCommand=function(self) self:sleep(0.1):easeoutsine(0.3):diffusealpha(0) end,
     SetCommand=function(s)
         if GAMESTATE:GetCurrentSteps(player) then
             local st = GAMESTATE:GetCurrentSteps(player)
@@ -169,7 +169,7 @@ t[#t+1] = Def.Quad{
             tempxpos = calc-220
         end
     end,
-    OffCommand=function(self) self:sleep(0.15):decelerate(0.3):diffusealpha(0) end,
+    OffCommand=function(self) self:sleep(0.15):easeoutsine(0.3):diffusealpha(0) end,
 }
 
 t[#t+1] = Def.Quad{
@@ -204,7 +204,7 @@ local ScAFrm =Def.ActorFrame{
             end
         end
     end,
-    OffCommand=function(self) self:sleep(0.15):decelerate(0.3):diffusealpha(0) end,
+    OffCommand=function(self) self:sleep(0.15):easeoutsine(0.3):diffusealpha(0) end,
     UpdatePosCommand=function(s)
         if GAMESTATE:GetCurMusicSeconds() < SongTotal-30 then
             s:x( GAMESTATE:GetCurMusicSeconds() > 27 and scale( GAMESTATE:GetCurMusicSeconds(), 0, SongTotal-30, tempxpos+(maxwidth/2), -calc+220 ) or tempxpos )
@@ -498,7 +498,7 @@ Name[#Name+1] = "MaxCombo"
 Length = Length + 2
 for i,v in ipairs( Name ) do
 	local Con = Def.ActorFrame{
-        OffCommand=function(self) self:sleep(0.05 * i):decelerate(0.2):diffusealpha(0) end,
+        OffCommand=function(self) self:sleep(0.05 * i):easeoutsine(0.2):diffusealpha(0) end,
 		Def.BitmapText {
 			Font = "_Bold",
 			Text=0,
@@ -507,7 +507,7 @@ for i,v in ipairs( Name ) do
 	        	self:xy(70,SCREEN_CENTER_Y+(UserOptions.judgmenty)+((44-(Length*2))*i)):halign(0):zoom(1.725-(Length*0.075)):halign(1)
 			end,
 			OnCommand=function(self)
-				self:diffusealpha(0):sleep(0.1 * i):decelerate(0.6):diffusealpha(1)
+				self:diffusealpha(0):sleep(0.1 * i):easeoutsine(0.6):diffusealpha(1)
 				if DLW then
 					for i=0,1 do
 						if (v == 'W'..(5-i) and tonumber(DLW) >= (i+1)) then self:diffusealpha( 0.4 ) end
@@ -529,9 +529,9 @@ for i,v in ipairs( Name ) do
             self:diffuse(BoostColor((JudgmentLineToColor("JudgmentLine_" .. v)),1.3))
             self:xy(-180,SCREEN_CENTER_Y+(UserOptions.judgmenty)+((44-(Length*2))*i)):zoom(1.725-(Length*0.075)):halign(0)
         end,
-        OffCommand=function(self) self:sleep(0.05 * i):decelerate(0.2):diffusealpha(0) end,
+        OffCommand=function(self) self:sleep(0.05 * i):easeoutsine(0.2):diffusealpha(0) end,
         OnCommand=function(self)
-            self:diffusealpha(0):sleep(0.1 * i):decelerate(0.6):diffusealpha(0.86)
+            self:diffusealpha(0):sleep(0.1 * i):easeoutsine(0.6):diffusealpha(0.86)
             if DLW then
                 for i=0,1 do
                     if (v == 'W'..(5-i) and tonumber(DLW) >= (i+1)) then self:diffusealpha( 0.4 ) end
@@ -561,7 +561,7 @@ for i, rc_type in ipairs(eval_radar) do
             self:xy(100,(_screen.cy+UserOptions.judgmenty-20)+spacing)
         end,
 		OnCommand=function(self)
-            self:diffusealpha(0):sleep(0.1 * i):decelerate(0.5):diffusealpha(1):playcommand("UpdateMaxValue")
+            self:diffusealpha(0):sleep(0.1 * i):easeoutsine(0.5):diffusealpha(1):playcommand("UpdateMaxValue")
         end,
         CurrentSongChangedMessageCommand=function(s) s:playcommand("UpdateMaxValue") end,
         UpdateMaxValueCommand=function(s)
@@ -570,7 +570,7 @@ for i, rc_type in ipairs(eval_radar) do
                 MaxVal = SongOrCourse:GetRadarValues(player):GetValue( "RadarCategory_"..rc_type[1] )
             end
         end,
-        OffCommand=function(self) self:sleep(0.1 * i):decelerate(0.2):diffusealpha(0) end,
+        OffCommand=function(self) self:sleep(0.1 * i):easeoutsine(0.2):diffusealpha(0) end,
         
 			-- Item name
 			Def.BitmapText {

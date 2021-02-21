@@ -79,7 +79,7 @@ local amvhit = Def.ActorMultiVertex{
 	end,
 	ScatterZoomMessageCommand=function(s,param)
 		if param.Player == p then
-			s:stoptweening():decelerate(0.2)
+			s:stoptweening():easeoutsine(0.2)
 			
 			-- If the player requests a zoom, we need to recalculate the vertices.
 			local WidthConv = (BodyWidth/2)*param.Zoom
@@ -95,7 +95,7 @@ local amvhit = Def.ActorMultiVertex{
 	end,
 	ScatterMoveMessageCommand=function(s,param)
 		if param.Player == p then
-			s:stoptweening():decelerate(0.2)
+			s:stoptweening():easeoutsine(0.2)
 			s:x( param.Zoom > 1 and -scale(param.Xpos, 1, param.MaxSegment, 0, BodyWidth) or 0 )
 		end
 	end,
@@ -107,7 +107,7 @@ local amvmiss = Def.ActorMultiVertex{
 	end,
 	ScatterZoomMessageCommand=function(s,param)
 		if param.Player == p then
-			s:stoptweening():decelerate(0.2)
+			s:stoptweening():easeoutsine(0.2)
 			
 			-- If the player requests a zoom, we need to recalculate the vertices.
 			-- Doing a simple zoomx is not going to work because it's going to make a distorted experience.
@@ -129,7 +129,7 @@ local amvmiss = Def.ActorMultiVertex{
 	end,
 	ScatterMoveMessageCommand=function(s,param)
 		if param.Player == p then
-			s:stoptweening():decelerate(0.2)
+			s:stoptweening():easeoutsine(0.2)
 			s:x( param.Zoom > 1 and -scale(param.Xpos, 1, param.MaxSegment, 0, BodyWidth) or 0 )
 		end
 	end,

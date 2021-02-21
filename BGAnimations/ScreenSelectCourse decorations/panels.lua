@@ -73,7 +73,7 @@ end
 for pn in ivalues(PlayerNumber) do
 -- Backdrop
 t[#t+1] = Def.ActorFrame {
-	OffCommand=function(self) self:sleep(0.24):decelerate(0.4):diffusealpha(0) end;
+	OffCommand=function(self) self:sleep(0.24):easeoutsine(0.4):diffusealpha(0) end;
 	-- Player color
 	Def.Quad {
 		InitCommand=function(self)
@@ -110,7 +110,7 @@ t[#t+1] = Def.ActorFrame {
 			end;
 			PlayerJoinedMessageCommand=function(self,param)
 				if param.Player == pn then
-					self:visible(true):diffusealpha(0):sleep(1.3):decelerate(0.4):diffusealpha(1);
+					self:visible(true):diffusealpha(0):sleep(1.3):easeoutsine(0.4):diffusealpha(1);
 				end;
 			end;
 		Def.Quad {
@@ -262,11 +262,11 @@ t[#t+1] = Def.ActorFrame {
 		end;
 	PlayerJoinedMessageCommand=function(self,param)
 		if param.Player == pn then
-			self:visible(true):diffusealpha(0):addy(200):decelerate(0.4):diffusealpha(1):sleep(0.2):smooth(0.75):addy(-200);
+			self:visible(true):diffusealpha(0):addy(200):easeoutsine(0.4):diffusealpha(1):sleep(0.2):smooth(0.75):addy(-200);
 		end;
 	end;
 	OffCommand=function(self)
-		self:sleep(0.24):decelerate(0.4):diffusealpha(0)
+		self:sleep(0.24):easeoutsine(0.4):diffusealpha(0)
 	end;
 	Def.Quad {
 		InitCommand=function(self)
@@ -320,7 +320,7 @@ t[#t+1] = Def.ActorFrame {
 		end;
 		PlayerJoinedMessageCommand=function(self,param)
 			if param.Player == pn then
-				self:decelerate(0.3):diffusealpha(0)
+				self:easeoutsine(0.3):diffusealpha(0)
 				end;
 			end;	
 		LoadActor(THEME:GetPathG("ScreenSelectMusic","JoinMarker")).. {
@@ -328,21 +328,21 @@ t[#t+1] = Def.ActorFrame {
 				self:diffuse(ColorMidTone(PlayerColor(pn)))
 			end;
 			OnCommand=function(self)
-				self:diffusealpha(0):zoomy(0.6):sleep(1):decelerate(0.4):zoomy(1):diffusealpha(1)
+				self:diffusealpha(0):zoomy(0.6):sleep(1):easeoutsine(0.4):zoomy(1):diffusealpha(1)
 				self:diffuseshift():effectcolor1(ColorMidTone(PlayerColor(pn))):effectcolor2(ColorMidTone(PlayerCompColor(pn))):effectperiod(4)
 			end;
 			OffCommand=function(self)
-				self:stoptweening():decelerate(0.3):diffusealpha(0)
+				self:stoptweening():easeoutsine(0.3):diffusealpha(0)
 			end;
 		};
 		Def.BitmapText {
 			Font="_Bold";
 			InitCommand=function(self) self:horizalign(center) end;
 			OnCommand=function(self)
-				self:diffusealpha(0):sleep(1.5):decelerate(0.4):diffusealpha(1)
+				self:diffusealpha(0):sleep(1.5):easeoutsine(0.4):diffusealpha(1)
 			end;
 			OffCommand=function(self)
-				self:stoptweening():stopeffect():decelerate(0.3):diffusealpha(0)
+				self:stoptweening():stopeffect():easeoutsine(0.3):diffusealpha(0)
 			end;
 			Text=ToUpper(THEME:GetString("ScreenSelectMusic","Start To Join"));
 		};	

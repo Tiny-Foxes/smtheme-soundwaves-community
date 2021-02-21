@@ -55,8 +55,8 @@ end
 	end
 
 	t[#t+1] = Def.ActorFrame {
-		OnCommand=function(self) self:addy(-75):sleep(barSleepIn):decelerate(0.5):addy(75) end;
-		OffCommand=function(self) self:sleep(0.15):decelerate(0.3):addy(-75) end;
+		OnCommand=function(self) self:addy(-75):sleep(barSleepIn):easeoutsine(0.5):addy(75) end;
+		OffCommand=function(self) self:sleep(0.15):easeoutsine(0.3):addy(-75) end;
 		Def.Quad {
 			InitCommand=function(self)
 				self:xy(0,0):vertalign(top):horizalign(left):zoomto(SCREEN_WIDTH,56) 
@@ -68,7 +68,7 @@ end
 		-- Colors for each player
 		Def.ActorFrame {
 			OnCommand=function(self) 
-				self:diffusealpha(0):sleep(barSleepIn+0.8):linear(0.2):diffusealpha(0.9):decelerate(2):diffusealpha(0.7)
+				self:diffusealpha(0):sleep(barSleepIn+0.8):linear(0.2):diffusealpha(0.9):easeoutsine(2):diffusealpha(0.7)
 			end;
 			Def.Quad {
 				InitCommand=function(self) 
@@ -98,14 +98,14 @@ end
 					playerpos = SCREENMAN:GetTopScreen():GetChild("Player"..ToEnumShortString(pn)):GetX()
 				end
 				self:xy(playerpos-180,SCREEN_TOP+28):halign(0):customtexturerect(0,0,1,1):texcoordvelocity(1,0):cropbottom(0.08):zoomx(0.826)
-				self:addy(-75):sleep(barSleepIn):decelerate(0.5):addy(75)
+				self:addy(-75):sleep(barSleepIn):easeoutsine(0.5):addy(75)
 			end,
 			LifeChangedMessageCommand=function(s,param)
 				if param.Player == pn then
 					s:cropright( 1 - param.LifeMeter:GetLife() )
 				end
 			end,
-			OffCommand=function(self) self:sleep(0.15):decelerate(0.3):addy(-75) end;
+			OffCommand=function(self) self:sleep(0.15):easeoutsine(0.3):addy(-75) end;
 			Texture=THEME:GetPathG("StreamDisplay","normal"),
 		}
 
@@ -122,7 +122,7 @@ end
 			end,
 			OnCommand=function(self)
 				self:xy(playerpos,30)
-				self:addy(-75):sleep(barSleepIn):decelerate(0.5):addy(75)
+				self:addy(-75):sleep(barSleepIn):easeoutsine(0.5):addy(75)
 				if GAMESTATE:GetPlayMode() == "PlayMode_Endless" then
 					self:queuecommand("UpdateTimer")
 				end
@@ -141,18 +141,18 @@ end
             RedrawScoreCommand=function(self)
 				self:settext(GetPlScore(pn, "primary"))
 			end;
-			OffCommand=function(self) self:sleep(0.15):decelerate(0.3):addy(-75) end;
+			OffCommand=function(self) self:sleep(0.15):easeoutsine(0.3):addy(-75) end;
 		};
 
 		t[#t+1] = Def.ActorFrame {
 		InitCommand=function(self) self:visible(GAMESTATE:IsHumanPlayer(pn)) end;
-		OffCommand=function(self) self:sleep(0.15):decelerate(0.3):addy(-75) end;
+		OffCommand=function(self) self:sleep(0.15):easeoutsine(0.3):addy(-75) end;
 			Def.ActorFrame {
 				InitCommand=function(self)
 					self:horizalign(center)
 				end;
 				OnCommand=function(self)
-					self:xy(playerpos-210,SCREEN_TOP+28):addy(-75):sleep(barSleepIn):decelerate(0.5):addy(75)
+					self:xy(playerpos-210,SCREEN_TOP+28):addy(-75):sleep(barSleepIn):easeoutsine(0.5):addy(75)
 				end;
 				-- Quad
 				Def.ActorFrame {

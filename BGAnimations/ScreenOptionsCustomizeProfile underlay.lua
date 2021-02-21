@@ -349,7 +349,7 @@ for i, item in ipairs(menu_items) do
 			end,
 			OffCommand=function(s) s:linear(0.2):diffusealpha(0) end,
 			UpdateCursorMessageCommand=function(self,param)
-				self:stoptweening():decelerate(0.16)
+				self:stoptweening():easeoutsine(0.16)
 				self:diffusealpha(param.ind == i and 1 or 0)
 				self:x( param.ind == i and 50 or 10 )
 			end,
@@ -428,7 +428,7 @@ local ProfileImage = AvI and AvI or THEME:GetPathG("UserProfile","generic icon")
 args[#args+1] = Def.ActorFrame{
     Name="InfoFrame",
     OnCommand=function(s)
-        s:diffusealpha(0):addy(-20):decelerate(0.2):addy(20):diffusealpha(1)
+        s:diffusealpha(0):addy(-20):easeoutsine(0.2):addy(20):diffusealpha(1)
     end,
     OffCommand=function(s)
         s:accelerate(0.2):addy(-20):diffusealpha(0)

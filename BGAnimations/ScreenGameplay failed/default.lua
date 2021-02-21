@@ -6,7 +6,7 @@ return Def.ActorFrame {
 			self:diffuse(color("#750000")):diffusealpha(0.9)
 		end;
 		StartTransitioningCommand=function(self)
-			self:decelerate(0.4):zoomto(SCREEN_WIDTH,SCREEN_HEIGHT)
+			self:easeoutsine(0.4):zoomto(SCREEN_WIDTH,SCREEN_HEIGHT)
 		end;
 	  };
 	-- Scanline
@@ -16,7 +16,7 @@ return Def.ActorFrame {
 			self:diffuse(color("#e57b7b"))
 		end;
 		StartTransitioningCommand=function(self)
-			self:decelerate(0.4):y(SCREEN_BOTTOM)
+			self:easeoutsine(0.4):y(SCREEN_BOTTOM)
 		end;
 	  };
 	  
@@ -24,7 +24,7 @@ return Def.ActorFrame {
 	Def.Quad {
 		InitCommand=function(self) self:vertalign(middle):zoomto(SCREEN_WIDTH,0):xy(SCREEN_CENTER_X,SCREEN_CENTER_Y):diffuse(color("#990c0c")):draworder(105) end,
 		StartTransitioningCommand=function(self)
-			self:decelerate(0.2):zoomtoheight(120)
+			self:easeoutsine(0.2):zoomtoheight(120)
 		end;
 	};
 	Def.Sprite {

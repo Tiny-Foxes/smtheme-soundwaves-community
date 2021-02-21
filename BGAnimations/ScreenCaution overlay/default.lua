@@ -30,6 +30,6 @@ return Def.ActorFrame {
 --
 	Def.Quad {
 		InitCommand=function(self) self:Center():zoomto(SCREEN_WIDTH,SCREEN_HEIGHT):diffuse(color("#000000")) end,
-		OnCommand=function(self) self:decelerate(0.3):diffusealpha(0) end
+		OnCommand=function(self) self:easeoutsine(0.3):diffusealpha(0) end
 	}
 }

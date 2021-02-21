@@ -4,31 +4,31 @@ return Def.ActorFrame {
 		if song then
 -- 			self:setaux(0);
 			self:finishtweening();
-			self:decelerate(0.3):diffusealpha(1)
+			self:easeoutcubic(0.3):diffusealpha(1)
 		elseif not song and self:GetZoomX() == 1 then
 -- 			self:setaux(1);
 			self:finishtweening();
-			self:decelerate(0.3):diffusealpha(0)
+			self:easeincubic(0.3):diffusealpha(0)
 		end;
 	end;
 	Def.StepsDisplayList {
 		Name="StepsDisplayListRow";
 		OnCommand=function(self)
-		self:diffusealpha(0):decelerate(0.3):diffusealpha(1)
+		self:diffusealpha(0):easeoutcubic(0.3):diffusealpha(1)
 		end;
 		OffCommand=function(self)
-		self:decelerate(0.3):diffusealpha(0)
+		self:easeoutcubic(0.3):diffusealpha(0)
 		end;
 		CursorP1 = Def.ActorFrame {
 			InitCommand=function(self) self:x(-87):player(PLAYER_1) end;
 			PlayerJoinedMessageCommand=function(self, params)
 				if params.Player == PLAYER_1 then
-					self:visible(true):zoom(0):bounceend(1):zoom(1)
+					self:visible(true):zoom(0):easeoutcubic(1):zoom(1)
 				end;
 			end;
 			PlayerUnjoinedMessageCommand=function(self, params)
 				if params.Player == PLAYER_1 then
-					self:visible(true):bouncebegin(1):zoom(0)
+					self:visible(true):easeoutcubic(1):zoom(0)
 				end;
 			end;
 			LoadActor(THEME:GetPathG("_StepsDisplayListRow","Cursor")) .. {
@@ -60,10 +60,10 @@ return Def.ActorFrame {
 			};
 		};
 		CursorP1Frame = Def.Actor{
-			ChangeCommand=function(self) self:stoptweening():decelerate(0.05) end;
+			ChangeCommand=function(self) self:stoptweening():easeoutsine(0.05) end;
 		};
 		CursorP2Frame = Def.Actor{
-			ChangeCommand=function(self) self:stoptweening():decelerate(0.05) end;
+			ChangeCommand=function(self) self:stoptweening():easeoutsine(0.05) end;
 		};
 	};
 };

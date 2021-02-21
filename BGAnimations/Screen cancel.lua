@@ -5,7 +5,7 @@ return Def.ActorFrame {
 			self:diffuse(Color.Black):draworder(12000)
 		end;
 		OnCommand=function(self)
-			self:decelerate(0.2):zoomto(SCREEN_WIDTH,SCREEN_HEIGHT)
+			self:easeoutsine(0.2):zoomto(SCREEN_WIDTH,SCREEN_HEIGHT)
 		end;
 	};
 	LoadActor(THEME:GetPathS("_Screen","cancel")) .. {

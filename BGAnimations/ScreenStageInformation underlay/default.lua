@@ -23,7 +23,7 @@ if getenv("CurrentlyInSong") == false then
 			self:diffuse(Color.Black)
 		end;
 		OnCommand=function(self)
-			self:decelerate(0.4):zoomto(SCREEN_WIDTH,SCREEN_HEIGHT)
+			self:easeoutsine(0.4):zoomto(SCREEN_WIDTH,SCREEN_HEIGHT)
 		end;
 	  };
 	-- Scanline
@@ -33,7 +33,7 @@ if getenv("CurrentlyInSong") == false then
 			self:diffuse(ColorLightTone(StageToColor(curStage)))
 		end;
 		OnCommand=function(self)
-			self:decelerate(0.4):y(SCREEN_BOTTOM)
+			self:easeoutsine(0.4):y(SCREEN_BOTTOM)
 		end;
 	  };
 

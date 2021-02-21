@@ -4,8 +4,8 @@ local item_height = 36;
 local ColorTable = LoadModule("Theme.Colors.lua")( LoadModule("Config.Load.lua")("SoundwavesSubTheme","Save/OutFoxPrefs.ini") )
 
 return Def.ActorFrame {
-	OnCommand=function(self) self:diffusealpha(0):decelerate(0.3):diffusealpha(1) end;
-	OffCommand=function(self) self:decelerate(0.3):diffusealpha(0) end;
+	OnCommand=function(self) self:diffusealpha(0):easeoutsine(0.3):diffusealpha(1) end;
+	OffCommand=function(self) self:easeoutsine(0.3):diffusealpha(0) end;
 	Def.Quad {
 	InitCommand=function(self) self:zoomto(item_width,item_height):diffuse(color("#001232")):diffusealpha(0.75) end;
 	},

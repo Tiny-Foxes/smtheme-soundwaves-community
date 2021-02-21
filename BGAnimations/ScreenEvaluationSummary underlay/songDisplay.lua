@@ -13,10 +13,10 @@ t[#t+1] = Def.ActorFrame {
 		-- Text banner
 		Def.ActorFrame {
 		OnCommand=function(self)
-			self:diffusealpha(0):sleep(0.2*(i-1)):decelerate(0.3):diffusealpha(1)
+			self:diffusealpha(0):sleep(0.2*(i-1)):easeoutsine(0.3):diffusealpha(1)
 		end;
 		OffCommand=function(self)
-			self:sleep(0.2*(i-1)):decelerate(0.2):diffusealpha(0)
+			self:sleep(0.2*(i-1)):easeoutsine(0.2):diffusealpha(0)
 		end;
 			Def.Quad {
 			InitCommand=function(self)
@@ -77,10 +77,10 @@ for ip, pn in ipairs(GAMESTATE:GetHumanPlayers()) do
 			else
 				self:settext(pStageStats:GetScore())
 			end;
-		self:diffusealpha(0):sleep(0.2*(i-1)):decelerate(0.3):diffusealpha(1)
+		self:diffusealpha(0):sleep(0.2*(i-1)):easeoutsine(0.3):diffusealpha(1)
 		end;
 		OffCommand=function(self)
-			self:sleep(0.2*(i-1)):decelerate(0.2):diffusealpha(0)
+			self:sleep(0.2*(i-1)):easeoutsine(0.2):diffusealpha(0)
 		end;
 	};
 end;

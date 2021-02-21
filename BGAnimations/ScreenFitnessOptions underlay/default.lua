@@ -95,21 +95,21 @@ for p in ivalues(PlayerNumber) do
 			end
 			self:diffusealpha(0.5) end;
 		OnCommand=function(self) self:linear(0.14):zoomto(400,SCREEN_HEIGHT) end;
-		OffCommand=function(self) self:sleep(0.2):decelerate(0.2):addy(SCREEN_HEIGHT) end;
+		OffCommand=function(self) self:sleep(0.2):easeoutsine(0.2):addy(SCREEN_HEIGHT) end;
 	};
 
 	-- Avatar and name
 	t[#t+1] = Def.ActorFrame {
 		OnCommand=function(self) 
 			self:diffusealpha(0):xy(SCREEN_CENTER_X+ 200*Side(p) ,SCREEN_TOP+80)
-			:sleep(0.5):decelerate(0.2):diffusealpha(1):player(p)
+			:sleep(0.5):easeoutsine(0.2):diffusealpha(1):player(p)
 		end;
 		Def.Quad {
 			InitCommand=function(self) 
 				self:zoomto(336,61):vertalign(top) 
 				self:diffuse(PlayerColor(p)):diffuserightedge(PlayerCompColor(p))
 			end;
-			OnCommand=function(self) self:zoomto(336,0):sleep(0.5):decelerate(0.7):zoomto(336,61) end;
+			OnCommand=function(self) self:zoomto(336,0):sleep(0.5):easeoutsine(0.7):zoomto(336,61) end;
 		 };
 		Def.Sprite {
 			InitCommand=function(self) self:horizalign(left):vertalign(top):xy(-164,5) end;
@@ -147,7 +147,7 @@ for p in ivalues(PlayerNumber) do
 			end;
 			PageUpdatedMessageCommand=function(self)
 				local vertind = MenuInd["VertInd"][p]
-				self:stoptweening():decelerate(0.1)
+				self:stoptweening():easeoutsine(0.1)
 				:diffuse( PBDColor )
 				if vertind == ind and
 					(MenuInd["TypeInd"][p] < 3 or (MenuInd["TypeInd"][p] == 1 or MenuInd["TypeInd"][p] == 3))
@@ -205,7 +205,7 @@ for p in ivalues(PlayerNumber) do
 				self:diffuse( PGradNor ):diffusetopedge( PGradCom )
 			end;
 			PageUpdatedMessageCommand=function(self)
-				self:stoptweening():decelerate(0.1):zoomy(1)
+				self:stoptweening():easeoutsine(0.1):zoomy(1)
 				if MenuInd["TypeInd"][p] == 3 then
 					self:zoomy(0)
 				end

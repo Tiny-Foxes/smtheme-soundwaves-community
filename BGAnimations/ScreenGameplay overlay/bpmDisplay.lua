@@ -35,10 +35,10 @@ local t = Def.ActorFrame{
 		self:xy(_screen.cx, SCREEN_BOTTOM-50):valign(1)
 	end,
 	OnCommand=function(self)
-		self:diffusealpha(0):sleep(0.25):decelerate(0.9):diffusealpha(1);
+		self:diffusealpha(0):sleep(0.25):easeoutsine(0.9):diffusealpha(1);
 		end;
 	OffCommand=function(self)
-		self:decelerate(0.9):diffusealpha(0);
+		self:easeoutsine(0.9):diffusealpha(0);
 		end;
 
 	Def.BitmapText {

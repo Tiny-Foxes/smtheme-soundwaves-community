@@ -76,11 +76,11 @@ local function CreatePaneDisplayGraph( _pnPlayer, _sLabel, _rcRadarCategory )
 				local course = GAMESTATE:GetCurrentCourse()
 				if not song and not course then
 					self:stoptweening();
-					self:decelerate(0.2);
+					self:easeoutsine(0.2);
 					self:zoomtowidth(0);
 				else
 					self:stoptweening();
-					self:decelerate(0.2);
+					self:easeoutsine(0.2);
 					self:zoomtowidth( clamp(GetRadarData( _pnPlayer, _rcRadarCategory ) * 50,0,50) );
 				end
 			end;

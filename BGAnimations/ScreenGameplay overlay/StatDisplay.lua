@@ -22,8 +22,8 @@ if GAMESTATE:IsHumanPlayer(p) then
 			InitCommand=function(self) 	
 				self:xy(pane_x_position,(SCREEN_CENTER_Y+backupy)+(yspacing*i) + (v == "MaxCombo" and 20 or 0) )
 			end,
-			OnCommand=function(self) self:diffusealpha(0):decelerate(0.4):diffusealpha(0.86) end,
-			OffCommand=function(self) self:decelerate(0.3):diffusealpha(0) end,
+			OnCommand=function(self) self:diffusealpha(0):easeoutsine(0.4):diffusealpha(0.86) end,
+			OffCommand=function(self) self:easeoutsine(0.3):diffusealpha(0) end,
 			-- Numbers numbers numbers!
 			Def.BitmapText {
 				Font = "_plex sans condensed score 32px",
@@ -61,8 +61,8 @@ if GAMESTATE:IsHumanPlayer(p) then
 			:zoom(0.5):skewx(-0.2):diffusealpha(1.0):shadowlength(1):maxwidth(140):horizalign(pane_align)
 			:settext(JudgmentLineToLocalizedString("MaxCombo"))
 		end,
-		OnCommand=function(self) self:diffusealpha(0):decelerate(0.4):diffusealpha(0.86) end,
-		OffCommand=function(self) self:decelerate(0.3):diffusealpha(0) end
+		OnCommand=function(self) self:diffusealpha(0):easeoutsine(0.4):diffusealpha(0.86) end,
+		OffCommand=function(self) self:easeoutsine(0.3):diffusealpha(0) end
 	}
 end
 	

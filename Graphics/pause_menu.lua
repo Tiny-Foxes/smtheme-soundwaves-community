@@ -234,7 +234,7 @@ local frame= Def.ActorFrame{
 				:sleep(1):queuecommand("Hide")
 		end,
 		HideCommand= function(self)
-			self:stoptweening():decelerate(.25):diffusealpha(0)
+			self:stoptweening():easeoutsine(.25):diffusealpha(0)
 		end,
 	},
 }

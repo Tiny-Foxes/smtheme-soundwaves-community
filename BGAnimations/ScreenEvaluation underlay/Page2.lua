@@ -5,7 +5,7 @@ local off_wait = 0.75
 
 local t = Def.ActorFrame{
 	OffCommand=function(self)
-		self:sleep(fade_out_pause):decelerate(fade_out_speed):diffusealpha(0)
+		self:sleep(fade_out_pause):easeoutsine(fade_out_speed):diffusealpha(0)
 	end;
 };
 -- A very useful table...
@@ -42,7 +42,7 @@ for i=1,GAMESTATE:GetCurrentStyle():ColumnsPerPlayer() do
 				:y( SCREEN_CENTER_Y-30+((44-(Length*2.6))*ind)):zoom(1.5-(Length*0.1) )
 				:settext( NoteTable[p][i][val] )
 				self:diffuse( BoostColor( JudgmentLineToColor(cur_line), 1 ) )
-				self:diffusealpha(0):sleep(0.1 * ind):decelerate(0.6):diffusealpha(0.86)
+				self:diffusealpha(0):sleep(0.1 * ind):easeoutsine(0.6):diffusealpha(0.86)
 				if DLW then
 					for i=0,1 do
 						if (v == 'W'..(5-i) and tonumber(DLW) >= (i+1)) then self:diffusealpha( 0.4 ) end
@@ -86,10 +86,10 @@ t[#t+1] = Def.GraphDisplay{
 		self:Set(stageStats, playerStageStats)
 	end,
 	OnCommand=function(self)
-		self:zoomy(0):sleep(1.2):decelerate(0.4):zoomy(1)
+		self:zoomy(0):sleep(1.2):easeoutsine(0.4):zoomy(1)
 	end;
 	OffCommand=function(self)
-		self:sleep(fade_out_pause):decelerate(fade_out_speed):diffusealpha(0)
+		self:sleep(fade_out_pause):easeoutsine(fade_out_speed):diffusealpha(0)
 	end;
 	CheckCurrentPageCommand=function(s,param)
 		if getenv("PageIndex") then
@@ -100,7 +100,7 @@ t[#t+1] = Def.GraphDisplay{
 	PageUpdatedMessageCommand=function(self)
 		if getenv("PageIndex") then
 			local PageInd = getenv("PageIndex")
-			self:finishtweening():decelerate(0.2)
+			self:finishtweening():easeoutsine(0.2)
 			:diffusealpha( PageInd[p] == 2 and 1 or 0 )
 		end
 	end,
@@ -168,7 +168,7 @@ t[#t+1] = Def.ActorFrameTexture{
 				self:vertalign(bottom)
 			end;
 			OffCommand=function(self)
-				self:sleep(fade_out_pause):decelerate(fade_out_speed):diffusealpha(0)
+				self:sleep(fade_out_pause):easeoutsine(fade_out_speed):diffusealpha(0)
 			end;
 		};
 	};

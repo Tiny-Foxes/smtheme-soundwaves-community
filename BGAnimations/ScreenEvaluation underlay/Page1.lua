@@ -67,7 +67,7 @@ Length = Length + 1
 for i,v in ipairs( Name ) do
 	local Con = Def.ActorFrame{
 		OffCommand=function(self)
-			self:sleep(fade_out_pause):decelerate(fade_out_speed):diffusealpha(0)
+			self:sleep(fade_out_pause):easeoutsine(fade_out_speed):diffusealpha(0)
 		end,
 		Def.BitmapText {
 			Font = "_Bold",
@@ -77,7 +77,7 @@ for i,v in ipairs( Name ) do
 	        	self:xy(SCREEN_CENTER_X+eval_part_offs+70,SCREEN_CENTER_Y-80+((44-(Length*2))*i)):halign(0):zoom(1.475-(Length*0.075)):halign(1)
 			end,
 			OnCommand=function(self)
-				self:diffusealpha(0):sleep(0.1 * i):decelerate(0.6):diffusealpha(1)
+				self:diffusealpha(0):sleep(0.1 * i):easeoutsine(0.6):diffusealpha(1)
 				if DLW then
 					for i=0,1 do
 						if (v == 'W'..(5-i) and tonumber(DLW) >= (i+1)) then self:diffusealpha( 0.4 ) end
@@ -95,7 +95,7 @@ for i,v in ipairs( Name ) do
 				self:xy(SCREEN_CENTER_X+(eval_part_offs-150),SCREEN_CENTER_Y-80+((44-(Length*2))*i)):zoom(1.475-(Length*0.075)):halign(0)
 			end,
 			OnCommand=function(self)
-				self:diffusealpha(0):sleep(0.1 * i):decelerate(0.6):diffusealpha(0.86)
+				self:diffusealpha(0):sleep(0.1 * i):easeoutsine(0.6):diffusealpha(0.86)
 				if DLW then
 					for i=0,1 do
 						if (v == 'W'..(5-i) and tonumber(DLW) >= (i+1)) then self:diffusealpha( 0.4 ) end
@@ -120,7 +120,7 @@ for i,v in ipairs( Name ) do
 				local height = self:GetHeight()
 				local width = self:GetWidth()
 				self:zoom( LoadModule("Lua.Resize.lua")(width, height, 160, 160) )
-				self:diffusealpha(0):sleep(0.1 * i):decelerate(0.6):diffusealpha(0.86)
+				self:diffusealpha(0):sleep(0.1 * i):easeoutsine(0.6):diffusealpha(0.86)
 			end
 		}
 	end
@@ -135,10 +135,10 @@ for i, rc_type in ipairs(eval_radar.Types) do
 	t[#t+1] = Def.ActorFrame {
 		InitCommand=function(self) 	self:x(_screen.cx + eval_part_offs+90):y((_screen.cy-103)+(spacing)) end;
 		OnCommand=function(self)
-			self:diffusealpha(0):sleep(0.1 * i):decelerate(0.5):diffusealpha(1)
+			self:diffusealpha(0):sleep(0.1 * i):easeoutsine(0.5):diffusealpha(1)
 		end;
 		OffCommand=function(self)
-			self:sleep(fade_out_pause):decelerate(fade_out_speed):diffusealpha(0)
+			self:sleep(fade_out_pause):easeoutsine(fade_out_speed):diffusealpha(0)
 		end;
 			-- Item name
 			Def.BitmapText {
@@ -174,14 +174,14 @@ t[#t+1] = Def.GraphDisplay{
 		Line:visible(false)
 	end,
 	OnCommand=function(self)
-		self:zoomy(0):sleep(1.2):decelerate(0.4):zoomy(1)
+		self:zoomy(0):sleep(1.2):easeoutsine(0.4):zoomy(1)
 	end;
 	OffCommand=function(self)
-		self:sleep(fade_out_pause):decelerate(fade_out_speed):zoomy(0)
+		self:sleep(fade_out_pause):easeoutsine(fade_out_speed):zoomy(0)
 	end;
 	PageUpdatedMessageCommand=function(self)
 		local PageInd = getenv("PageIndex")
-		self:finishtweening():decelerate(0.2):zoomy(0)
+		self:finishtweening():easeoutsine(0.2):zoomy(0)
 		:zoomy( PageInd[p] == 1 and 1 or 0 )
 	end;
 };

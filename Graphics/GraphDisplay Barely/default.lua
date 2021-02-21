@@ -4,7 +4,7 @@ return Def.ActorFrame{
 	Text=THEME:GetString("ScreenEvaluation","Barely!"),
 	OnCommand=function(self)
 		self:zoom(0.6):strokecolor(Color.Black):y(-12):diffusealpha(0)
-		:addy(-20):sleep(3.25):decelerate(0.2):diffusealpha(1):addy(20)
+		:addy(-20):sleep(3.25):easeoutsine(0.2):diffusealpha(1):addy(20)
 	end;
 	},
 	Def.BitmapText{
@@ -13,7 +13,7 @@ return Def.ActorFrame{
 	OnCommand=function(self)
 		self:zoom(0.6):strokecolor(Color.Black):y(0):diffusealpha(0)
 		:bob():effectmagnitude(0,5,0)
-		:addy(-20):sleep(3.25):decelerate(0.2):diffusealpha(1):addy(30)
+		:addy(-20):sleep(3.25):easeoutsine(0.2):diffusealpha(1):addy(30)
 	end;
 	},
 }

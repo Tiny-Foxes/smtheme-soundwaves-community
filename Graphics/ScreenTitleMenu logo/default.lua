@@ -11,7 +11,7 @@ return Def.ActorFrame{
 			if not MascotEnabled then
 				self:addx(-20)
 			end;
-			self:diffusealpha(0):decelerate(1):diffusealpha(1):addx(20)
+			self:diffusealpha(0):easeoutsine(1):diffusealpha(1):addx(20)
 		end
 	},
 	LoadActor("_mascot") .. {
@@ -19,7 +19,7 @@ return Def.ActorFrame{
 		OnCommand=function(self) self:queuecommand("Animate") end,
 		AnimateCommand=function(self) 
 			if MascotEnabled then
-				self:diffusealpha(0):addy(40):decelerate(1):diffusealpha(1):addx(-40)
+				self:diffusealpha(0):addy(40):easeoutsine(1):diffusealpha(1):addx(-40)
 			end
 		end
 	}

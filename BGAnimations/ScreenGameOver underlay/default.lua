@@ -21,7 +21,7 @@ return Def.ActorFrame {
 	};	
 	
 	LoadActor(THEME:GetPathG("ScreenGameOver","gameover"))..{
-		OnCommand=function(self) self:zoomx(1.1):diffusealpha(0):sleep(1):decelerate(0.6):diffusealpha(1):zoomx(1) end;
+		OnCommand=function(self) self:zoomx(1.1):diffusealpha(0):sleep(1):easeoutsine(0.6):diffusealpha(1):zoomx(1) end;
 	},
 	
 	Def.BitmapText {

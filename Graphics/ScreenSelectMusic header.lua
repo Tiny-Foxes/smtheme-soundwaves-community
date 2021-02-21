@@ -9,10 +9,10 @@ Def.ActorFrame {
 		self:vertalign(top)
 	end;
 	OnCommand=function(self)
-		self:addy(-104):decelerate(0.3):addy(104)
+		self:addy(-104):easeoutsine(0.3):addy(104)
 	end,
 	OffCommand=function(self)
-		self:sleep(0.175):decelerate(0.3):addy(-105)
+		self:sleep(0.175):easeoutsine(0.3):addy(-105)
 	end;
 		Def.Quad {
 			InitCommand=function(self)
@@ -32,7 +32,7 @@ Def.ActorFrame {
 			end,
 			SortOrderChangedMessageCommand=function(self) 
 				self:finishtweening():diffusealpha(0.4):diffuse(ColorTable["headerSortA"])
-				:decelerate(0.4):diffusealpha(0):diffuse(ColorTable["headerSortB"])
+				:easeoutsine(0.4):diffusealpha(0):diffuse(ColorTable["headerSortB"])
 			end;
 		},
 		-- Stripe
@@ -63,6 +63,6 @@ Def.ActorFrame {
 		UpdateScreenHeaderMessageCommand=function(self,param)
 			self:settext(param.Header)
 		end;
-		OffCommand=function(self) self:decelerate(0.175):diffusealpha(0) end;
+		OffCommand=function(self) self:easeoutsine(0.175):diffusealpha(0) end;
 	};
 };

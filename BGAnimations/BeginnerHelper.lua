@@ -213,15 +213,15 @@ if LoadModule("Characters.AnyoneHasChar.lua")() then
 								["DownRight"] = {2,1,-45},
 							};
 							if Tweens[StrRes] then
-								self:decelerate( 0.6/UpTime )
+								self:easeoutsine( 0.6/UpTime )
 								:rotationy( Tweens[StrRes][3] ):x( Margin+Tweens[StrRes][1] ):z( Tweens[StrRes][2] )
 								:sleep( 0.2/UpTime )
-								:decelerate( 0.6/UpTime )
+								:easeoutsine( 0.6/UpTime )
 								:rotationy( 0 ):x( Margin ):z( 0 )
 							end
 							if Trk == 4 then
-								self:decelerate( 0.6/MUpdate ):rotationy(-45):sleep( 0.2/MUpdate )
-								:decelerate( 0.6/MUpdate ):rotationy(0)
+								self:easeoutsine( 0.6/MUpdate ):rotationy(-45):sleep( 0.2/MUpdate )
+								:easeoutsine( 0.6/MUpdate ):rotationy(0)
 							end
 							-- While that's going on, go back to the UpdateRate command to loop the
 							-- check to return to Rest.

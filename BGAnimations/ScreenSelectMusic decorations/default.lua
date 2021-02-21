@@ -21,15 +21,15 @@ t[#t+1] = Def.ActorFrame {
 -- Base quad
 	Def.Quad {
 		InitCommand=function(self) self:horizalign(left):vertalign(top):y(63):x( isUltraWide and SCREEN_CENTER_X-640 or SCREEN_LEFT):zoomto(baseQuadWidth,SCREEN_HEIGHT) end;
-		OnCommand=function(self) self:diffuse(Color.Black):diffusealpha(0):decelerate(0.4):diffusealpha(0.2) end;
-		OffCommand=function(self) self:sleep(0.36):decelerate(0.4):diffusealpha(0) end;
+		OnCommand=function(self) self:diffuse(Color.Black):diffusealpha(0):easeoutsine(0.4):diffusealpha(0.2) end;
+		OffCommand=function(self) self:sleep(0.36):easeoutsine(0.4):diffusealpha(0) end;
 	};
 
 -- BPM + Time Quad
 	Def.Quad {
 		InitCommand=function(self) self:horizalign(left):vertalign(top):x( isUltraWide and SCREEN_CENTER_X+22 or scale( SCREEN_WIDTH, 1151, 1280, SCREEN_CENTER_X-42, SCREEN_CENTER_X+22) ):y(63):zoomto(200,206) end;
 		OnCommand=function(self) self:diffuse(Color.Black):diffusealpha(0.32) end;
-		OffCommand=function(self) self:sleep(0.36+.08):decelerate(0.4):diffusealpha(0) end
+		OffCommand=function(self) self:sleep(0.36+.08):easeoutsine(0.4):diffusealpha(0) end
 	};
 };
 end;
@@ -72,8 +72,8 @@ t[#t+1] = Def.ActorFrame {
 		InitCommand=function(self) self:horizalign(left):zoom(0.9)
 		:x(IsWidescreen() and ( isUltraWide and SCREEN_CENTER_X+46 or scale( SCREEN_WIDTH, 1152, 1280, SCREEN_CENTER_X-20 , SCREEN_CENTER_X+46)) or SCREEN_CENTER_X-470):y(IsWidescreen() and SCREEN_CENTER_Y-270+30 or SCREEN_CENTER_Y-95+30)
 		end;
-		OnCommand=function(self) self:diffusealpha(0):decelerate(0.2):diffusealpha(1) end;
-		OffCommand=function(self) self:decelerate(0.2):diffusealpha(0) end;
+		OnCommand=function(self) self:diffusealpha(0):easeoutsine(0.2):diffusealpha(1) end;
+		OffCommand=function(self) self:easeoutsine(0.2):diffusealpha(0) end;
 	};
 	
 	StandardDecorationFromFileOptional("BPMDisplay","BPMDisplay");
@@ -83,15 +83,15 @@ t[#t+1] = Def.ActorFrame {
 		Text=ToUpper("BPM"),
 		InitCommand=function(self) self:horizalign(left):zoom(0.9)
 		:x(IsWidescreen() and ( isUltraWide and SCREEN_CENTER_X+46 or scale( SCREEN_WIDTH, 1152, 1280, SCREEN_CENTER_X-20 , SCREEN_CENTER_X+46)) or SCREEN_CENTER_X-470+120):y(IsWidescreen() and SCREEN_CENTER_Y-205+30 or SCREEN_CENTER_Y-95+30) end;
-		OnCommand=function(self) self:playcommand("Set"):diffusealpha(0):sleep(0.12):decelerate(0.2):diffusealpha(1) end;
-		OffCommand=function(self) self:sleep(0.12):decelerate(0.2):diffusealpha(0) end;	
+		OnCommand=function(self) self:playcommand("Set"):diffusealpha(0):sleep(0.12):easeoutsine(0.2):diffusealpha(1) end;
+		OffCommand=function(self) self:sleep(0.12):easeoutsine(0.2):diffusealpha(0) end;	
 	};
 
 	Def.ActorFrame {
 	InitCommand=function(self) self:x(IsWidescreen() and ( isUltraWide and SCREEN_CENTER_X+46 or scale( SCREEN_WIDTH, 1152, 1280, SCREEN_CENTER_X-20 , SCREEN_CENTER_X+46)) or SCREEN_CENTER_X-470+160+90)
 	:y(IsWidescreen() and SCREEN_CENTER_Y-140 or SCREEN_CENTER_Y-95) end;
-	OnCommand=function(self) self:diffusealpha(0):sleep(0.12*2):decelerate(0.2):diffusealpha(1) end;
-	OffCommand=function(self) self:sleep(0.12*2):decelerate(0.2):diffusealpha(0) end;	
+	OnCommand=function(self) self:diffusealpha(0):sleep(0.12*2):easeoutsine(0.2):diffusealpha(1) end;
+	OffCommand=function(self) self:sleep(0.12*2):easeoutsine(0.2):diffusealpha(0) end;	
 		Def.BitmapText {
 			Font="_Bold";
 			InitCommand=function(self) self:horizalign(left):zoom(1.25):maxwidth(IsWidescreen() and 135 or 105):addy(2) end;
@@ -120,14 +120,14 @@ t[#t+1] = Def.ActorFrame {
 if IsWidescreen() then
 t[#t+1] = Def.Quad {
 	InitCommand=function(self) self:horizalign(left):vertalign(top):xy( isUltraWide and SCREEN_CENTER_X+22 or scale( SCREEN_WIDTH, 1151, 1280, SCREEN_CENTER_X-42, SCREEN_CENTER_X+22) ,63+206):zoomto(200,408) end;
-	OnCommand=function(self) self:diffuse(Color.Black):diffusealpha(0):decelerate(0.4):diffusealpha(0.5) end;
-	OffCommand=function(self) self:sleep(0.36+.12):decelerate(0.4):diffusealpha(0) end;
+	OnCommand=function(self) self:diffuse(Color.Black):diffusealpha(0):easeoutsine(0.4):diffusealpha(0.5) end;
+	OffCommand=function(self) self:sleep(0.36+.12):easeoutsine(0.4):diffusealpha(0) end;
 	}
 else
 t[#t+1] = Def.Quad {
 	InitCommand=function(self) self:horizalign(left):vertalign(top):xy(SCREEN_CENTER_X-81,64-4):zoomto(143,257) end;
-	OnCommand=function(self) self:diffuse(Color.Black):diffusealpha(0):decelerate(0.4):diffusealpha(0.5) end;
-	OffCommand=function(self) self:sleep(0.36+.12):decelerate(0.4):diffusealpha(0) end;
+	OnCommand=function(self) self:diffuse(Color.Black):diffusealpha(0):easeoutsine(0.4):diffusealpha(0.5) end;
+	OffCommand=function(self) self:sleep(0.36+.12):easeoutsine(0.4):diffusealpha(0) end;
 	}
 end;
 
@@ -135,8 +135,8 @@ t[#t+1] = StandardDecorationFromFileOptional("DifficultyList","DifficultyList");
 
 -- CDTitle
 	t[#t+1] = Def.ActorFrame {
-		OnCommand=function(self) self:draworder(49):x( isUltraWide and SCREEN_CENTER_X-595 or SCREEN_LEFT+45):y(IsWidescreen() and ( isUltraWide and SCREEN_CENTER_Y-130 or scale( SCREEN_WIDTH, 1152, 1280, SCREEN_CENTER_Y-120, SCREEN_CENTER_Y-130)) or SCREEN_CENTER_Y-200):addx(-SCREEN_WIDTH/0.75):decelerate(0.8):addx(SCREEN_WIDTH/0.75) end;
-		OffCommand=function(self) self:decelerate(0.75):addx(-SCREEN_WIDTH/0.75) end;
+		OnCommand=function(self) self:draworder(49):x( isUltraWide and SCREEN_CENTER_X-595 or SCREEN_LEFT+45):y(IsWidescreen() and ( isUltraWide and SCREEN_CENTER_Y-130 or scale( SCREEN_WIDTH, 1152, 1280, SCREEN_CENTER_Y-120, SCREEN_CENTER_Y-130)) or SCREEN_CENTER_Y-200):addx(-SCREEN_WIDTH/0.75):easeoutsine(0.8):addx(SCREEN_WIDTH/0.75) end;
+		OffCommand=function(self) self:easeoutsine(0.75):addx(-SCREEN_WIDTH/0.75) end;
 		Def.Sprite {
 			Name="CDTitle";
 			OnCommand=function(self) self:draworder(49):diffusealpha(1):zoom(0):bounceend(0.35):zoom(0.75):playcommand("Set") end;
@@ -196,7 +196,7 @@ t[#t+1] = LoadActor("panels");
 ----- /	
 t[#t+1] = Def.ActorFrame {
 	InitCommand=function(self) self:horizalign(left):x( isUltraWide and SCREEN_CENTER_X-630 or SCREEN_LEFT+10):y(IsWidescreen() and SCREEN_CENTER_Y-68 or SCREEN_CENTER_Y-150) end;
-	OffCommand=function(self) self:sleep(0.24):decelerate(0.4):diffusealpha(0) end;
+	OffCommand=function(self) self:sleep(0.24):easeoutsine(0.4):diffusealpha(0) end;
 	Def.BitmapText {
 		Font="_Bold",
 		Text=ToUpper(THEME:GetString("MusicWheel","ArtistText") .. ":"),
@@ -232,9 +232,9 @@ t[#t+1] = StandardDecorationFromFileOptional("AlternateHelpDisplay","AlternateHe
 ----- /
 t[#t+1] = Def.ActorFrame {
 	OnCommand=function(self) self:visible(false) end;
-	ShowPressStartForOptionsCommand=function(self) self:visible(true):diffusealpha(0):vertalign(bottom):y(SCREEN_BOTTOM+120):decelerate(0.25):addy(-118):diffusealpha(1) end;		
-	ShowEnteringOptionsCommand=function(self) self:sleep(0.4):decelerate(0.2):addy(118):diffusealpha(0) end;
-	HidePressStartForOptionsCommand=function(self) self:sleep(0.4):decelerate(0.2):addy(118):diffusealpha(0) end;
+	ShowPressStartForOptionsCommand=function(self) self:visible(true):diffusealpha(0):vertalign(bottom):y(SCREEN_BOTTOM+120):easeoutcubic(0.25):addy(-118):diffusealpha(1) end;		
+	ShowEnteringOptionsCommand=function(self) self:sleep(0.4):easeoutcubic(0.2):addy(118):diffusealpha(0) end;
+	HidePressStartForOptionsCommand=function(self) self:sleep(0.4):easeoutcubic(0.2):addy(118):diffusealpha(0) end;
 	
 	Def.Quad{
 		InitCommand=function(self) self:vertalign(bottom):zoomto(SCREEN_WIDTH,120):x(SCREEN_CENTER_X):diffuse(ColorTable["promptBG"]):diffusealpha(0) end;

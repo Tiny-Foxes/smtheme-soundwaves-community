@@ -6,7 +6,7 @@ return Def.ActorFrame{
 			self:diffuse(Color.Black)
 		end;
 		OnCommand=function(self)
-			self:decelerate(0.5):diffusealpha(0)
+			self:easeoutsine(0.5):diffusealpha(0)
 		end;
     };
 

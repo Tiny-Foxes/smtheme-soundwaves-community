@@ -88,7 +88,7 @@ for pn in ivalues(PlayerNumber) do
 local paneloffset = string.find(pn, "P1") and 0 or p2paneoffset();
 -- Backdrop
 t[#t+1] = Def.ActorFrame {
-	OffCommand=function(self) self:sleep(0.24):decelerate(0.4):diffusealpha(0) end;
+	OffCommand=function(self) self:sleep(0.24):easeoutsine(0.4):diffusealpha(0) end;
 	Def.Quad {
 		InitCommand=function(self)
 			self:align(0,0)
@@ -114,7 +114,7 @@ t[#t+1] = Def.ActorFrame {
 			OnCommand=function(self) self:visible( GAMESTATE:IsHumanPlayer(pn) ) end,
 			PlayerJoinedMessageCommand=function(self,param)
 				if param.Player == pn then
-					self:visible(true):diffusealpha(0):sleep(1.3):decelerate(0.4):diffusealpha(1);
+					self:visible(true):diffusealpha(0):sleep(1.3):easeoutsine(0.4):diffusealpha(1);
 				end
 			end,
 		Def.Quad {
@@ -271,13 +271,13 @@ t[#t+1] = Def.ActorFrame {
 
 ------- Heading
 t[#t+1] = Def.ActorFrame {
-	OffCommand=function(self) self:sleep(0.24):decelerate(0.4):diffusealpha(0) end,
+	OffCommand=function(self) self:sleep(0.24):easeoutsine(0.4):diffusealpha(0) end,
 	InitCommand=function(self)
 		self:align(0,0):x(paneloffset):y(63+206+artistStripeHeight):visible(GAMESTATE:IsHumanPlayer(pn))
 	end,
 	PlayerJoinedMessageCommand=function(self,param)
 		if param.Player == pn then
-			self:visible(true):diffusealpha(0):addy(300):decelerate(0.4):diffusealpha(1):sleep(0.2):smooth(0.75):addy(-300)
+			self:visible(true):diffusealpha(0):addy(300):easeoutsine(0.4):diffusealpha(1):sleep(0.2):smooth(0.75):addy(-300)
 		end
 	end,
 	Def.Quad {
@@ -325,10 +325,10 @@ t[#t+1] = Def.ActorFrame {
 	InitCommand=function(self)
 		self:align(0,0):x(paneloffset):y(63+210+artistStripeHeight):visible(GAMESTATE:IsHumanPlayer(pn))
 	end;
-	OffCommand=function(self) self:sleep(0.24):decelerate(0.4):diffusealpha(0) end;
+	OffCommand=function(self) self:sleep(0.24):easeoutsine(0.4):diffusealpha(0) end;
 	PlayerJoinedMessageCommand=function(self,param)
 		if param.Player == pn then
-			self:visible(true):diffusealpha(0):sleep(1.3):decelerate(0.4):diffusealpha(1);
+			self:visible(true):diffusealpha(0):sleep(1.3):easeoutsine(0.4):diffusealpha(1);
 		end;
 	end;
 	Def.Quad {
@@ -430,7 +430,7 @@ t[#t+1] = Def.ActorFrame{
 	OffCommand=function(self) self:linear(0.1):diffusealpha(0) end;
 	PlayerJoinedMessageCommand=function(self,param)
 		if param.Player == pn then
-			self:visible(true):diffusealpha(0):sleep(1.3):decelerate(0.4):diffusealpha(1);
+			self:visible(true):diffusealpha(0):sleep(1.3):easeoutsine(0.4):diffusealpha(1);
 		end;
 	end;
 };
@@ -451,7 +451,7 @@ for Index,GraphCont in ipairs(GraphData.Contents) do
 		OffCommand=function(self) self:finishtweening():linear(0.1):diffusealpha(0) end;
 		PlayerJoinedMessageCommand=function(self,param)
 			if param.Player == pn then
-				self:visible(true):diffusealpha(0):sleep(1.3):decelerate(0.4):diffusealpha(1);
+				self:visible(true):diffusealpha(0):sleep(1.3):easeoutsine(0.4):diffusealpha(1);
 			end;
 		end;
 		ShowAMVCommand=function(s) s:linear(0.2):diffusealpha(0) end,
@@ -505,7 +505,7 @@ for Index,GraphCont in ipairs(GraphData.Contents) do
 				end
 
 				-- Transform vertices to the new position.
-				self:stoptweening():decelerate(0.2):SetVertices(verts)
+				self:stoptweening():easeoutsine(0.2):SetVertices(verts)
 			end;
 			OffCommand=function(self)
 				self:linear(0.1):diffusealpha(0)
@@ -536,7 +536,7 @@ t[#t+1] = Def.ActorFrame {
 		end;
 		PlayerJoinedMessageCommand=function(self,param)
 			if param.Player == pn then
-				self:decelerate(0.3):diffusealpha(0)
+				self:easeoutsine(0.3):diffusealpha(0)
 				end;
 			end;
 		LoadActor(THEME:GetPathG("ScreenSelectMusic","JoinMarker")).. {
@@ -544,22 +544,22 @@ t[#t+1] = Def.ActorFrame {
 				self:diffuse(ColorMidTone(PlayerColor(pn)))
 			end;
 			OnCommand=function(self)
-				self:diffusealpha(0):zoomy(0.6):sleep(1):decelerate(0.4):zoomy(1):diffusealpha(1)
+				self:diffusealpha(0):zoomy(0.6):sleep(1):easeoutsine(0.4):zoomy(1):diffusealpha(1)
 				self:diffuseshift():effectcolor1(PlayerColor(pn)):effectcolor2(PlayerCompColor(pn)):effectperiod(4)
 			end;
 			OffCommand=function(self)
-				self:stoptweening():stopeffect():decelerate(0.3):diffusealpha(0)
+				self:stoptweening():stopeffect():easeoutsine(0.3):diffusealpha(0)
 			end;
 		};
 		Def.BitmapText {
 			Font="_Bold";
 			InitCommand=function(self) self:horizalign(center):maxwidth(200):diffuse(ColorLightTone(PlayerColor(pn))) end;
 			OnCommand=function(self)
-				self:diffusealpha(0):sleep(1.5):decelerate(0.4):diffusealpha(1)
+				self:diffusealpha(0):sleep(1.5):easeoutsine(0.4):diffusealpha(1)
 				self:diffuseshift():effectcolor1(ColorLightTone(PlayerColor(pn))):effectcolor2(ColorLightTone(PlayerCompColor(pn))):effectperiod(4)
 			end;
 			OffCommand=function(self)
-				self:stoptweening():stopeffect():decelerate(0.3):diffusealpha(0)
+				self:stoptweening():stopeffect():easeoutsine(0.3):diffusealpha(0)
 			end;
 			Text=ToUpper(Screen.String("Start To Join"));
 		};

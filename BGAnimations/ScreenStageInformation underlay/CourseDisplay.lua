@@ -18,8 +18,8 @@ local t = Def.ActorFrame{
 		end;
 		OnCommand=function(self)
 			self:scale_or_crop_background()
-			self:diffusealpha(0):addx(-20):sleep(titleFadeIn):decelerate(titleAnimLength):diffusealpha(0.18):addx(20)
-			:sleep(titleWait):decelerate(0.5):diffusealpha(0)
+			self:diffusealpha(0):addx(-20):sleep(titleFadeIn):easeoutsine(titleAnimLength):diffusealpha(0.18):addx(20)
+			:sleep(titleWait):easeoutsine(0.5):diffusealpha(0)
 		end;	
 		};
 	-- alternate background
@@ -31,8 +31,8 @@ local t = Def.ActorFrame{
 		OnCommand=function(self) self:playcommand("Show") end;
 		ShowCommand=function(self)
 			if course:HasBackground() then
-				self:diffusealpha(0):addx(-20):sleep(titleFadeIn):decelerate(titleAnimLength):diffusealpha(0.18):addx(20)
-				:sleep(titleWait):decelerate(0.5):diffusealpha(0)
+				self:diffusealpha(0):addx(-20):sleep(titleFadeIn):easeoutsine(titleAnimLength):diffusealpha(0.18):addx(20)
+				:sleep(titleWait):easeoutsine(0.5):diffusealpha(0)
 			end
 		end;
 	};

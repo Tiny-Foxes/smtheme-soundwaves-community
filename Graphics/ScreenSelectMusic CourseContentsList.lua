@@ -32,10 +32,10 @@ t[#t+1] = Def.CourseContentsList {
 	MaxSongs = 999,
     NumItemsToDraw = 12,
 	ShowCommand=function(self) 
-		self:stoptweening():decelerate(0.3):diffusealpha(1)
+		self:stoptweening():easeoutsine(0.3):diffusealpha(1)
 	end;
 	HideCommand=function(self) 
-		self:stoptweening():decelerate(0.3):diffusealpha(0)
+		self:stoptweening():easeoutsine(0.3):diffusealpha(0)
 	end;
 	SetCommand=function(self)
 		self:MaskDest()

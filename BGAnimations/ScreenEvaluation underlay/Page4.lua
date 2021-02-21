@@ -36,7 +36,7 @@ t[#t+1] = Def.Quad{
 		:diffuse( Color.Black )
 	end,
 	OffCommand=function(s)
-		s:sleep(0.2):decelerate(0.62):croptop(1):cropbottom(1)
+		s:sleep(0.2):easeoutsine(0.62):croptop(1):cropbottom(1)
 	end,
 }
 
@@ -46,7 +46,7 @@ t[#t+1] = Def.Quad{
 		:diffuse( PlayerColor(p) ):croptop(0.96)
 	end,
 	OffCommand=function(s)
-		s:sleep(0.2):decelerate(0.3):y( _screen.cy+40 ):sleep(0.1):accelerate(0.3):cropleft(1)
+		s:sleep(0.2):easeoutsine(0.3):y( _screen.cy+40 ):sleep(0.1):accelerate(0.3):cropleft(1)
 	end,
 }
 
@@ -56,7 +56,7 @@ t[#t+1] = Def.Quad{
 		:diffuse( PlayerColor(p) ):croptop(0.96)
 	end,
 	OffCommand=function(s)
-		s:sleep(0.2):decelerate(0.3):y( _screen.cy+192-80 ):sleep(0.1):accelerate(0.3):cropleft(1)
+		s:sleep(0.2):easeoutsine(0.3):y( _screen.cy+192-80 ):sleep(0.1):accelerate(0.3):cropleft(1)
 	end,
 }
 local CurPrefTiming = LoadModule("Options.ReturnCurrentTiming.lua")().Name
@@ -73,7 +73,7 @@ for k,v in pairs( sm.TimingList[1] ) do
 					s:fadebottom( 0.7 )
 				end,
 				OffCommand=function(s)
-					s:sleep(0.02*k):decelerate(0.1):croptop(1)
+					s:sleep(0.02*k):easeoutsine(0.1):croptop(1)
 				end,
 			}
 
@@ -86,7 +86,7 @@ for k,v in pairs( sm.TimingList[1] ) do
 					:xy( _screen.cx + eval_part_offs + ( i == 2 and -position+6 or position-6), _screen.cy )
 				end,
 				OffCommand=function(s)
-					s:sleep(0.02*k):decelerate(0.1):diffusealpha(0)
+					s:sleep(0.02*k):easeoutsine(0.1):diffusealpha(0)
 				end,
 			}
 		end
@@ -101,7 +101,7 @@ t[#t+1] = Def.ActorMultiVertex{
 		s:SetPointSize(1.5)
 	end,
 	OffCommand=function(s)
-		s:decelerate(0.3):diffusealpha(0)
+		s:easeoutsine(0.3):diffusealpha(0)
 	end,
 }
 
@@ -110,7 +110,7 @@ t[#t+1] = Def.Quad{
 		s:xy(  _screen.cx + eval_part_offs, _screen.cy+188+(78/2) ):zoomto( 2 , graphsizes[2]  ):vertalign(bottom)
 	end,
 	OffCommand=function(s)
-		s:decelerate(0.3):diffusealpha(0):croptop(1)
+		s:easeoutsine(0.3):diffusealpha(0):croptop(1)
 	end,
 }
 
@@ -124,7 +124,7 @@ for k,v in pairs(TopAreaLabels) do
 			:uppercase(true):settext( THEME:GetString("ScreenEvaluation",v) )
 		end,
 		OffCommand=function(s)
-			s:sleep(0.02*k):decelerate(0.3):diffusealpha(0)
+			s:sleep(0.02*k):easeoutsine(0.3):diffusealpha(0)
 		end,
 	}
 
@@ -135,7 +135,7 @@ for k,v in pairs(TopAreaLabels) do
 			s:xy(  _screen.cx + eval_part_offs + scale( k, 1, #TopAreaLabels, -120, 120 ) , _screen.cy-30 ):zoom(0.8)
 		end,
 		OffCommand=function(s)
-			s:sleep(0.02*k):decelerate(0.3):diffusealpha(0)
+			s:sleep(0.02*k):easeoutsine(0.3):diffusealpha(0)
 		end,
 	}
 end
@@ -149,7 +149,7 @@ for k,v in pairs(times) do
 			s:xy(  _screen.cx + eval_part_offs + scale( k, 1, #times, -10, 10 ), _screen.cy+250 ):halign( (1-(k-1)) ):zoom(0.7)
 		end,
 		OffCommand=function(s)
-			s:sleep(0.02*k):decelerate(0.3):diffusealpha(0)
+			s:sleep(0.02*k):easeoutsine(0.3):diffusealpha(0)
 		end,
 	}
 end

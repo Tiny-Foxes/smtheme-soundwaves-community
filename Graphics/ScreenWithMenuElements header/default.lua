@@ -8,10 +8,10 @@ Def.ActorFrame {
 		self:vertalign(top)
 	end;
 	OnCommand=function(self)
-		self:addy(-104):decelerate(0.3):addy(104)
+		self:addy(-104):easeoutsine(0.3):addy(104)
 	end,
 	OffCommand=function(self)
-		self:sleep(0.175):decelerate(0.3):addy(-105)
+		self:sleep(0.175):easeoutsine(0.3):addy(-105)
 	end;
 	Def.Quad {
 		InitCommand=function(self)
@@ -50,7 +50,7 @@ Def.BitmapText {
 	UpdateScreenHeaderMessageCommand=function(self,param)
 		self:settext(param.Header)
 	end;
-	OffCommand=function(self) self:decelerate(0.175):diffusealpha(0) end;
+	OffCommand=function(self) self:easeoutsine(0.175):diffusealpha(0) end;
 };
 
 };

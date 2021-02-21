@@ -2,8 +2,8 @@ local ColorTable = LoadModule("Theme.Colors.lua")( LoadModule("Config.Load.lua")
 local x = Def.ActorFrame {
 	Def.ActorFrame {
 		InitCommand=function(self) self:diffusealpha(0):vertalign(bottom):y(SCREEN_BOTTOM+120) end;
-		OnCommand=function(self) self:decelerate(0.2):addy(-118):diffusealpha(1) end;		
-		OffCommand=function(self) self:sleep(0.4):decelerate(0.3):addy(118):diffusealpha(0) end;
+		OnCommand=function(self) self:easeoutcubic(0.2):addy(-118):diffusealpha(1) end;		
+		OffCommand=function(self) self:sleep(0.4):easeoutcubic(0.3):addy(118):diffusealpha(0) end;
 		
 		Def.Quad{
 			InitCommand=function(self) self:vertalign(bottom):zoomto(SCREEN_WIDTH,120):x(SCREEN_CENTER_X):diffuse(ColorTable["promptBG"]) end;
