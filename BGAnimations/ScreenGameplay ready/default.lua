@@ -8,7 +8,7 @@ if LoadModule("Config.Load.lua")("GameplayReadyPrompt","Save/OutFoxPrefs.ini") t
 		Def.Quad {
 			InitCommand=function(self) self:vertalign(middle):zoomto(SCREEN_WIDTH,0):xy(SCREEN_CENTER_X,SCREEN_CENTER_Y):diffuse( ColorTable["promptBG"] ):draworder(105) end,
 			StartTransitioningCommand=function(self)
-				self:decelerate(0.3):zoomtoheight(120):sleep(1.6):diffusealpha(0)
+				self:easeoutcubic(0.3):zoomtoheight(120):sleep(1.6):diffusealpha(0)
 			end;
 		};
 		Def.Sprite {
