@@ -406,6 +406,7 @@ t[#t+1] = Def.ActorFrame {
 	Def.Sprite {
 		Texture=THEME:GetPathG("ScreenSelectMusic","readyplayer"),
 		InitCommand=function(self) 
+			self:visible(GAMESTATE:GetCurrentGame():GetName() == "pump")
 			self:zoom(0.75):horizalign(center):xy((p2paneoffset())/2,120) 
 			:diffuse(PlayerColor(pn)):diffuserightedge(PlayerCompColor(pn)):diffusealpha(0)
 		end,
@@ -421,6 +422,7 @@ t[#t+1] = Def.ActorFrame {
 	Def.Sprite {
 		Texture=THEME:GetPathG("ScreenSelectMusic","pumpstart"),
 		InitCommand=function(self) 
+			self:visible(GAMESTATE:GetCurrentGame():GetName() == "pump")
 			self:zoom(1):horizalign(center):xy((p2paneoffset())/2,120):diffusealpha(0)
 		end,
 		SongChosenMessageCommand=function(self)
