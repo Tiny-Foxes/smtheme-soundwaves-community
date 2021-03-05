@@ -425,7 +425,7 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 					if song and stepsData ~= nil then
 						local st = stepsData:GetStepsType();
 						local diff = stepsData:GetDifficulty();
-						local path = THEME:GetPathG("","_StepsType/" .. ToEnumShortString(st) .. ".png") 
+						local path = THEME:GetPathG("","_StepsType/" .. ToEnumShortString(st) .. " (res 32x16).png") 
 						local missing = self:Load( THEME:GetPathG("","_StepsType/missing") )
 						self:Load( FILEMAN:DoesFileExist(path) and path or missing  ):zoom(1.0)
 					end
