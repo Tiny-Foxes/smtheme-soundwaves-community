@@ -1,6 +1,6 @@
 # Soundwaves
 
-**Soundwaves** is the default theme of StepMania 5.3 "OutFox".
+**Soundwaves** is the default theme of Project OutFox.
 
 It has a clean and modern feel with influence from flat design, whilst still having visual flair. It is designed to provide a larger number of built-in features over previous SM default themes, including popular requests such as judgment font selection and notefield zoom percentage, as well as new features such as  user-selectable timing windows, notefield angle controls, and a zoomable judgment scatterplot. Soundwaves is developed around new paradigms and features used in OutFox.
 
