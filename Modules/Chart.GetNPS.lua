@@ -20,7 +20,7 @@ return function(Steps)
 
         for k,v in pairs( GAMESTATE:GetCurrentSong():GetNoteData(chartint) ) do
             if TD:GetElapsedTimeFromBeat(v[1]) > mMargin then
-				-- Don't round NPS values, they are not restricted to whole numbers.
+                -- Don't round NPS values, they are not restricted to whole numbers.
                 measureNPS = mDuration == 0 and 0 or measureNotes/mDuration
                 PeakNPS = (measureNPS > PeakNPS) and measureNPS or PeakNPS
                 if(measureNotes >= 15) then
