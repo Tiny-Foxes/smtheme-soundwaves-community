@@ -8,6 +8,12 @@ local t = Def.ActorFrame{
 		self:sleep(fade_out_pause):decelerate(fade_out_speed):diffusealpha(0)
 	end;
 };
+
+if not GAMESTATE:GetCurrentStyle(p) then
+	-- Couldn't find style, then report an empty actor to avoid calc problems.
+	return Def.Actor{}
+end
+
 -- A very useful table...
 local NoteTable = getenv("perColJudgeData")
 
@@ -30,15 +36,15 @@ local DLW = LoadModule("Config.Load.lua")("DisableLowerWindows","Save/OutFoxPref
 table.sort(Name)
 Name[#Name+1] = "Miss"
 Length = Length + 1
-for i=1,GAMESTATE:GetCurrentStyle():ColumnsPerPlayer() do
+local numcol = GAMESTATE:GetCurrentStyle(p):ColumnsPerPlayer()
+for i=1,numcol do
 	for ind,val in ipairs( Name ) do
 		local cur_line = "JudgmentLine_" .. val
 		t[#t+1] = Def.BitmapText{
 			Font="_Condensed Semibold",
 			OnCommand=function(self)
-				local col = GAMESTATE:GetCurrentStyle():ColumnsPerPlayer();
-				local sidespacing = scale( col,3,10,87,146 )
-				self:x( _screen.cx + scale( i, 1, col, eval_part_offs-sidespacing, eval_part_offs+sidespacing ) )
+				local sidespacing = scale( numcol,3,10,87,146 )
+				self:x( _screen.cx + scale( i, 1, numcol, eval_part_offs-sidespacing, eval_part_offs+sidespacing ) )
 				:y( SCREEN_CENTER_Y-30+((44-(Length*2.6))*ind)):zoom(1.5-(Length*0.1) )
 				:settext( NoteTable[p][i][val] )
 				self:diffuse( BoostColor( JudgmentLineToColor(cur_line), 1 ) )
@@ -57,19 +63,18 @@ end
 local noteskin = GAMESTATE:GetPlayerState(p):GetPlayerOptions('ModsLevel_Song'):NoteSkin():lower()
 
 -- Print the noteskin columns
-for i=1,GAMESTATE:GetCurrentStyle():ColumnsPerPlayer() do
+for i=1,numcol do
 	-- Check if the noteskin actually exists, otherwise warn, and use the first noteskin
 	-- available on the array.
 	if not NOTESKIN:DoesNoteSkinExist( noteskin ) then
 		Warn( "The noteskin currently set does not exist on this game mode. Using ".. NOTESKIN:GetNoteSkinNames()[1] .." instead." )
 		noteskin = NOTESKIN:GetNoteSkinNames()[1]
 	end
-	local tcol = GAMESTATE:GetCurrentStyle():GetColumnInfo( p, i )
+	local tcol = GAMESTATE:GetCurrentStyle(p):GetColumnInfo( p, i )
 	t[#t+1] = Def.ActorFrame{
 		InitCommand=function(self)
-			local col = GAMESTATE:GetCurrentStyle():ColumnsPerPlayer();
-			local sidespacing = scale( col,3,10,87,146 )
-			self:x( _screen.cx + scale( i, 1, col, eval_part_offs-sidespacing, eval_part_offs+sidespacing ) )
+			local sidespacing = scale( numcol,3,10,87,146 )
+			self:x( _screen.cx + scale( i, 1, numcol, eval_part_offs-sidespacing, eval_part_offs+sidespacing ) )
 			:y( _screen.cy-48)
 			:zoom(0.75)
 		end,

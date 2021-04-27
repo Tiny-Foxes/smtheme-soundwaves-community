@@ -1,7 +1,18 @@
 local iPN = ...;
 assert(iPN,"[Graphics/PaneDisplay text.lua] No PlayerNumber Provided.");
 
-local t = Def.ActorFrame {};
+local PaneItems = Def.ActorFrame{}
+local DanceGames = {
+	["dance"] = true,
+	["pump"] = true,
+	["techno"] = true,
+	["para"] = true,
+	["maniax"] = true,
+	["ds3ddx"] = true,
+	["ez2"] = true
+}
+local gm = GAMESTATE:GetCurrentGame():GetName()
+
 local function GetRadarData( pnPlayer, rcRadarCategory )
 	local tRadarValues;
 	local StepsOrTrail;
@@ -109,48 +120,66 @@ local function CreatePaneDisplayGraph( _pnPlayer, _sLabel, _rcRadarCategory )
 end;
 
 --[[ Numbers ]]
-t[#t+1] = Def.ActorFrame {
-	-- Left 
-	CreatePaneDisplayItem( iPN, "Taps", 'RadarCategory_TapsAndHolds' ) .. {
-		InitCommand=function(self) self:x(-128+16+8):y(-14) end;
-		OnCommand=function(self) self:zoomy(0.8):diffusealpha(0):sleep(0.4):linear(0.3):diffusealpha(1):zoomy(1) end;
-		OffCommand=function(self) self:linear(0.1):diffusealpha(0):zoomy(0.8) end;
-	};
-	CreatePaneDisplayItem( iPN, "Jumps", 'RadarCategory_Jumps' ) .. {
-		InitCommand=function(self) self:x(-128+16+8):y(-14+24) end;
-		OnCommand=function(self) self:zoomy(0.8):diffusealpha(0):sleep(0.5):linear(0.3):diffusealpha(1):zoomy(1) end;
-		OffCommand=function(self) self:linear(0.1):diffusealpha(0):zoomy(0.8) end;
-	};
-	CreatePaneDisplayItem( iPN, "Holds", 'RadarCategory_Holds' ) .. {
-		InitCommand=function(self) self:x(-128+16+8):y(-14+24*2) end;
-		OnCommand=function(self) self:zoomy(0.8):diffusealpha(0):sleep(0.6):linear(0.3):diffusealpha(1):zoomy(1) end;
-		OffCommand=function(self) self:linear(0.1):diffusealpha(0):zoomy(0.8) end;
-	};
-	CreatePaneDisplayItem( iPN, "Mines", 'RadarCategory_Mines' ) .. {
-		InitCommand=function(self) self:x(-128+16+8):y(-14+24*3) end;
-		OnCommand=function(self) self:zoomy(0.8):diffusealpha(0):sleep(0.7):linear(0.3):diffusealpha(1):zoomy(1) end;
-		OffCommand=function(self) self:linear(0.1):diffusealpha(0):zoomy(0.8) end;
-	};
-	-- Center
-	CreatePaneDisplayItem( iPN, "Hands", 'RadarCategory_Hands' ) .. {
-		InitCommand=function(self) self:x(50):y(-14) end;
-		OnCommand=function(self) self:zoomy(0.8):diffusealpha(0):sleep(0.4):linear(0.3):diffusealpha(1):zoomy(1) end;
-		OffCommand=function(self) self:linear(0.1):diffusealpha(0):zoomy(0.8) end;
-	};
-	CreatePaneDisplayItem( iPN, "Rolls", 'RadarCategory_Rolls' ) .. {
-		InitCommand=function(self) self:x(50):y(-14+24) end;
-		OnCommand=function(self) self:zoomy(0.8):diffusealpha(0):sleep(0.5):linear(0.3):diffusealpha(1):zoomy(1) end;
-		OffCommand=function(self) self:linear(0.1):diffusealpha(0):zoomy(0.8) end;
-	};
-	CreatePaneDisplayItem( iPN, "Lifts", 'RadarCategory_Lifts' ) .. {
-		InitCommand=function(self) self:x(50):y(-14+24*2) end;
-		OnCommand=function(self) self:zoomy(0.8):diffusealpha(0):sleep(0.6):linear(0.3):diffusealpha(1):zoomy(1) end;
-		OffCommand=function(self) self:linear(0.1):diffusealpha(0):zoomy(0.8) end;
-	};
-	CreatePaneDisplayItem( iPN, "Fakes", 'RadarCategory_Fakes' ) .. {
-		InitCommand=function(self) self:x(50):y(-14+24*3) end;
-		OnCommand=function(self) self:zoomy(0.8):diffusealpha(0):sleep(0.7):linear(0.3):diffusealpha(1):zoomy(1) end;
-		OffCommand=function(self) self:linear(0.1):diffusealpha(0):zoomy(0.8) end;
-	};
-};
-return t;
+if DanceGames[gm] == true then
+	PaneItems[#PaneItems+1] = Def.ActorFrame {
+		-- Left 
+		CreatePaneDisplayItem( iPN, "Taps", 'RadarCategory_TapsAndHolds' ) .. {
+			InitCommand=function(self) self:x(-128+16+8):y(-14) end;
+			OnCommand=function(self) self:zoomy(0.8):diffusealpha(0):sleep(0.4):linear(0.3):diffusealpha(1):zoomy(1) end;
+			OffCommand=function(self) self:linear(0.1):diffusealpha(0):zoomy(0.8) end;
+		},
+		CreatePaneDisplayItem( iPN, "Jumps", 'RadarCategory_Jumps' ) .. {
+			InitCommand=function(self) self:x(-128+16+8):y(-14+24) end;
+			OnCommand=function(self) self:zoomy(0.8):diffusealpha(0):sleep(0.5):linear(0.3):diffusealpha(1):zoomy(1) end;
+			OffCommand=function(self) self:linear(0.1):diffusealpha(0):zoomy(0.8) end;
+		},
+		CreatePaneDisplayItem( iPN, "Holds", 'RadarCategory_Holds' ) .. {
+			InitCommand=function(self) self:x(-128+16+8):y(-14+24*2) end;
+			OnCommand=function(self) self:zoomy(0.8):diffusealpha(0):sleep(0.6):linear(0.3):diffusealpha(1):zoomy(1) end;
+			OffCommand=function(self) self:linear(0.1):diffusealpha(0):zoomy(0.8) end;
+		},
+		CreatePaneDisplayItem( iPN, "Mines", 'RadarCategory_Mines' ) .. {
+			InitCommand=function(self) self:x(-128+16+8):y(-14+24*3) end;
+			OnCommand=function(self) self:zoomy(0.8):diffusealpha(0):sleep(0.7):linear(0.3):diffusealpha(1):zoomy(1) end;
+			OffCommand=function(self) self:linear(0.1):diffusealpha(0):zoomy(0.8) end;
+		},
+		-- Center
+		CreatePaneDisplayItem( iPN, "Hands", 'RadarCategory_Hands' ) .. {
+			InitCommand=function(self) self:x(50):y(-14) end;
+			OnCommand=function(self) self:zoomy(0.8):diffusealpha(0):sleep(0.4):linear(0.3):diffusealpha(1):zoomy(1) end;
+			OffCommand=function(self) self:linear(0.1):diffusealpha(0):zoomy(0.8) end;
+		},
+		CreatePaneDisplayItem( iPN, "Rolls", 'RadarCategory_Rolls' ) .. {
+			InitCommand=function(self) self:x(50):y(-14+24) end;
+			OnCommand=function(self) self:zoomy(0.8):diffusealpha(0):sleep(0.5):linear(0.3):diffusealpha(1):zoomy(1) end;
+			OffCommand=function(self) self:linear(0.1):diffusealpha(0):zoomy(0.8) end;
+		},
+		CreatePaneDisplayItem( iPN, "Lifts", 'RadarCategory_Lifts' ) .. {
+			InitCommand=function(self) self:x(50):y(-14+24*2) end;
+			OnCommand=function(self) self:zoomy(0.8):diffusealpha(0):sleep(0.6):linear(0.3):diffusealpha(1):zoomy(1) end;
+			OffCommand=function(self) self:linear(0.1):diffusealpha(0):zoomy(0.8) end;
+		},
+		CreatePaneDisplayItem( iPN, "Fakes", 'RadarCategory_Fakes' ) .. {
+			InitCommand=function(self) self:x(50):y(-14+24*3) end;
+			OnCommand=function(self) self:zoomy(0.8):diffusealpha(0):sleep(0.7):linear(0.3):diffusealpha(1):zoomy(1) end;
+			OffCommand=function(self) self:linear(0.1):diffusealpha(0):zoomy(0.8) end;
+		}
+	}
+	else
+	PaneItems[#PaneItems+1] = Def.ActorFrame {
+		CreatePaneDisplayItem( iPN, "Notes", 'RadarCategory_TapsAndHolds' ) .. {
+			InitCommand=function(self) self:x(-128+16+8):y(-14) end;
+			OnCommand=function(self) self:zoomy(0.8):diffusealpha(0):sleep(0.4):linear(0.3):diffusealpha(1):zoomy(1) end;
+			OffCommand=function(self) self:linear(0.1):diffusealpha(0):zoomy(0.8) end;
+		},
+		CreatePaneDisplayItem( iPN, "Holds", 'RadarCategory_Holds' ) .. {
+			InitCommand=function(self) self:x(50):y(-14) end;
+			OnCommand=function(self) self:zoomy(0.8):diffusealpha(0):sleep(0.6):linear(0.3):diffusealpha(1):zoomy(1) end;
+			OffCommand=function(self) self:linear(0.1):diffusealpha(0):zoomy(0.8) end;
+		}
+	}
+	end
+	
+return Def.ActorFrame {
+	PaneItems
+}

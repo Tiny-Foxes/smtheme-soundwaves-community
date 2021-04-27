@@ -259,6 +259,7 @@ end
 									local x = scale( t, SongMargin.Start, SongMargin.End, SctMargin.Left, SctMargin.Right )
 									-- Now scale that position on v to the y coordinate.
 									local y = math.round( scale( v, 0, tnp, maxheight, -maxheight ) )
+									if y < -maxheight then y = -maxheight end
 									-- And send them to the table to be rendered.
 									if x <= SctMargin.Right then
 										if #verts > 2 and verts[#verts][1][2] == y and verts[#verts-2][1][2] == y then

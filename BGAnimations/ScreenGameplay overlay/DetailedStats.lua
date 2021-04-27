@@ -251,6 +251,7 @@ if UserOptions.npsscatter then
                             local x = scale( t, SongMargin.Start, SongMargin.End, -calc, calc )
                             -- Now scale that position on v to the y coordinate.
                             local y = scale( v, 0, tnp, maxheight, -maxheight )
+							if y < -maxheight then y = -maxheight end
                             -- And send them to the table to be rendered.
                             -- Also make sure they don't go out the boundry...
                             if x < calc then

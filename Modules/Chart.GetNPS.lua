@@ -20,9 +20,9 @@ return function(Steps)
 
         for k,v in pairs( GAMESTATE:GetCurrentSong():GetNoteData(chartint) ) do
             if TD:GetElapsedTimeFromBeat(v[1]) > mMargin then
-                -- Don't round NPS values, they are not restricted to whole numbers.
-                measureNPS = mDuration == 0 and 0 or measureNotes/mDuration
-                PeakNPS = (measureNPS > PeakNPS) and measureNPS or PeakNPS
+                local originalval = mDuration == 0 and 0 or measureNotes/mDuration
+                measureNPS = math.round(originalval)
+                PeakNPS = (measureNPS > PeakNPS or originalval > PeakNPS) and originalval or PeakNPS
                 if(measureNotes >= 15) then
                     streamMeasures[#streamMeasures+1] = measureCount+1
                 end

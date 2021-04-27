@@ -1,7 +1,6 @@
 local p = ...
 local t = Def.ActorFrame{}
-local additionaloffset = (PREFSMAN:GetPreference("Center1Player") and GAMESTATE:GetNumPlayersEnabled() == 1 ) and 40 or 0
-local pane_x_position = string.find(p, "P1") and SCREEN_LEFT+20+additionaloffset or SCREEN_RIGHT-20-additionaloffset
+local pane_x_position = string.find(p, "P1") and SCREEN_LEFT+20 or SCREEN_RIGHT-20
 local pane_align = string.find(p, "P1") and left or right
 local DLW = LoadModule("Config.Load.lua")("DisableLowerWindows","Save/OutFoxPrefs.ini") or false
 

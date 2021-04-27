@@ -11,7 +11,7 @@ local x = Def.ActorFrame {
 		Def.BitmapText {
 			Font="_SemiBold";
 			Text=ScreenString("Saving Profiles");
-			OnCommand=function(self) self:xy(60,-76):horizalign(left):diffuse(color("#EEF1FF")):zoom(1.5) end;
+			OnCommand=function(self) self:xy(60,-76):horizalign(left):diffuse(color("#FFFFFF")):zoom(1.5) end;
 		};
 	};
 };

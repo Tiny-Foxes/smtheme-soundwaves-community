@@ -24,7 +24,7 @@ local background = Def.ActorFrame { Name="YOU_WISH_YOU_WERE_PLAYING_BEATMANIA_RI
 					return GAMESTATE:GetCurrentCourse():GetDisplayFullTitle().. " (Song ".. stats:GetPlayerStageStats( player ):GetSongsPassed()+1 .. ")" or ""
 				end
 			end
-			GAMESTATE:UpdateDiscordSongPlaying(GAMESTATE:IsCourseMode() and courselength() or state,songname,GAMESTATE:GetCurrentSong():GetLastSecond())
+			GAMESTATE:UpdateDiscordSongPlaying(GAMESTATE:IsCourseMode() and courselength() or state,songname,(GAMESTATE:GetCurrentSong():GetLastSecond() - GAMESTATE:GetCurMusicSeconds())/GAMESTATE:GetSongOptionsObject('ModsLevel_Song'):MusicRate())
 		end
 	end,
 	CurrentSongChangedMessageCommand=function(s) s:playcommand("UpdateDiscordInfo") end,
@@ -38,6 +38,7 @@ local background = Def.ActorFrame { Name="YOU_WISH_YOU_WERE_PLAYING_BEATMANIA_RI
 					local recepoffset = (Reverse == -1) and THEME:GetMetric("Player","ReceptorArrowsYReverse") or THEME:GetMetric("Player","ReceptorArrowsYStandard")
 					local Zoom = (LoadModule("Config.Load.lua")("MiniSelector",CheckIfUserOrMachineProfile(pn-1).."/OutFoxPrefs.ini") or 100)
 					recepoffset = recepoffset * (1-(Zoom/100))
+					recepoffset = GAMESTATE:GetIsFieldReversed() and recepoffset*-1 or recepoffset
 					for _,col in ipairs(SCREENMAN:GetTopScreen():GetChild("PlayerP"..pn):GetChild("NoteField"):get_column_actors()) do
 						col:rotationx(LoadModule("Config.Load.lua")("RotateFieldX",CheckIfUserOrMachineProfile(pn-1).."/OutFoxPrefs.ini") or 0)
 						:addy((Zoom == 0) and 0 or recepoffset/(Zoom/100))
@@ -76,14 +77,14 @@ local function UpdateModelRate()
             MusicRate = GAMESTATE:GetSongOptionsObject("ModsLevel_Preferred"):MusicRate()*SCREENMAN:GetTopScreen():GetHasteRate()
         end
         local BPM = (GAMESTATE:GetSongBPS()*60)
-        
+
         -- We're using scale to compare higher values with lower values.
         local UpdateScale = scale( BPM, 60, 700, 0.6, 3 );
-        
+
         -- Then take what we have and update depending on the music rate.
         local ToConvert = UpdateScale*MusicRate
         local SPos = GAMESTATE:GetSongPosition()
-        
+
         if not SPos:GetFreeze() and not SPos:GetDelay() and not SCREENMAN:GetTopScreen():IsPaused() then
             return ToConvert
         end

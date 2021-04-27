@@ -56,6 +56,7 @@ local amv = Def.ActorFrame{
 							)
 							-- Now scale that position on v to the y coordinate.
                             local y = math.round( scale( v, 0, peak, 60, -50 ) )
+							if y < -50 then y = -50 end
                             local colrange = colorrange( v, peak, ColorDarkTone(PlayerColor(pn)), Color.Purple )
 							-- And send them to the table to be rendered.
 							if #verts > 2 and (verts[#verts][1][2] == y and verts[#verts-2][1][2] == y) then
@@ -89,6 +90,7 @@ local amv = Def.ActorFrame{
             BeginUpdateCommand=function(self)
                 local time = GAMESTATE:GetSongPosition():GetMusicSecondsVisible()
                 local scl = scale( time, 0, GAMESTATE:GetCurrentSong():GetLastSecond(), 0, p2paneoffset)
+				if scl > p2paneoffset then scl = p2paneoffset end
                 self:x( scl ):sleep(1/20):queuecommand("BeginUpdate")
             end
         },

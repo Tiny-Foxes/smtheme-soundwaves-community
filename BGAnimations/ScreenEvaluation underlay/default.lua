@@ -319,7 +319,9 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 					self:linear(0.2):diffusealpha(0)
 			end;
 			Text="&MENULEFT;",
-			MouseLeftClickMessageCommand=function(s)
+			MouseLeftClickMessageCommand=function(s,param)
+				if not param.IsPressed then return end
+
 				local x = INPUTFILTER:GetMouseX()
 				local y = INPUTFILTER:GetMouseY()		
 				if (y > s:GetY()-(s:GetHeight()/2) and y < s:GetY()+(s:GetHeight()/2)) and (x > s:GetX()-(s:GetWidth()/2) and x < s:GetX()+(s:GetWidth()/2)) then
