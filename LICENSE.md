@@ -14,9 +14,7 @@ limitations under the License.
 Existing code from StepMania licensed under the terms of the MIT License. 
 
 # Third-party attributions
-Menu music is Effects of Elevation (Citizen) / Revolution Void [CC-BY 3.0] https://freemusicarchive.org/music/Revolution_Void/Effects_of_Elevation/
-
-Mascot art by leojiaz (https://twitter.com/leojiaz); this artwork is **NOT** licensed under the Apache License, and may not be reused without permission.
+Menu music is Rush (Instrumental) / Plexis [CC-BY 3.0] https://sanxion7.com/album/rush
 
 # Text of the Apache License
 

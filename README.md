@@ -24,5 +24,3 @@ Please see LICENSE.md
 
 ### Third-party attributions
 Menu music is Rush (Instrumental) / Plexis [CC-BY 3.0] https://sanxion7.com/album/rush
-
-Narumi (mascot) art by leojiaz https://twitter.com/leojiaz
