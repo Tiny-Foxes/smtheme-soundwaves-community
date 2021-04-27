@@ -1,4 +1,4 @@
-Copyright 2019-present Team Rizu contributors
+Copyright 2019 Team Rizu contributors
 
 All newly-created code is licensed under Apache License 2.0 (the License), 
 and all graphics are dual-licensed under Creative Commons Attribution 
@@ -16,6 +16,7 @@ Existing code from StepMania licensed under the terms of the MIT License.
 # Third-party attributions
 Menu music is Effects of Elevation (Citizen) / Revolution Void [CC-BY 3.0] https://freemusicarchive.org/music/Revolution_Void/Effects_of_Elevation/
 
+Mascot art by leojiaz (https://twitter.com/leojiaz); this artwork is **NOT** licensed under the Apache License, and may not be reused without permission.
 
 # Text of the Apache License
 

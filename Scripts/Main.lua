@@ -147,11 +147,20 @@ end
 
 function SPOChoices( itemSet )
 	local TimingMode = GAMESTATE:GetCurrentGame():GetName() ~= "para" and "Timing," or ""
+	local GHMode = GAMESTATE:GetCurrentGame():GetName() == "gh" and "GH," or ""
 	local Items = {
-		["Main"] = "SPM,SPV,NS,14,Mini,SF,FilterColor,".. TimingMode ..",Judg,13,18,16",
+		["Main"] = "SPM,SPV,NS,14,Mini,SF,FilterColor,".. TimingMode .."Judg,13,18",
 		["Special"] = "RotateFieldX,RotateFieldZ,MC,MCD,MCB,DLW,JudgImg,Combo,Toasty,ToastDraw,SP,OVG,OB,12",
-		["Effects"] = "2,3A,3B,4,5,6,7,9,R1,10,11"
+		["Effects"] = "2,3A,3B,4,5,6,7,9,R1,"..GHMode.."10,11"
 	}
+	
+	if GAMESTATE:IsHumanPlayer(PLAYER_1) then
+		Items["Main"] = Items["Main"] .. ",P1_16"
+	end
+	
+	if GAMESTATE:IsHumanPlayer(PLAYER_2) then
+		Items["Main"] = Items["Main"] .. ",P2_16"
+	end
 
 	if LoadModule("Characters.AnyoneHasChar.lua")() then
 		Items["Main"] = Items["Main"] .. ",St"

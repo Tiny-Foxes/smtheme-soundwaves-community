@@ -3,24 +3,19 @@ local t = Def.ActorFrame {}
 ------------------------
 -- Begin TapNote Collection
 local judgments,offsetdata,PauseTimeTable = {},{},{}
-
 -- Begin by seting up the table with player values
-for pla in ivalues(PlayerNumber) do
+for i,pla in pairs( GAMESTATE:GetEnabledPlayers() ) do
 	judgments[pla] = {}
 	offsetdata[pla] = {}
 	-- Now fill by how many columns are available on the current style
-	for i=1,GAMESTATE:GetCurrentStyle():ColumnsPerPlayer() do
+	-- Find the style used by the current player, given that now players can have different styles.
+	for i=1,GAMESTATE:GetCurrentStyle(pla):ColumnsPerPlayer() do
 		-- On each, 11 judgments will be inserted.
 		judgments[pla][i] = { ProW1=0, ProW2=0, ProW3=0, ProW4=0, ProW5=0, W1=0, W2=0, W3=0, W4=0, W5=0, Miss=0 }
 		-- Disabling Fantastic timing won't affect the table, as scores will go
 		-- to W2 instead.
 	end
 	t[#t+1] = Def.Actor{
-		PlayerHitPauseMessageCommand=function(self,params)
-			if params.pn == pla then
-				PauseTimeTable[#PauseTimeTable+1] = GAMESTATE:GetCurMusicSeconds()
-			end
-		end,
 		OffCommand=function(self)
 			local StgStats = STATSMAN:GetCurStageStats():GetPlayerStageStats(pla)
 			local ClBurned = StgStats:GetCaloriesBurned()
@@ -61,23 +56,28 @@ for pla in ivalues(PlayerNumber) do
 end
 
 t[#t+1] = Def.Actor{
+	PlayerHitPauseMessageCommand=function(self,params)
+		PauseTimeTable[#PauseTimeTable+1] = GAMESTATE:GetCurMusicSeconds()
+	end,
 	JudgmentMessageCommand=function(self, params)
 		-- Do we have the player and their notes?
-		if params.Player == params.Player and params.Notes then
+		if params.Player == params.Player then
 			local p = params.Player
 			-- Let´s check what column was just hit
-			for i,col in pairs(params.Notes) do
-				-- Alright, time to add it to the appropiate table.
-				local tns = ToEnumShortString(params.TapNoteScore)
-				if tns ~= "CheckpointHit" then
-					judgments[p][i][tns] = judgments[p][i][tns] + 1
+			if params.Notes then
+				for i,col in pairs(params.Notes) do
+					-- Alright, time to add it to the appropiate table.
+					local tns = ToEnumShortString(params.TapNoteScore)
+					if tns ~= "CheckpointHit" and judgments[p][i][tns] then
+						judgments[p][i][tns] = judgments[p][i][tns] + 1
+					end
 				end
-			end
-			if params.TapNoteOffset and params.TapNoteScore ~= "TapNoteScore_CheckpointHit" and params.TapNoteScore ~= "TapNoteScore_CheckpointMiss" then
-				local vStats = STATSMAN:GetCurStageStats():GetPlayerStageStats( p )
-				local time = GAMESTATE:IsCourseMode() and vStats:GetAliveSeconds() or GAMESTATE:GetCurMusicSeconds()
-				local noff = params.TapNoteScore == "TapNoteScore_Miss" and "Miss" or params.TapNoteOffset
-				offsetdata[p][#offsetdata[p]+1] = { time, noff, params.TapNoteScore }
+				if params.TapNoteOffset and params.TapNoteScore ~= "TapNoteScore_CheckpointHit" and params.TapNoteScore ~= "TapNoteScore_CheckpointMiss" then
+					local vStats = STATSMAN:GetCurStageStats():GetPlayerStageStats( p )
+					local time = GAMESTATE:IsCourseMode() and vStats:GetAliveSeconds() or GAMESTATE:GetCurMusicSeconds()
+					local noff = params.TapNoteScore == "TapNoteScore_Miss" and "Miss" or params.TapNoteOffset
+					offsetdata[p][#offsetdata[p]+1] = { time, noff, params.TapNoteScore }
+				end
 			end
 		end
 	end,

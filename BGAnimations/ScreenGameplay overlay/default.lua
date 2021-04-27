@@ -25,9 +25,6 @@ t[#t+1] = Def.Actor {
 
 -- Usually this happens on ScreenStage but we don't do that anymore.
 t[#t+1]=LoadActor("Intro")
-
--- Pause menu
-t[#t+1]= LoadActor(THEME:GetPathG("", "pause_menu"))
 	
 -- BPM display
 if LoadModule("Config.Load.lua")("GameplayBPM","Save/OutFoxPrefs.ini") then

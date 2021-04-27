@@ -18,7 +18,7 @@ if currentBGTheme == "Ocular" then
 			end,
 			OnCommand=function(self)
 				if AnimatedMenu then
-					self:spin():effectmagnitude(0,0,-2)
+					self:spin():effectmagnitude(0,0,-6)
 				end
 			end
 		},
@@ -29,7 +29,7 @@ if currentBGTheme == "Ocular" then
 			end,
 			OnCommand=function(self)
 				if AnimatedMenu then
-					self:spin():effectmagnitude(0,0,3)
+					self:spin():effectmagnitude(0,0,8)
 				end
 			end
 		},

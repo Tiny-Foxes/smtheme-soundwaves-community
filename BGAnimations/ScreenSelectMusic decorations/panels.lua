@@ -274,11 +274,22 @@ t[#t+1] = Def.ActorFrame {
 	OffCommand=function(self) self:sleep(0.24):decelerate(0.4):diffusealpha(0) end,
 	InitCommand=function(self)
 		self:align(0,0):x(paneloffset):y(63+206+artistStripeHeight):visible(GAMESTATE:IsHumanPlayer(pn))
+		if GAMESTATE:IsHumanPlayer(pn) then
+			self:playcommand("CheckPlayerInfo")
+		end
 	end,
 	PlayerJoinedMessageCommand=function(self,param)
 		if param.Player == pn then
 			self:visible(true):diffusealpha(0):addy(300):decelerate(0.4):diffusealpha(1):sleep(0.2):smooth(0.75):addy(-300)
+			:playcommand("CheckPlayerInfo")
 		end
+	end,
+	CheckPlayerInfoCommand=function(self)
+		-- Check information about the player who just joined.
+		local playerdata = LoadModule("Options.GetProfileData.lua")(pn)
+
+		self:GetChild("ProfileName"):settext( playerdata["Name"] )
+		self:GetChild("ProfilePicture"):Load( playerdata["Image"] ):zoomto(48,48)
 	end,
 	Def.Quad {
 		InitCommand=function(self)
@@ -296,6 +307,7 @@ t[#t+1] = Def.ActorFrame {
 	},
 	-- Profile picture?
 	Def.Sprite {
+		Name="ProfilePicture",
 		InitCommand=function(self) self:align(0,0):xy(6,4) end,
 		Texture=LoadModule("Options.GetProfileData.lua")(pn)["Image"],
 		OnCommand=function(self)
@@ -305,19 +317,12 @@ t[#t+1] = Def.ActorFrame {
 
 	-- Profile name
 	Def.BitmapText {
-		Font="_Bold";
+		Font="_Bold",
+		Name="ProfileName",
 		InitCommand=function(self)
 			self:align(0,0):addx(60):addy(22):zoom(1):maxwidth(IsWidescreen() and 220 or 150):skewx(-0.15):queuecommand("Set")
 		end;
 		OnCommand=function(self) self:diffuse(ColorDarkTone(PlayerDarkColor(pn))) end;
-		PlayerJoinedMessageCommand=function(self,param)
-			if param.Player == pn then
-				self:queuecommand("Set")
-			end
-		end,
-		SetCommand=function(self)
-			self:settext(LoadModule("Options.GetProfileData.lua")(pn)["Name"])
-		end
 	}
 }
 

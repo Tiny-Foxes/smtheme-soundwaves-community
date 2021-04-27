@@ -377,8 +377,8 @@ return {
 	SoundwavesSubTheme =
 	{
 		Default = 1,
-		Choices = { OptionNameString('swClassic'), OptionNameString('swVaporwave'), OptionNameString('swGrass'), OptionNameString('swRetro'), OptionNameString('swFire'), "Dark", "Chaos", "Ice", "Wave", "Alien Alien", "BISTRO", "Invert Standard", "Rainbow FUN", "Baby Pink", "Sunny Day", "The Blood", "Virtual LED", "Night Emotions", "Cool Blues"},
-		Values = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19}
+		Choices = { OptionNameString('swClassic'), OptionNameString('swVaporwave'), OptionNameString('swGrass'), OptionNameString('swRetro'), OptionNameString('swFire'), "Dark", "Chaos", "Ice", "Wave", "Alien Alien", "BISTRO", "Invert Standard", "Rainbow FUN", "Baby Pink", "Sunny Day", "The Blood", "Virtual LED", "Night Emotions", "Cool Blues", "Dragonfire", "Y2K"},
+		Values = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21}
 	},
 	LifeType =
 	{
@@ -635,7 +635,7 @@ return {
 	SoundwavesMenuBG =
 	{
 		Default = "Ocular",
-		Choices = { "Circle", "Triangle", "Hexagon", "Square", OptionNameString('swBGSolid'), OptionNameString('swBGBlack') },
+		Choices = { OptionNameString('swBGCircle'), OptionNameString('swBGTriangle'), OptionNameString('swBGHexagon'), OptionNameString('swBGSquare'), OptionNameString('swBGSolid'), OptionNameString('swBGBlack') },
 		Values = { "Ocular", "Triangles", "HexagonPattern", "CheckerBoard", "ColorBackground", "BlackBackground" }
 	},
 

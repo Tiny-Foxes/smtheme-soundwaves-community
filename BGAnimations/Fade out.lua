@@ -5,7 +5,7 @@ return Def.ActorFrame {
 		Def.Quad {
 			InitCommand=function(self) self:xy(SCREEN_CENTER_X,SCREEN_CENTER_Y):zoomto(SCREEN_WIDTH+1,SCREEN_HEIGHT):draworder(10000) end,
 			StartTransitioningCommand=function(self) 
-				self:diffuse(color("0,0,0,0")):diffusealpha(0):linear(0.3):diffusealpha(1) 
+				self:diffuse(color("0,0,0,0")):diffusealpha(0):linear(0.15):diffusealpha(1) 
 			end;
 		};
 	};
