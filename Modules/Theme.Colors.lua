@@ -41,7 +41,15 @@ return function( Index )
             ["menuBlockHighlightB"] = color("#FFC447"),
             ["menuTextGainFocus"] = color("#B9CDFD"),
             ["menuTextLoseFocus"] = color("#C7F9FF"),
-            ["optionExplanationBG"] = color("#00000050")
+            ["optionExplanationBG"] = color("#00000050"),
+            ["difficultyBeginner"] = color("#0EA7FF"),
+            ["difficultyEasy"] = color("#00F4BD"),
+            ["difficultyMedium"] = color("#FF8100"),
+            ["difficultyHard"] = color("#F70825"),
+            ["difficultyChallenge"] = color("#A907FF"),
+            ["difficultyEdit"] = color("#9199D4"),
+            ["difficultyCouple"] = color("#ed0972"),
+            ["difficultyRoutine"] = color("#ff9a00")
         }, -- end Standard
         { -- (2) Vapor
             ["titleBGA"] = color("#230066"),
@@ -84,7 +92,15 @@ return function( Index )
             ["menuBlockHighlightB"] = color("#F400F4"),
             ["menuTextGainFocus"] = color("#A3FDFF"),
             ["menuTextLoseFocus"] = color("#FFFFFF"),
-            ["optionExplanationBG"] = color("#00000050")
+            ["optionExplanationBG"] = color("#00000050"),
+            ["difficultyBeginner"] = color("#0EA7FF"),
+            ["difficultyEasy"] = color("#00F4BD"),
+            ["difficultyMedium"] = color("#FF8100"),
+            ["difficultyHard"] = color("#F70825"),
+            ["difficultyChallenge"] = color("#A907FF"),
+            ["difficultyEdit"] = color("#9199D4"),
+            ["difficultyCouple"] = color("#ed0972"),
+            ["difficultyRoutine"] = color("#ff9a00")
         }, -- end Vapor
         { -- (3) Grass
             ["titleBGA"] = color("#063B08"),
@@ -127,7 +143,15 @@ return function( Index )
             ["menuBlockHighlightB"] = color("#0DA20B"),
             ["menuTextGainFocus"] = color("#62DD4A"),
             ["menuTextLoseFocus"] = color("#62DD4A"),
-            ["optionExplanationBG"] = color("#00000090")
+            ["optionExplanationBG"] = color("#00000090"),
+            ["difficultyBeginner"] = color("#0EA7FF"),
+            ["difficultyEasy"] = color("#00F4BD"),
+            ["difficultyMedium"] = color("#FF8100"),
+            ["difficultyHard"] = color("#F70825"),
+            ["difficultyChallenge"] = color("#A907FF"),
+            ["difficultyEdit"] = color("#9199D4"),
+            ["difficultyCouple"] = color("#ed0972"),
+            ["difficultyRoutine"] = color("#ff9a00")
         }, -- end Grass
         { -- (4) CincoCero
             ["titleBGA"] = color("#FDB813"),
@@ -170,7 +194,15 @@ return function( Index )
             ["menuBlockHighlightB"] = color("#FFFFFF"),
             ["menuTextGainFocus"] = color("#FFFFFF"),
             ["menuTextLoseFocus"] = color("#FFEB5B"),
-            ["optionExplanationBG"] = color("#00000095")
+            ["optionExplanationBG"] = color("#00000095"),
+            ["difficultyBeginner"] = color("#0EA7FF"),
+            ["difficultyEasy"] = color("#00F4BD"),
+            ["difficultyMedium"] = color("#FF8100"),
+            ["difficultyHard"] = color("#F70825"),
+            ["difficultyChallenge"] = color("#A907FF"),
+            ["difficultyEdit"] = color("#9199D4"),
+            ["difficultyCouple"] = color("#ed0972"),
+            ["difficultyRoutine"] = color("#ff9a00")
         }, -- end CincoCero
         { -- (5) Fuego
             ["titleBGA"] = color("#680707"),
@@ -213,7 +245,15 @@ return function( Index )
             ["menuBlockHighlightB"] = color("#E7C021"),
             ["menuTextGainFocus"] = color("#FACC9D"),
             ["menuTextLoseFocus"] = color("#FFFFFF"),
-            ["optionExplanationBG"] = color("#00000050")
+            ["optionExplanationBG"] = color("#00000050"),
+            ["difficultyBeginner"] = color("#0EA7FF"),
+            ["difficultyEasy"] = color("#00F4BD"),
+            ["difficultyMedium"] = color("#FF8100"),
+            ["difficultyHard"] = color("#F70825"),
+            ["difficultyChallenge"] = color("#A907FF"),
+            ["difficultyEdit"] = color("#9199D4"),
+            ["difficultyCouple"] = color("#ed0972"),
+            ["difficultyRoutine"] = color("#ff9a00")
         }, -- end Fuego
         { -- (6) Dark Mode
             ["titleBGA"] = color("#050505"),
@@ -256,7 +296,15 @@ return function( Index )
             ["menuBlockHighlightB"] = color("#CCCCCC"),
             ["menuTextGainFocus"] = color("#FFFFFF"),
             ["menuTextLoseFocus"] = color("#DDDDDD"),
-            ["optionExplanationBG"] = color("#00000050")
+            ["optionExplanationBG"] = color("#00000050"),
+            ["difficultyBeginner"] = color("#0EA7FF"),
+            ["difficultyEasy"] = color("#00F4BD"),
+            ["difficultyMedium"] = color("#FF8100"),
+            ["difficultyHard"] = color("#F70825"),
+            ["difficultyChallenge"] = color("#A907FF"),
+            ["difficultyEdit"] = color("#9199D4"),
+            ["difficultyCouple"] = color("#ed0972"),
+            ["difficultyRoutine"] = color("#ff9a00")
         }, -- end Dark Mode
         { -- (7) Chaos
             ["titleBGA"] = color("#23272a"),
@@ -299,7 +347,15 @@ return function( Index )
             ["menuBlockHighlightB"] = color("#2c2f33"),
             ["menuTextGainFocus"] = color("#ffffff"),
             ["menuTextLoseFocus"] = color("#99aab5"),
-            ["optionExplanationBG"] = color("#23272a")
+            ["optionExplanationBG"] = color("#23272a"),
+            ["difficultyBeginner"] = color("#0EA7FF"),
+            ["difficultyEasy"] = color("#00F4BD"),
+            ["difficultyMedium"] = color("#FF8100"),
+            ["difficultyHard"] = color("#F70825"),
+            ["difficultyChallenge"] = color("#A907FF"),
+            ["difficultyEdit"] = color("#9199D4"),
+            ["difficultyCouple"] = color("#ed0972"),
+            ["difficultyRoutine"] = color("#ff9a00")
         }, -- end Chaos
         {  -- (8) Ice
             ["titleBGA"] = color("#4488FF"),
@@ -342,7 +398,15 @@ return function( Index )
             ["menuBlockHighlightB"] = color("#4488FF"),
             ["menuTextGainFocus"] = color("#FFFFFF"),
             ["menuTextLoseFocus"] = color("#4488FF"),
-            ["optionExplanationBG"] = color("#00000050")
+            ["optionExplanationBG"] = color("#00000050"),
+            ["difficultyBeginner"] = color("#0EA7FF"),
+            ["difficultyEasy"] = color("#00F4BD"),
+            ["difficultyMedium"] = color("#FF8100"),
+            ["difficultyHard"] = color("#F70825"),
+            ["difficultyChallenge"] = color("#A907FF"),
+            ["difficultyEdit"] = color("#9199D4"),
+            ["difficultyCouple"] = color("#ed0972"),
+            ["difficultyRoutine"] = color("#ff9a00")
         }, -- end Ice
         { -- (9) Wave
             ["titleBGA"] = color("#009696"),
@@ -385,7 +449,15 @@ return function( Index )
             ["menuBlockHighlightB"] = color("#69F0EC"),
             ["menuTextGainFocus"] = color("#97EAEC"),
             ["menuTextLoseFocus"] = color("#878787"),
-            ["optionExplanationBG"] = color("#00000090")
+            ["optionExplanationBG"] = color("#00000090"),
+            ["difficultyBeginner"] = color("#0EA7FF"),
+            ["difficultyEasy"] = color("#00F4BD"),
+            ["difficultyMedium"] = color("#FF8100"),
+            ["difficultyHard"] = color("#F70825"),
+            ["difficultyChallenge"] = color("#A907FF"),
+            ["difficultyEdit"] = color("#9199D4"),
+            ["difficultyCouple"] = color("#ed0972"),
+            ["difficultyRoutine"] = color("#ff9a00")
         }, -- end Wave
         { -- (10) Alien Alien
                     ["titleBGA"] = color("#000000"),
@@ -428,7 +500,15 @@ return function( Index )
             ["menuBlockHighlightB"] = color("#00c700"),
             ["menuTextGainFocus"] = color("#FFFFFF"),
             ["menuTextLoseFocus"] = color("#FFFFFF"),
-            ["optionExplanationBG"] = color("#00000050")
+            ["optionExplanationBG"] = color("#00000050"),
+            ["difficultyBeginner"] = color("#0EA7FF"),
+            ["difficultyEasy"] = color("#00F4BD"),
+            ["difficultyMedium"] = color("#FF8100"),
+            ["difficultyHard"] = color("#F70825"),
+            ["difficultyChallenge"] = color("#A907FF"),
+            ["difficultyEdit"] = color("#9199D4"),
+            ["difficultyCouple"] = color("#ed0972"),
+            ["difficultyRoutine"] = color("#ff9a00")
         },
         { -- (11) BISTRO
             ["titleBGA"] = color("#FFFFFF"),
@@ -471,7 +551,15 @@ return function( Index )
             ["menuBlockHighlightB"] = color("#FFFFFF"),
             ["menuTextGainFocus"] = color("#FFFFFF"),
             ["menuTextLoseFocus"] = color("#8a878a"),
-            ["optionExplanationBG"] = color("#4C4C4C")
+            ["optionExplanationBG"] = color("#4C4C4C"),
+            ["difficultyBeginner"] = color("#0EA7FF"),
+            ["difficultyEasy"] = color("#00F4BD"),
+            ["difficultyMedium"] = color("#FF8100"),
+            ["difficultyHard"] = color("#F70825"),
+            ["difficultyChallenge"] = color("#A907FF"),
+            ["difficultyEdit"] = color("#9199D4"),
+            ["difficultyCouple"] = color("#ed0972"),
+            ["difficultyRoutine"] = color("#ff9a00")
         }, -- end BISTRO
         {  -- (12) Invert Standard
             ["titleBGA"] = color("#FCEDA2"),
@@ -514,7 +602,15 @@ return function( Index )
             ["menuBlockHighlightB"] = color("#003B8"),
             ["menuTextGainFocus"] = color("#463202"),
             ["menuTextLoseFocus"] = color("#380600"),
-            ["optionExplanationBG"] = color("#FFFFFF50")
+            ["optionExplanationBG"] = color("#FFFFFF50"),
+            ["difficultyBeginner"] = color("#0EA7FF"),
+            ["difficultyEasy"] = color("#00F4BD"),
+            ["difficultyMedium"] = color("#FF8100"),
+            ["difficultyHard"] = color("#F70825"),
+            ["difficultyChallenge"] = color("#A907FF"),
+            ["difficultyEdit"] = color("#9199D4"),
+            ["difficultyCouple"] = color("#ed0972"),
+            ["difficultyRoutine"] = color("#ff9a00")
         }, -- End of Invert Standard
         {  -- (13) Rainbow FUN
             ["titleBGA"] = color("#9E0000"),
@@ -557,7 +653,15 @@ return function( Index )
             ["menuBlockHighlightB"] = color("#CF0072"),
             ["menuTextGainFocus"] = color("#00DA54"),
             ["menuTextLoseFocus"] = color("#FFFFFF"),
-            ["optionExplanationBG"] = color("#FF000050")
+            ["optionExplanationBG"] = color("#FF000050"),
+            ["difficultyBeginner"] = color("#0EA7FF"),
+            ["difficultyEasy"] = color("#00F4BD"),
+            ["difficultyMedium"] = color("#FF8100"),
+            ["difficultyHard"] = color("#F70825"),
+            ["difficultyChallenge"] = color("#A907FF"),
+            ["difficultyEdit"] = color("#9199D4"),
+            ["difficultyCouple"] = color("#ed0972"),
+            ["difficultyRoutine"] = color("#ff9a00")
         }, -- End of Rainbow FUN
         {  -- (14) Baby Pink
             ["titleBGA"] = color("#E7B6FE"),
@@ -600,7 +704,15 @@ return function( Index )
             ["menuBlockHighlightB"] = color("#deddd9"),
             ["menuTextGainFocus"] = color("#d3dfd1"),
             ["menuTextLoseFocus"] = color("#bccbba"),
-            ["optionExplanationBG"] = color("#e394e3")
+            ["optionExplanationBG"] = color("#e394e3"),
+            ["difficultyBeginner"] = color("#0EA7FF"),
+            ["difficultyEasy"] = color("#00F4BD"),
+            ["difficultyMedium"] = color("#FF8100"),
+            ["difficultyHard"] = color("#F70825"),
+            ["difficultyChallenge"] = color("#A907FF"),
+            ["difficultyEdit"] = color("#9199D4"),
+            ["difficultyCouple"] = color("#ed0972"),
+            ["difficultyRoutine"] = color("#ff9a00")
         }, -- end Baby Pink
         {  -- (15) Sunny Day
             ["titleBGA"] = color("#FFAA00"),
@@ -643,7 +755,15 @@ return function( Index )
             ["menuBlockHighlightB"] = color("#FFDE00"),
             ["menuTextGainFocus"] = color("#FFFF00"),
             ["menuTextLoseFocus"] = color("#000000"),
-            ["optionExplanationBG"] = color("#00000050")
+            ["optionExplanationBG"] = color("#00000050"),
+            ["difficultyBeginner"] = color("#0EA7FF"),
+            ["difficultyEasy"] = color("#00F4BD"),
+            ["difficultyMedium"] = color("#FF8100"),
+            ["difficultyHard"] = color("#F70825"),
+            ["difficultyChallenge"] = color("#A907FF"),
+            ["difficultyEdit"] = color("#9199D4"),
+            ["difficultyCouple"] = color("#ed0972"),
+            ["difficultyRoutine"] = color("#ff9a00")
         }, -- End of Sunny Day
         {  -- (16) The Blood
             ["titleBGA"] = color("#470000"),
@@ -686,7 +806,15 @@ return function( Index )
             ["menuBlockHighlightB"] = color("#AD0000"),
             ["menuTextGainFocus"] = color("#FFFFFF"),
             ["menuTextLoseFocus"] = color("#FF0000"),
-            ["optionExplanationBG"] = color("#00000050")
+            ["optionExplanationBG"] = color("#00000050"),
+            ["difficultyBeginner"] = color("#0EA7FF"),
+            ["difficultyEasy"] = color("#00F4BD"),
+            ["difficultyMedium"] = color("#FF8100"),
+            ["difficultyHard"] = color("#F70825"),
+            ["difficultyChallenge"] = color("#A907FF"),
+            ["difficultyEdit"] = color("#9199D4"),
+            ["difficultyCouple"] = color("#ed0972"),
+            ["difficultyRoutine"] = color("#ff9a00")
         }, -- End of The Blood
         { -- (17) Virtual LED
             ["titleBGA"] = color("#000000"),
@@ -729,7 +857,15 @@ return function( Index )
             ["menuBlockHighlightB"] = color("#C70000"),
             ["menuTextGainFocus"] = color("#FFFFFF"),
             ["menuTextLoseFocus"] = color("#FFFFFF"),
-            ["optionExplanationBG"] = color("#00000050")
+            ["optionExplanationBG"] = color("#00000050"),
+            ["difficultyBeginner"] = color("#0EA7FF"),
+            ["difficultyEasy"] = color("#00F4BD"),
+            ["difficultyMedium"] = color("#FF8100"),
+            ["difficultyHard"] = color("#F70825"),
+            ["difficultyChallenge"] = color("#A907FF"),
+            ["difficultyEdit"] = color("#9199D4"),
+            ["difficultyCouple"] = color("#ed0972"),
+            ["difficultyRoutine"] = color("#ff9a00")
         }, -- end Virtual LED
         { -- (18) Night Emotions
             ["titleBGA"] = color("#000000"),
@@ -772,7 +908,15 @@ return function( Index )
             ["menuBlockHighlightB"] = color("#0080FF"),
             ["menuTextGainFocus"] = color("#FFFFFF"),
             ["menuTextLoseFocus"] = color("#FFFFFF"),
-            ["optionExplanationBG"] = color("#00000050")
+            ["optionExplanationBG"] = color("#00000050"),
+            ["difficultyBeginner"] = color("#0EA7FF"),
+            ["difficultyEasy"] = color("#00F4BD"),
+            ["difficultyMedium"] = color("#FF8100"),
+            ["difficultyHard"] = color("#F70825"),
+            ["difficultyChallenge"] = color("#A907FF"),
+            ["difficultyEdit"] = color("#9199D4"),
+            ["difficultyCouple"] = color("#ed0972"),
+            ["difficultyRoutine"] = color("#ff9a00")
         }, -- end Night Emotions
         {  -- (19) Cool Blues
             ["titleBGA"] = color("#0000CC"),
@@ -815,7 +959,15 @@ return function( Index )
             ["menuBlockHighlightB"] = color("#000099"),
             ["menuTextGainFocus"] = color("#FFFFFF"),
             ["menuTextLoseFocus"] = color("#CCCCFF"),
-            ["optionExplanationBG"] = color("#00000050")
+            ["optionExplanationBG"] = color("#00000050"),
+            ["difficultyBeginner"] = color("#0EA7FF"),
+            ["difficultyEasy"] = color("#00F4BD"),
+            ["difficultyMedium"] = color("#FF8100"),
+            ["difficultyHard"] = color("#F70825"),
+            ["difficultyChallenge"] = color("#A907FF"),
+            ["difficultyEdit"] = color("#9199D4"),
+            ["difficultyCouple"] = color("#ed0972"),
+            ["difficultyRoutine"] = color("#ff9a00")
         }, -- End of Cool Blues
         { -- (20) Dragonfire
             ["titleBGA"] = color("#992828"),
@@ -858,7 +1010,15 @@ return function( Index )
             ["menuBlockHighlightB"] = color("#bea46f"),
             ["menuTextGainFocus"] = color("#f3da82"),
             ["menuTextLoseFocus"] = color("#FFFFFF"),
-            ["optionExplanationBG"] = color("#00000050")
+            ["optionExplanationBG"] = color("#00000050"),
+            ["difficultyBeginner"] = color("#0EA7FF"),
+            ["difficultyEasy"] = color("#00F4BD"),
+            ["difficultyMedium"] = color("#FF8100"),
+            ["difficultyHard"] = color("#F70825"),
+            ["difficultyChallenge"] = color("#A907FF"),
+            ["difficultyEdit"] = color("#9199D4"),
+            ["difficultyCouple"] = color("#ed0972"),
+            ["difficultyRoutine"] = color("#ff9a00")
         }, -- end Dragonfire
         { -- Y2K (opsm1)
             ["titleBGA"] = color("#CABBF7"),
@@ -901,7 +1061,15 @@ return function( Index )
             ["menuBlockHighlightB"] = color("#FFFFFF"),
             ["menuTextGainFocus"] = color("#FFFFFF"),
             ["menuTextLoseFocus"] = color("#DFD7FA"),
-            ["optionExplanationBG"] = color("#6441DD")
+            ["optionExplanationBG"] = color("#6441DD"),
+            ["difficultyBeginner"] = color("#0EA7FF"),
+            ["difficultyEasy"] = color("#00F4BD"),
+            ["difficultyMedium"] = color("#FF8100"),
+            ["difficultyHard"] = color("#F70825"),
+            ["difficultyChallenge"] = color("#A907FF"),
+            ["difficultyEdit"] = color("#9199D4"),
+            ["difficultyCouple"] = color("#ed0972"),
+            ["difficultyRoutine"] = color("#ff9a00")
         }, -- end opsm1
     }
     return Index and Items[tonumber(Index)] or Items[1]
