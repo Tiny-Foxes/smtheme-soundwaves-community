@@ -12,6 +12,8 @@ function GameState:BothPlayersEnabled()
 	return GAMESTATE:IsPlayerEnabled(PLAYER_1) and GAMESTATE:IsPlayerEnabled(PLAYER_2)
 end
 
+local ColorTable = LoadModule("Theme.Colors.lua")( LoadModule("Config.Load.lua")("SoundwavesSubTheme","Save/OutFoxPrefs.ini") )
+
 GameColor = {
     PlayerColors = {
         PLAYER_1 = color("#C85D49"),
@@ -32,24 +34,24 @@ GameColor = {
         --[[ These are for 'Custom' Difficulty Ranks. It can be very  useful
         in some cases, especially to apply new colors for stuff you
         couldn't before. (huh? -aj) ]]
-        Beginner    = color("#0EA7FF"),         -- Blue
-        Easy        = color("#00F4BD"),         -- Green
-        Medium      = color("#FF8100"),         -- Orange
-        Hard        = color("#F70825"),         -- Magenta
-        Challenge   = color("#A907FF"),         -- Purple
-        Edit        = color("#9199D4"),   -- Gray
-        Couple      = color("#ed0972"),         -- hot pink
-        Routine     = color("#ff9a00"),         -- orange
+        Beginner    = ColorTable["difficultyBeginner"],
+        Easy        = ColorTable["difficultyEasy"],
+        Medium      = ColorTable["difficultyMedium"],
+        Hard        = ColorTable["difficultyHard"],
+        Challenge   = ColorTable["difficultyChallenge"],
+        Edit        = ColorTable["difficultyEdit"],
+        Couple      = ColorTable["difficultyCouple"],
+        Routine     = ColorTable["difficultyRoutine"],
         --[[ These are for courses, so let's slap them here in case someone
         wanted to use Difficulty in Course and Step regions. ]]
-        Difficulty_Beginner = color("#0EA7FF"),     -- Blue
-        Difficulty_Easy     = color("#00F4BD"),     -- Green
-        Difficulty_Medium   = color("#FF8100"),     -- Orange
-        Difficulty_Hard     = color("#F70825"),     -- Magenta
-        Difficulty_Challenge    = color("#A907FF"), -- Purple
-        Difficulty_Edit     = color("#9199D4"),       -- gray
-        Difficulty_Couple   = color("#ed0972"),             -- hot pink
-        Difficulty_Routine  = color("#ff9a00")              -- orange
+        Difficulty_Beginner = ColorTable["difficultyBeginner"],
+        Difficulty_Easy     = ColorTable["difficultyEasy"],
+        Difficulty_Medium   = ColorTable["difficultyMedium"],
+        Difficulty_Hard     = ColorTable["difficultyHard"],
+        Difficulty_Challenge    = ColorTable["difficultyChallenge"],
+        Difficulty_Edit     = ColorTable["difficultyEdit"],
+        Difficulty_Couple   = ColorTable["difficultyCouple"],
+        Difficulty_Routine  = ColorTable["difficultyRoutine"]
     },
     Stage = {
         Stage_1st   = color("#6C94D7"),
