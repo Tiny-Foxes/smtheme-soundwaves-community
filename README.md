@@ -14,6 +14,8 @@ It has a clean and modern feel with influence from flat design, whilst still hav
 ## Contributors
 
 * ry00001 (measure counter)
+* Ksempac (color scheme function update)
+* SheepyChris (NPS code update)
 
 ## Acknowledgements 
 * Everyone who has provided feedback for Soundwaves during development.
