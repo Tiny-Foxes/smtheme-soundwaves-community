@@ -12,9 +12,10 @@ t[#t+1] = Def.ActorFrame {
 			local StageIndex = GAMESTATE:GetCurrentStageIndex()
 			GAMESTATE:UpdateDiscordScreenInfo("Selecting Song (Stage ".. StageIndex+1 .. ")	","",1)
 		end
-		self:xy( isUltraWide and  SCREEN_CENTER_X+300 or SCREEN_RIGHT-340, SCREEN_TOP+30 ):diffusealpha(0):sleep(0.5):smooth(0.3):diffusealpha(1) 
+		self:xy( isUltraWide and  SCREEN_CENTER_X+300 or SCREEN_RIGHT-340, SCREEN_TOP+30 )
+		self:addy(-105):decelerate(0.3):addy(105)
 	end,
-	OffCommand=function(self) self:smooth(0.175):diffusealpha(0) end,
+	OffCommand=function(self) self:decelerate(0.175):addy(-105) end,
     Def.Sprite {
 		Texture=THEME:GetPathG("ScreenSelectMusic","sort icon"),
 		InitCommand=function(self) self:xy(-40,0) end,
@@ -55,9 +56,9 @@ t[#t+1] = Def.ActorFrame {
 			if PREFSMAN:GetPreference("MenuTimer") == true then
 				self:addx(-220)
 			end
-			self:diffusealpha(0):sleep(0.5):smooth(0.3):diffusealpha(1) 
+			self:addy(-105):decelerate(0.3):addy(105)
 		end,
-		OffCommand=function(self) self:smooth(0.175):diffusealpha(0) end
+		OffCommand=function(self) self:decelerate(0.175):addy(-105) end,
 	}
 }
 end

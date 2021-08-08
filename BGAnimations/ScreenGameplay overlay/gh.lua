@@ -1,5 +1,5 @@
 local barSleepIn = 0.9
-local songAreaWidth = SCREEN_WIDTH*0.4375
+local difficulty_width = scale( SCREEN_WIDTH, 960, 1152, 360, 394 ) > 394 and 394 or scale( SCREEN_WIDTH, 960, 1152, 360, 394 )
 local nativeTitle = tobool(PREFSMAN:GetPreference("ShowNativeLanguage"))
 local ColorTable = LoadModule("Theme.Colors.lua")( LoadModule("Config.Load.lua")("SoundwavesSubTheme","Save/OutFoxPrefs.ini") )
 
@@ -38,81 +38,30 @@ local t = Def.ActorFrame {
 	local songareapos = SCREEN_CENTER_X
 
 	t[#t+1] = Def.ActorFrame {
-		OnCommand=function(self) self:addy(-75):sleep(barSleepIn):decelerate(0.5):addy(75) end,
-		OffCommand=function(self) self:sleep(0.15):decelerate(0.3):addy(-75) end,
+		OnCommand=function(self) self:addy(75):sleep(barSleepIn+3):easeoutquint(0.5):addy(-75) end,
+		OffCommand=function(self) self:sleep(0.15):easeoutquint(0.3):addy(75) end,
 
 		-- Song title area
 		Def.ActorFrame {
-				Def.Quad {
-					InitCommand=function(self) self:align(0.5,0):xy(songareapos,0):zoomto(0,56) end,
-					OnCommand=function(self)
-						self:sleep(barSleepIn+0.3):decelerate(0.6):zoomto(songAreaWidth,56)
-					end,
-					SetMessageCommand=function(self)
-						local curStage = GAMESTATE:GetCurrentStage()
-						self:diffuse(ColorTable["gameplayTitle"]):diffusealpha(0.5)
-					end,
-				},
-
-			-- Song meter
-			Def.ActorFrame {
-			OnCommand=function(self)
-				self:diffuseshift():effectclock("beat"):effectcolor1(color("1,1,1,0.5")):effectcolor2(color("1,1,1,0.8"))
-			end,	
-				Def.Quad {
-					InitCommand=function(self) self:xy(songareapos,56):align(0.5,1) end,
-					OnCommand=function(self)
-						self:zoomto(0,7):sleep(barSleepIn+0.3):decelerate(0.6):zoomto(songAreaWidth,7)
-					end,
-					SetMessageCommand=function(self)
-						local curStage = GAMESTATE:GetCurrentStage()
-						self:diffuse(ColorTable["gameplayMeter"]):diffusealpha(0.5)
-					end,		
-				}
+			Def.Quad {
+				InitCommand=function(self) self:xy(songareapos,SCREEN_BOTTOM-16):align(0.5,1) end,
+				OnCommand=function(self)
+					self:zoomto(0,7):sleep(barSleepIn+3):easeoutquint(0.5):zoomto(difficulty_width,7)
+				end,
+				SetMessageCommand=function(self)
+					local curStage = GAMESTATE:GetCurrentStage()
+					self:diffuse(ColorTable["gameplayMeter"]):diffusealpha(0.5)
+				end,		
 			},
 			Def.SongMeterDisplay {
-				InitCommand=function(self) self:xy(songareapos,56):align(0.5,1) end,
-				StreamWidth=songAreaWidth,
+				InitCommand=function(self) self:xy(songareapos,SCREEN_BOTTOM-16):align(0.5,1) end,
+				StreamWidth=difficulty_width,25,
 				Stream=LoadActor( THEME:GetPathG( 'SongMeterDisplay', 'stream') )..{
 					InitCommand=function(self)
 						self:valign(1):diffusealpha(0.4):zoomy(0.5)
 					end,
 				},
 				Tip=Def.ActorFrame{}
-			},
-			--- Song info
-			Def.BitmapText {
-				Font="SongTitle font",
-				InitCommand=function(self)
-					self:xy(SCREEN_CENTER_X,26):zoom(1):maxwidth(SCREEN_WIDTH*0.421875):diffuse(color("#FFFFFF")):horizalign(center)
-				end,
-				OnCommand=function(self)
-					self:diffusealpha(0):sleep(barSleepIn+0.3+0.9):decelerate(0.7):diffusealpha(1)
-				end,
-				SetMessageCommand=function(self)
-					   	local song = GAMESTATE:GetCurrentSong()
-					   	self:settext("")
-						   if song then
-							self:settext(nativeTitle and song:GetDisplayMainTitle() or song:GetTranslitMainTitle(), song:GetTranslitMainTitle() )
-							self:y(song:GetDisplaySubTitle() ~= "" and  26-14 or 26-6)
-						end
-				  end,
-			},
-			Def.BitmapText {
-				Font="SongSubTitle font",
-				InitCommand=function(self)
-					self:xy(SCREEN_CENTER_X,26+6):zoom(0.6):maxwidth(SCREEN_WIDTH*0.578125):diffuse(color("#FFFFFF")):horizalign(center)
-				end,
-				OnCommand=function(self)
-					self:diffusealpha(0):sleep(barSleepIn+0.3+0.9):decelerate(0.7):diffusealpha(1)
-				end,
-				SetMessageCommand=function(self)
-					local song = GAMESTATE:GetCurrentSong()
-					self:settext("")
-					if song then
-						self:settext(nativeTitle and song:GetDisplaySubTitle() or song:GetTranslitSubTitle())
-					end
-				end
 			},
 		}
 	}
@@ -215,7 +164,6 @@ local t = Def.ActorFrame {
 
 		local life_x_position = string.find(pn, "P1") and SCREEN_LEFT+32 or SCREEN_RIGHT-32
 		local difficulty_y = stpenable[pnum] and SCREEN_BOTTOM-92 or SCREEN_BOTTOM-42
-		local difficulty_width = scale( SCREEN_WIDTH, 960, 1152, 360, 394 ) > 394 and 394 or scale( SCREEN_WIDTH, 960, 1152, 360, 394 )
 
 		t[#t+1] = Def.ActorFrame {
 				InitCommand=function(self) self:xy(ppos,difficulty_y) end,

@@ -45,7 +45,7 @@ if GAMESTATE:IsCourseMode() then
 		{
 			Name = "end_course",
 			Action = function( screen )
-				screen:PostScreenMessage('SM_NotesEnded', 0)
+				screen:PostScreenMessage('SM_LeaveGameplay', 0)
 			end
 		},
 	}
@@ -130,7 +130,7 @@ return Def.ActorFrame{
 		end
 		Paused = true
 	end,
-	NonGameStartCommand=function(self)
+	StartCommand=function(self)
 		if Paused then 
 			Choices[CurSel].Action( SCREENMAN:GetTopScreen() )
 			self:visible(false)
@@ -138,10 +138,10 @@ return Def.ActorFrame{
 		end
 		Paused = false
 	end,
-	MenuLeftCommand=function(self) ChangeSel(self,-1) end,
-	MenuRightCommand=function(self) ChangeSel(self,1) end,
-	MenuUpCommand=function(self) ChangeSel(self,-1) end,
-	MenuDownCommand=function(self) ChangeSel(self,1) end,
+	MenuLeftCommand=function(self) if Paused then ChangeSel(self,-1) end end,
+	MenuRightCommand=function(self) if Paused then ChangeSel(self,1) end end,
+	MenuUpCommand=function(self) if Paused then ChangeSel(self,-1) end end,
+	MenuDownCommand=function(self) if Paused then ChangeSel(self,1) end end,
 	Def.Quad{
 		Name="Dim",
 		InitCommand=function(self)

@@ -12,7 +12,7 @@ Def.ActorFrame {
 		self:addy(-104):decelerate(0.3):addy(104)
 	end,
 	OffCommand=function(self)
-		self:sleep(0.175):decelerate(0.3):addy(-105)
+		self:decelerate(0.175):addy(-105)
 	end;
 		Def.Quad {
 			InitCommand=function(self)
@@ -55,7 +55,7 @@ Def.ActorFrame {
 			self:xy(SCREEN_LEFT+25,32):horizalign(left):diffuse( ColorTable["headerTextColor"] ):diffusebottomedge( ColorTable["headerTextGradient"] ):skewx(-0.15):zoom(0.8)
 		end;
 		OnCommand=function(self)
-			self:diffusealpha(0):sleep(0.3):smooth(0.2):diffusealpha(1)
+			self:addy(-104):decelerate(0.3):addy(104)
 			if SCREENMAN:GetTopScreen():GetName() == "ScreenSelectMusic" then
 				self:maxwidth( WideScale(10,240) )
 			end
@@ -63,6 +63,6 @@ Def.ActorFrame {
 		UpdateScreenHeaderMessageCommand=function(self,param)
 			self:settext(param.Header)
 		end;
-		OffCommand=function(self) self:decelerate(0.175):diffusealpha(0) end;
+		OffCommand=function(self) self:decelerate(0.175):addy(-105)	end;
 	};
 };

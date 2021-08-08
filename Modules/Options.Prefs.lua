@@ -1,3 +1,15 @@
+local Rates = {
+	Val = {},
+	Str = {},
+}
+for i = 0.3, 2.01, 0.01 do
+	table.insert( Rates.Val, string.format( "%.2f",i ) )	
+	table.insert( Rates.Str, string.format( "%.2fx",i ) )	
+end
+--table.insert( Rates.Str, "Haste" )
+--table.insert( Rates.Val, "haste" )
+
+
 return {
 	AutoSetStyle =
 	{
@@ -377,8 +389,8 @@ return {
 	SoundwavesSubTheme =
 	{
 		Default = 1,
-		Choices = { OptionNameString('swClassic'), OptionNameString('swVaporwave'), OptionNameString('swGrass'), OptionNameString('swRetro'), OptionNameString('swFire'), "Dark", "Chaos", "Ice", "Wave", "Alien Alien", "BISTRO", "Invert Standard", "Rainbow FUN", "Baby Pink", "Sunny Day", "The Blood", "Virtual LED", "Night Emotions", "Cool Blues", "Dragonfire", "Y2K"},
-		Values = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21}
+		Choices = { OptionNameString('swClassic'), OptionNameString('swVaporwave'), OptionNameString('swGrass'), OptionNameString('swRetro'), OptionNameString('swFire'), "Dark", "Chaos", "Ice", "Wave", "Alien Alien", "BISTRO", "Invert Standard", "Rainbow FUN", "Baby Pink", "Sunny Day", "The Blood", "Virtual LED", "Night Emotions", "Cool Blues", "Dragonfire", "Y2K", "Golden Dawn"},
+		Values = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22}
 	},
 	LifeType =
 	{
@@ -449,15 +461,35 @@ return {
 			end
 		end,
 	},
+	Haste = 
+	{
+		Default = false,
+		Choices = { OptionNameString('Off'), OptionNameString('On') },
+		Values = { false, true },
+		LoadFunction = function(self,list,pn)
+			local mod = GAMESTATE:GetSongOptionsObject("ModsLevel_Preferred"):Haste()
+			if mod == 1 then
+				list[2] = true
+				return
+			end
+			list[1] = true
+		end,
+		SaveFunction = function(self, list)
+			GAMESTATE:GetSongOptionsObject("ModsLevel_Preferred"):Haste( list[2] and 1 or 0 )
+		end,
+		NotifyOfSelection = function(self, pn, choice)
+			GAMESTATE:GetSongOptionsObject("ModsLevel_Preferred"):Haste( choice-1 )
+		end,
+	},
 	Rate =
 	{
 		Default = 1,
-		Choices = fornumrange(0.3,2.1,0.1),
-		Values = fornumrange(0.3,2.1,0.1),
+		Choices = Rates.Str,
+		Values = Rates.Val,
 		LoadFunction = function(self,list)
 			-- Detect the speed mod being provided from the list.
 			-- Math can be weird, so we need to format the value.
-			local msrate = string.format( "%.1f", GAMESTATE:GetSongOptionsObject("ModsLevel_Preferred"):MusicRate() )
+			local msrate = string.format( "%.2f", GAMESTATE:GetSongOptionsObject("ModsLevel_Preferred"):MusicRate() )
 			--[[
 				Unlike other options, this one can be messy with its formatting
 				So we'll setup an enviroment that will house the original rate mod.
@@ -471,10 +503,82 @@ return {
 					return
 				end
 			end
-			list[8] = true
+			list[15] = true
+		end,
+		SaveFunction = function(self, list)
+			if GAMESTATE:GetSongOptionsObject("ModsLevel_Preferred"):Haste() ~= 0.0 then
+				-- Reset the music rate and apply the haste.
+				GAMESTATE:GetSongOptionsObject("ModsLevel_Preferred"):MusicRate(1.0)
+			end
 		end,
 		NotifyOfSelection = function(self, pn, choice)
-			GAMESTATE:GetSongOptionsObject("ModsLevel_Preferred"):MusicRate( string.format( "%.1f", self.Values[choice]) )
+			-- Special case for regular players who want an unified slider that manages both options at once, which
+			-- then can decide which to use via the SoundEffect option.
+			local isInPlayerOptions = SCREENMAN:GetTopScreen() and SCREENMAN:GetTopScreen():GetName() == "ScreenPlayerOptions"
+			GAMESTATE:GetSongOptionsObject("ModsLevel_Preferred"):MusicRate( self.Values[choice] )
+			if( isInPlayerOptions ) then
+				GAMESTATE:GetSongOptionsObject("ModsLevel_Preferred"):PitchRate( self.Values[choice] )
+			end
+		end,
+	},
+	Pitch =
+	{
+		Default = 1,
+		Choices = Rates.Str,
+		Values = Rates.Val,
+		LoadFunction = function(self,list)
+			-- Detect the speed mod being provided from the list.
+			-- Math can be weird, so we need to format the value.
+			local msrate = string.format( "%.2f", GAMESTATE:GetSongOptionsObject("ModsLevel_Preferred"):PitchRate() )
+			--[[
+				Unlike other options, this one can be messy with its formatting
+				So we'll setup an enviroment that will house the original rate mod.
+				This is for the occasion that the user backs out of the screen and does not confirm the chosen rate.
+			]]
+			setenv( "originalRate", msrate )
+			-- Now check all available speeds to the rate.
+			for k,v2 in pairs(self.Values) do
+				if tostring(v2) == msrate then
+					list[k] = true
+					return
+				end
+			end
+			list[15] = true
+		end,
+		SaveFunction = function(self, list)
+			if GAMESTATE:GetSongOptionsObject("ModsLevel_Preferred"):Haste() ~= 0.0 then
+				-- Reset the music rate and apply the haste.
+				GAMESTATE:GetSongOptionsObject("ModsLevel_Preferred"):PitchRate(1.0)
+			end
+		end,
+		NotifyOfSelection = function(self, pn, choice)
+			GAMESTATE:GetSongOptionsObject("ModsLevel_Preferred"):PitchRate( self.Values[choice] )
+		end,
+	},
+	SoundEffect = 
+	{
+		Default = "SoundEffect_Both",
+		Choices = { OptionNameString('Off'), OptionNameString('EffectSpeed'), OptionNameString('EffectPitch'), OptionNameString('EffectBoth') },
+		Values = { "SoundEffectType_Off", "SoundEffectType_Speed", "SoundEffectType_Pitch", "SoundEffectType_Both" },
+		LoadFunction = function(self, list)
+			local mode = GAMESTATE:GetSongOptionsObject("ModsLevel_Preferred"):SoundEffectSetting()
+			for k,v2 in pairs(self.Values) do
+				if v2 == mode then
+					list[k] = true
+					return
+				end
+			end
+			list[2] = true
+		end,
+		SaveFunction = function(self, list)
+			for i,_ in ipairs(self.Values) do
+				if list[i] then
+					GAMESTATE:GetSongOptionsObject("ModsLevel_Preferred"):SoundEffectSetting( _ )
+				end
+			end
+		end,
+		NotifyOfSelection = function(self, pn, choice)
+			GAMESTATE:GetSongOptionsObject("ModsLevel_Preferred"):SoundEffectSetting( self.Values[choice] )
 		end,
 	},
 	judgmentscatter =
@@ -482,7 +586,7 @@ return {
 		Default = true,
 		Choices = { OptionNameString('Off'), OptionNameString('On') },
 		Values = { false, true },
-		LoadFunction = function(self, list) list[ (LoadModule("Profile.LoadFromLocalID.lua")("judgmentscatter",self.Values) or 2) ] = true end,
+		LoadFunction = function(self, list) list[ LoadModule("Profile.LoadFromLocalID.lua")("judgmentscatter",self.Values,1) ] = true end,
 		SaveFunction = function(self, list)
 			local Location = "Save/LocalProfiles/".. GAMESTATE:GetEditLocalProfileID() .."/OutFoxPrefs.ini"
 			for i,_ in ipairs(self.Values) do
@@ -497,7 +601,7 @@ return {
 		Default = true,
 		Choices = { OptionNameString('Off'), OptionNameString('On') },
 		Values = { false, true },
-		LoadFunction = function(self, list) list[ (LoadModule("Profile.LoadFromLocalID.lua")("npsscatter",self.Values) or 2) ] = true end,
+		LoadFunction = function(self, list) list[ LoadModule("Profile.LoadFromLocalID.lua")("npsscatter",self.Values,2) ] = true end,
 		SaveFunction = function(self, list)
 			local Location = "Save/LocalProfiles/".. GAMESTATE:GetEditLocalProfileID() .."/OutFoxPrefs.ini"
 			for i,_ in ipairs(self.Values) do
@@ -512,7 +616,7 @@ return {
 		Default = true,
 		Choices = { OptionNameString('Off'), OptionNameString('On') },
 		Values = { false, true },
-		LoadFunction = function(self, list) list[ (LoadModule("Profile.LoadFromLocalID.lua")("lifescatter",self.Values) or 2) ] = true end,
+		LoadFunction = function(self, list) list[ LoadModule("Profile.LoadFromLocalID.lua")("lifescatter",self.Values,2) ] = true end,
 		SaveFunction = function(self, list)
 			local Location = "Save/LocalProfiles/".. GAMESTATE:GetEditLocalProfileID() .."/OutFoxPrefs.ini"
 			for i,_ in ipairs(self.Values) do
@@ -527,7 +631,7 @@ return {
 		Default = true,
 		Choices = { OptionNameString('Off'), OptionNameString('On') },
 		Values = { false, true },
-		LoadFunction = function(self, list) list[ (LoadModule("Profile.LoadFromLocalID.lua")("progressquad",self.Values) or 2) ] = true end,
+		LoadFunction = function(self, list) list[ LoadModule("Profile.LoadFromLocalID.lua")("progressquad",self.Values,2) ] = true end,
 		SaveFunction = function(self, list)
 			local Location = "Save/LocalProfiles/".. GAMESTATE:GetEditLocalProfileID() .."/OutFoxPrefs.ini"
 			for i,_ in ipairs(self.Values) do
@@ -542,7 +646,7 @@ return {
 		Default = true,
 		Choices = { OptionNameString('Off'), OptionNameString('On') },
 		Values = { false, true },
-		LoadFunction = function(self, list) list[ (LoadModule("Profile.LoadFromLocalID.lua")("labelnps",self.Values) or 2) ] = true end,
+		LoadFunction = function(self, list) list[ LoadModule("Profile.LoadFromLocalID.lua")("labelnps",self.Values,2) ] = true end,
 		SaveFunction = function(self, list)
 			local Location = "Save/LocalProfiles/".. GAMESTATE:GetEditLocalProfileID() .."/OutFoxPrefs.ini"
 			for i,_ in ipairs(self.Values) do
@@ -558,7 +662,7 @@ return {
 		OneInRow = true,
 		Choices = fornumrange(100,600,50),
 		Values = fornumrange(100,600,50),
-		LoadFunction = function(self, list) list[ (LoadModule("Profile.LoadFromLocalID.lua")("scattery",self.Values) or 3) ] = true end,
+		LoadFunction = function(self, list) list[ LoadModule("Profile.LoadFromLocalID.lua")("scattery",self.Values,3) ] = true end,
 		SaveFunction = function(self, list)
 			local Location = "Save/LocalProfiles/".. GAMESTATE:GetEditLocalProfileID() .."/OutFoxPrefs.ini"
 			for i,_ in ipairs(self.Values) do
@@ -597,13 +701,7 @@ return {
 		Default = true,
 		Choices = { OptionNameString('Off'), OptionNameString('On') },
 		Values = { false, true },
-		LoadFunction = function(self, list)
-			local Location = "Save/LocalProfiles/".. GAMESTATE:GetEditLocalProfileID() .."/OutFoxPrefs.ini"
-			local CurPref = LoadModule("Config.Load.lua")("showmiscjud",Location)
-			for i,v2 in ipairs(self.Values) do
-				if tostring(v2) == tostring(CurPref) then list[i] = true return end
-			end
-		end,
+		LoadFunction = function(self, list) list[ LoadModule("Profile.LoadFromLocalID.lua")("showmiscjud",self.Values,2) ] = true end,
 		SaveFunction = function(self, list)
 			local Location = "Save/LocalProfiles/".. GAMESTATE:GetEditLocalProfileID() .."/OutFoxPrefs.ini"
 			for i,_ in ipairs(self.Values) do

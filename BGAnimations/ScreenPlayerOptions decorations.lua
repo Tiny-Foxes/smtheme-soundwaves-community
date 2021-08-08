@@ -1,23 +1,28 @@
 local num_players = GAMESTATE:GetHumanPlayers()
 local ColorTable = LoadModule("Theme.Colors.lua")( LoadModule("Config.Load.lua")("SoundwavesSubTheme","Save/OutFoxPrefs.ini") )
 
-local t = LoadFallbackB()..{
-	InitCommand=function()
-		if getenv( "originalRate" ) then
-			GAMESTATE:GetSongOptionsObject("ModsLevel_Preferred"):MusicRate( getenv( "originalRate" ) )
-		end
-	end
-}
+local t = LoadFallbackB()
 
 -- Load all noteskins for the previewer.
-local column = GAMESTATE:GetCurrentStyle():GetColumnInfo( GAMESTATE:GetMasterPlayerNumber(), 2 )
+local icol = 2
+if GAMESTATE:GetCurrentStyle():ColumnsPerPlayer() < 2 then
+	icol = 1
+end
+local column = GAMESTATE:GetCurrentStyle():GetColumnInfo( GAMESTATE:GetMasterPlayerNumber(), icol )
 if getenv("NewOptions") == "Main" then
 	for _,v in pairs(NOTESKIN:GetNoteSkinNames()) do
-		t[#t+1] = NOTESKIN:LoadActorForNoteSkin( column["Name"] , "Tap Note", v )..{
-			Name="NS"..string.lower(v), InitCommand=function(s) s:visible(false) end,
-			OnCommand=function(s) s:diffusealpha(0):sleep(0.2):linear(0.2):diffusealpha(1) end,
-			OffCommand=function(s) s:linear(0.2):diffusealpha(0) end
-		}
+		local noteskinset = NOTESKIN:LoadActorForNoteSkin( column["Name"] , "Tap Note", v )
+
+		if noteskinset then
+			t[#t+1] = noteskinset..{
+				Name="NS"..string.lower(v), InitCommand=function(s) s:visible(false) end,
+				OnCommand=function(s) s:diffusealpha(0):sleep(0.2):linear(0.2):diffusealpha(1) end,
+				OffCommand=function(s) s:linear(0.2):diffusealpha(0) end
+			}
+		else
+			lua.ReportScriptError(string.format("The noteskin %s failed to load.", v))
+			t[#t+1] = Def.Actor{ Name="NS"..string.lower(v) }
+		end
 	end
 
 	for i=1,#num_players do

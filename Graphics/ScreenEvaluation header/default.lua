@@ -8,7 +8,7 @@ return Def.ActorFrame {
 			self:addy(-104):decelerate(0.3):addy(104)
 		end,
 		OffCommand=function(self)
-			self:sleep(0.175):decelerate(0.3):addy(-105)
+			self:decelerate(0.175):addy(-105)
 		end;
 		Def.Quad {
 			InitCommand=function(self)
@@ -43,12 +43,12 @@ return Def.ActorFrame {
 				self:x(SCREEN_CENTER_X):y(32):horizalign(center):diffuse(color("#FFFFFF")):diffusebottomedge( ColorTable["headerTextGradient"] ):skewx(-0.15):zoom(0.8)
 			end;
 			OnCommand=function(self)
-				self:diffusealpha(0):sleep(0.3):smooth(0.2):diffusealpha(1)
+				self:addy(-104):decelerate(0.3):addy(104)
 			end;
 			UpdateScreenHeaderMessageCommand=function(self,param)
 				self:settext(param.Header)
 			end;
-			OffCommand=function(self) self:decelerate(0.175):diffusealpha(0) end;
+			OffCommand=function(self) self:decelerate(0.175):addy(-105)	end;
 		};
 	};
 

@@ -59,7 +59,7 @@ end
 
 local function SetTimingData()
 	local screen = SCREENMAN:GetTopScreen()
-    local screentype = screen:GetScreenType()
+    local screentype = screen and screen:GetScreenType() or nil
     if screen and screentype == "ScreenType_Gameplay" or screentype == "ScreenType_Attract" then
         setenv("song", 	GAMESTATE:GetCurrentSong() )
         setenv("start", getenv("song"):GetFirstBeat() )
@@ -129,15 +129,17 @@ if LoadModule("Characters.AnyoneHasChar.lua")() then
 					end
 				else
 					-- Repeat the process until the ActorProxy obtains confirmation about the BG.
-					self:queuecommand("LoadBG")
+					self:sleep(0.1):queuecommand("LoadBG")
 				end
-			end;
-			UnloadScreenGameplayMessageCommand=function(self)
+			end,
+			PerformUnloadCommand=function(self)
 				-- Stop the previous loop and unload the ActorProxy.
 				self:finishtweening():visible( false )
 				-- Go back to the BG check.
 				self:queuecommand("LoadBG")
-			end;
+			end,
+			DoneLoadingNextSongMessageCommand=function(self) self:playcommand("PerformUnload") end,
+			UnloadScreenGameplayMessageCommand=function(self) self:playcommand("PerformUnload") end
 		};
 	end
 
@@ -206,6 +208,8 @@ if LoadModule("Characters.AnyoneHasChar.lua")() then
 
 		self:sleep(Frm)
 		if SCREENMAN:GetTopScreen() then
+			-- XXX: Tranform this into a local caller, but it'll serve for now.
+			MESSAGEMAN:Broadcast("UpdateModelRates")
 			if getenv("now")<getenv("start") then
 				self:queuecommand("WaitForStart")
 			else
@@ -298,13 +302,13 @@ if LoadModule("Characters.AnyoneHasChar.lua")() then
 						if self:GetPosition() >= self:GetTotalFrames() then
 							local NewDance = math.random(DAm)
 							-- Now change the animation to dance once the start threshold hits.
-							MESSAGEMAN:Broadcast( player.."DanceAnimationChanged",{dance=NewDance})
+							self:playanimation("dance"..NewDance, UpdateModelRate() )
 						end
 					end
 					end,
-					[player.."DanceAnimationChangedMessageCommand"]=function(self,params)
-						self:playanimation( "dance"..params.dance, UpdateModelRate() )
-					end;
+					DoneLoadingNextSongMessageCommand=function(self)
+						self:loop(true):playanimation("WarmUp",1)
+					end
 			};
 		end
 		return t;

@@ -40,6 +40,15 @@ GameColor = {
         Hard        = ColorTable["difficultyHard"],
         Challenge   = ColorTable["difficultyChallenge"],
         Edit        = ColorTable["difficultyEdit"],
+		D7			= color("0.8,0.8,0.8,1"),	-- TODO
+		D8			= color("0.8,0.8,0.8,1"),	-- TODO
+		D9			= color("0.8,0.8,0.8,1"),	-- TODO
+		D10			= color("0.8,0.8,0.8,1"),	-- TODO
+		D11			= color("0.8,0.8,0.8,1"),	-- TODO
+		D12			= color("0.8,0.8,0.8,1"),	-- TODO
+		D13			= color("0.8,0.8,0.8,1"),	-- TODO
+		D14			= color("0.8,0.8,0.8,1"),	-- TODO
+		D15			= color("0.8,0.8,0.8,1"),	-- TODO
         Couple      = ColorTable["difficultyCouple"],
         Routine     = ColorTable["difficultyRoutine"],
         --[[ These are for courses, so let's slap them here in case someone
@@ -49,6 +58,15 @@ GameColor = {
         Difficulty_Medium   = ColorTable["difficultyMedium"],
         Difficulty_Hard     = ColorTable["difficultyHard"],
         Difficulty_Challenge    = ColorTable["difficultyChallenge"],
+		Difficulty_D7			= color("0.8,0.8,0.8,1"),	-- TODO
+		Difficulty_D8			= color("0.8,0.8,0.8,1"),	-- TODO
+		Difficulty_D9			= color("0.8,0.8,0.8,1"),	-- TODO
+		Difficulty_D10			= color("0.8,0.8,0.8,1"),	-- TODO
+		Difficulty_D11			= color("0.8,0.8,0.8,1"),	-- TODO
+		Difficulty_D12			= color("0.8,0.8,0.8,1"),	-- TODO
+		Difficulty_D13			= color("0.8,0.8,0.8,1"),	-- TODO
+		Difficulty_D14			= color("0.8,0.8,0.8,1"),	-- TODO
+		Difficulty_D15			= color("0.8,0.8,0.8,1"),	-- TODO
         Difficulty_Edit     = ColorTable["difficultyEdit"],
         Difficulty_Couple   = ColorTable["difficultyCouple"],
         Difficulty_Routine  = ColorTable["difficultyRoutine"]
@@ -127,6 +145,10 @@ function thified_curstage_index(on_eval)
 	end
 end
 
+Branch.AfterTitleMenu = function()
+	return Branch.StartGame()
+end
+
 Branch.AfterSelectProfile = function()
 	if getenv("StartFitness") == true then
 		return "ScreenFitnessOptions"
@@ -151,7 +173,7 @@ function SPOChoices( itemSet )
 	local TimingMode = GAMESTATE:GetCurrentGame():GetName() ~= "para" and "Timing," or ""
 	local GHMode = GAMESTATE:GetCurrentGame():GetName() == "gh" and "GH," or ""
 	local Items = {
-		["Main"] = "SPM,SPV,NS,14,Mini,SF,FilterColor,".. TimingMode .."Judg,13,18",
+		["Main"] = "SPM,SPV,NS,14,Mini,SF,FilterColor,".. TimingMode .."Judg,13,LuaRate,LuaHaste,LuaSoundEffect,18",
 		["Special"] = "RotateFieldX,RotateFieldZ,MC,MCD,MCB,DLW,JudgImg,Combo,Toasty,ToastDraw,SP,OVG,OB,12",
 		["Effects"] = "2,3A,3B,4,5,6,7,9,R1,"..GHMode.."10,11"
 	}
@@ -176,6 +198,29 @@ function PlayerOptionsDefineNextScreen()
 		return GAMESTATE:Env()["PlayerOptionsNextScreen"]
 	end
 	return Branch.SongOptions()
+end
+
+function ExtraColorPreference()
+	local Modes = {
+		dance = 10,
+		pump = 21,
+		beat = 12,
+		kb7 = 10,
+		para = 10,
+		techno = 10,
+		lights = 10, -- lights shouldn't be playable
+		kickbox= 100, -- extra color is lame
+	}
+	local ret = {
+		["old"] = 10,
+		["X"] = 15,
+		["pump"] = 21,
+	}
+	if ret[LoadModule("Config.Load.lua")("PreferredMeter","Save/OutFoxPrefs.ini")] == "old" then 
+		return Modes[CurGameName()] or 10
+	else
+		return ret[LoadModule("Config.Load.lua")("PreferredMeter","Save/OutFoxPrefs.ini")]
+	end
 end
 
 function ArtistSetConversion(self)

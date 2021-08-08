@@ -18,9 +18,21 @@ return function(Steps)
         local mDuration = TD:GetElapsedTimeFromBeat((measureCount+1)*4) - TD:GetElapsedTimeFromBeat(measureCount*4)
         local mMargin = (TD:GetElapsedTimeFromBeat(measureCount*4) + mDuration)
 
+		local function CalcNPS( notes, duration )
+			local res = 0
+
+			-- Some Warp segments can fall into parts where the duration of the lasting beat before its next one
+			-- is miniscule, so lets just skip those.
+			if duration <= 0.05 then
+				return res
+			end
+
+			return notes/duration
+		end
+
         for k,v in pairs( GAMESTATE:GetCurrentSong():GetNoteData(chartint) ) do
             if TD:GetElapsedTimeFromBeat(v[1]) > mMargin then
-                local originalval = mDuration == 0 and 0 or measureNotes/mDuration
+                local originalval = mDuration == 0 and 0 or CalcNPS(measureNotes,mDuration)
                 measureNPS = math.round(originalval)
                 PeakNPS = (measureNPS > PeakNPS or originalval > PeakNPS) and originalval or PeakNPS
                 if(measureNotes >= 15) then
@@ -35,9 +47,11 @@ return function(Steps)
                 mDuration = TD:GetElapsedTimeFromBeat((measureCount+1)*4) - TD:GetElapsedTimeFromBeat(measureCount*4)
                 mMargin = (TD:GetElapsedTimeFromBeat(measureCount*4) + mDuration)
             else
-                if v[3] ~= "TapNoteType_Mine" and v[3] ~= "TapNoteType_Fake" then
-                    measureNotes = measureNotes + 1
-                end
+				if TD:IsJudgableAtBeat(v[1]) then
+					if (v[3] ~= "TapNoteType_Mine" and v[3] ~= "TapNoteType_Fake" and v[3] ~= "TapNoteType_AutoKeySound") then
+						measureNotes = measureNotes + 1
+					end
+				end
             end
         end
 

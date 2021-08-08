@@ -1,41 +1,43 @@
 return function()
 
     local Info = {
-        "Dance\n\nSingle (4 panels)\nSolo (6 panel)\nThree (3 panels)\nDouble (8 panels)",
+        "Dance\n\nSingle (4 panels)\nSolo (6 panels)\nThree (3 panels)\nDouble (8 panels)",
         "Pump\n\nSingle (5 panels)\nHalfDouble (6 panels)\nDouble (10 panels)",
-        "KB7\n\n7 buttons",
-        "Ez2Dancer\n\nSingle (3 panels and 2 hand sensors)\nReal (3 panels and 4 hand sensors, upper and lower)\nDouble (6 panels and 4 hand sensors)",
+        "Techno\n\nCross (4 panels)\nDiagonal (5 panels)\nSquare (8 panels)\nSquare+ (9 panels)\nCross Double (8 panels)\nDiagonal Double (10 panels)\nSquare Double (16 panels)\nSquare+ Double (18 panels)",
+        "BMS\n\nSingle 5 (5 buttons, 1 turntable)\nSingle 7 (7 buttons, 1 turntable)\nDouble 10 (10 buttons, 2 turntables)\nDouble 14 (14 buttons, 2 turntables)",
+        "PMS\n\n3 buttons\n4 buttons\n5 buttons\n7 buttons\n9 buttons",
+        "GDDM\n\n10-piece (8 drums, bass pedal, hi-hat pedal)\n9-piece (7 drums, bass pedal, hi-hat pedal)\n6-piece (5 drums, bass pedal)",
+        "GDGF\n\nGuitar 5 (5 frets)\nBass 5 (5 frets, open strum)\nGuitar 6 (6 frets)\nGuitar 3 (3 frets)\nBass 3 (3 frets, open strum)",
+        "GH\n\nSolo, Bass, Rhythm (5 frets)",
+        "Taitai\n\nSingle (drumhead/red, rim/blue)",
         "Para\n\nSingle (5 sensors)\nDouble (10 sensors)",
-        "3DDX\n\nSingle (4 panels and 4 sensors)",
-        "BMS\n\n5-key\n7-key\n10-key\n14-key",
-        "DMX\n\nSingle (4 hand sensors)\nDouble (8 hand sensors)",
-        "Techno\n\nSingle (4 panels)\nSingle (5 panels)\nSingle (8 panels)\nSingle (9 panels)\nDouble (8 panels)\nDouble (10 panels)\nDouble (16 panels)\nDouble (18 panels)",
-        "PMS\n\n3-button\n4-button\n5-button\n7-button\n9-button",
-        "GDDM\n\n9-piece (7 drums, bass pedal, hi-hat pedal)\n6-piece (5 drums, bass pedal)",
-        "GDGF\n\n5 Guitar (5 frets)\n5 Bass (5 frets, open strum)\n6 Guitar (6 frets)\n3 Guitar (3 frets)\n3 Bass (3 frets, open strum)",
-        "GH\n\n5 frets, open strum",
+        "KB7\n\n7 buttons",
+        "Ez2Dancer\n\nSingle (3 panels, 2 sensors)\nReal (3 panels, 2 upper sensors, 2 lower sensors)\nDouble (6 panels, 4 sensors)",
+        "3DDX\n\nSingle (4 panels, 4 sensors)",
+        "DMX\n\nSingle (4 sensors)\nDouble (8 sensors)",
         --"lights",
-        "KickBox"
+        "KickBox\n\nHuman\nQuadarm\nInsect\nArachnid"
     }
 
 
     local Choices = {
         "dance",
         "pump",
-        "kb7",
-        "ez2",
-        "para",
-        "ds3ddx",
-        "beat",
-        "maniax",
         "techno",
+        "beat",
         "popn",
         "gddm",
         "gdgf",
         "gh",
+        "taiko",
+        "para",
+        "kb7",
+        "ez2",
+        "ds3ddx",
+        "maniax",
         --"lights", -- should change this to another screen option.
         "kickbox"
-    }--]]
+    }
 
     local choice = 1
     for i,v in ipairs(Choices) do
@@ -143,8 +145,10 @@ return function()
         MenuRightCommand=function(self) MoveOption(self,1) end,
 
         BackCommand=function(self) 
-            SOUND:PlayOnce(THEME:GetPathS("Common","Cancel"))
-            SCREENMAN:GetTopScreen():SetNextScreenName(SCREENMAN:GetTopScreen():GetPrevScreenName()):StartTransitioningScreen("SM_GoToNextScreen")
+            if GAMESTATE:GetCurrentGame():GetName() ~= "SelectGameMode" then
+                SOUND:PlayOnce(THEME:GetPathS("Common","Cancel"))
+                SCREENMAN:GetTopScreen():SetNextScreenName(SCREENMAN:GetTopScreen():GetPrevScreenName()):StartTransitioningScreen("SM_GoToNextScreen")
+            end
         end,
 
         StartCommand=function(self)

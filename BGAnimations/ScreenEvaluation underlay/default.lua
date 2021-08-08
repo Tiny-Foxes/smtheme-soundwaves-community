@@ -113,7 +113,7 @@ end
 -- Shared portion.
 local mid_pane = Def.ActorFrame {
 	OnCommand=function(self) self:diffusealpha(0):sleep(0.3):decelerate(0.4):diffusealpha(1) end;
-	OffCommand=function(self) self:decelerate(0.3):diffusealpha(0) end;
+	OffCommand=function(self) self:decelerate(0.15):diffusealpha(0) end;
 	-- Song/course banner.
 	Def.ActorFrame {
 	InitCommand=function(self) self:xy(_screen.cx,_screen.cy-26) end;
@@ -226,7 +226,7 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 				self:diffuse(BoostColor(ColorDarkTone(PlayerColor(p)),0.4)):diffusealpha(0.6)
 			end;
 			OffCommand=function(self)
-				self:sleep(off_wait+0.1):linear(0.2):addy(SCREEN_HEIGHT)
+				self:sleep(off_wait+0.1):linear(0.1):addy(SCREEN_HEIGHT)
 			end;
 		};
 		-- Navigation stripe

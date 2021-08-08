@@ -25,10 +25,9 @@ local maxwidth = 440
 local maxheight = 60
 
 local function upref(key,default)
-    if LoadModule("Config.Exists.lua")(key,profile_location) then
-        local cfg = LoadModule("Config.Load.lua")(key,profile_location)
-		return cfg
-    end 
+	if LoadModule("Config.Exists.lua")(key,profile_location) then
+		return LoadModule("Config.Load.lua")(key,profile_location)
+	end 
 	return default
 end
 

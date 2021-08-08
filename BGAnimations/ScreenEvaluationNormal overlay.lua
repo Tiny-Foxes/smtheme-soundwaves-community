@@ -15,7 +15,7 @@ for p in ivalues(PlayerNumber) do
 					self:diffuse(PlayerColor(p)):diffuserightedge(PlayerCompColor(p)):diffusealpha(0.96)
 				end;
 				OnCommand=function(self) self:zoomto(336,0):decelerate(0.3):zoomto(336,61) end;
-				OffCommand=function(self) self:sleep(0.175):decelerate(0.4):addy(-105) end;
+				OffCommand=function(self) self:decelerate(0.175):addy(-105)	end;
 			 };
 			 -- Avatar and name
 			Def.ActorFrame {
@@ -39,7 +39,7 @@ for p in ivalues(PlayerNumber) do
 					SetCommand=function(self)
 						self:settext(LoadModule("Options.GetProfileData.lua")(p)["Name"])
 					end;
-					OffCommand=function(self) self:decelerate(0.2):diffusealpha(0) end;
+					OffCommand=function(self) self:decelerate(0.175):addy(-105)	end;
 				};
 			};
 		};
@@ -55,7 +55,7 @@ for p in ivalues(PlayerNumber) do
 					self:diffuse( ColorDarkTone(PlayerColor(p)) ):diffusealpha(0.96)
 				end;
 				OnCommand=function(self) self:zoomto(336,0):decelerate(0.3):zoomto(336,61) end;
-				OffCommand=function(self) self:sleep(0.175):decelerate(0.4):addy(-105) end;
+				OffCommand=function(self) self:decelerate(0.175):addy(-105)	end;
 			},
 		
 			Def.ActorFrame {
@@ -69,7 +69,7 @@ for p in ivalues(PlayerNumber) do
 						self:horizalign(center):y(30):maxwidth(320):zoom(1.25):skewx(-0.15)
 					end;
 					OnCommand=function(self) self:diffuse( ColorLightTone(PlayerColor(p)) ) end;	
-					OffCommand=function(self) self:decelerate(0.2):diffusealpha(0) end;
+					OffCommand=function(self) self:decelerate(0.175):addy(-105)	end;
 				};
 			}
 		}
@@ -88,14 +88,14 @@ if not GAMESTATE:IsCourseMode() then
 		LoadActor(THEME:GetPathG("ScreenEvaluation", "StageDisplay")) .. {
 			InitCommand=function(self) self:x(SCREEN_CENTER_X):y(SCREEN_TOP+76):zoom(0.8):visible(not GAMESTATE:HasEarnedExtraStage()) end;
 			OnCommand=function(self) self:diffusealpha(0):sleep(0.3):decelerate(0.3):diffusealpha(1) end;
-			OffCommand=function(self) self:sleep(0.175):decelerate(0.4):diffusealpha(0) end;
+			OffCommand=function(self) self:sleep(0.175):diffusealpha(0) end;
 		}
 	}
 else
 	t[#t+1] =  Def.ActorFrame {
 		InitCommand=function(self) self:x(SCREEN_CENTER_X):y(SCREEN_TOP+76):zoom(0.8) end;
 		OnCommand=function(self) self:diffusealpha(0):sleep(0.3):decelerate(0.3):diffusealpha(1) end;
-		OffCommand=function(self) self:sleep(0.175):decelerate(0.4):diffusealpha(0) end;
+		OffCommand=function(self) self:decelerate(0.175):diffusealpha(0) end;
 				Def.BitmapText {
 				Font="_Bold";
 				InitCommand=function(self) self:y(-1):zoom(1):shadowlength(1) end;
@@ -122,7 +122,7 @@ if GAMESTATE:HasEarnedExtraStage() then
 	t[#t+1] =  Def.ActorFrame {
 		InitCommand=function(self) self:x(SCREEN_CENTER_X):y(SCREEN_TOP+76):zoom(0.8) end;
 		OnCommand=function(self) self:diffusealpha(0):sleep(0.3):decelerate(0.4):diffusealpha(1) end;
-		OffCommand=function(self) self:sleep(0.175):decelerate(0.4):diffusealpha(0) end;
+		OffCommand=function(self) self:decelerate(0.175):diffusealpha(0) end;
 			Def.BitmapText {
 				Font="_Medium";
 				InitCommand=function(self) self:y(-1):zoom(1):shadowlength(1):maxwidth(250) end;

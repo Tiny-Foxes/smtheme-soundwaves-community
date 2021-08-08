@@ -18,12 +18,13 @@ local function UpdateSingleBPM(self)
 
 	-- then, MusicRate stuff
 	local MusicRateDisplay = self:GetParent():GetChild("RatemodDisplay")
-	local so = GAMESTATE:GetSongOptionsObject("ModsLevel_Song")
+	local so = GAMESTATE:GetSongOptionsObject("ModsLevel_Current")
 	local MusicRate = so:MusicRate()
 
 	-- BPM Display
-	local bpm = songPosition:GetCurBPS() * 60 * MusicRate
-	bpmDisplay:settext( round(bpm) )
+	 local bpm = songPosition:GetCurBPS() * 60 * (MusicRate)
+	--local bpm = MusicPitch
+	bpmDisplay:settext( string.format( "%d",bpm ) )
 
 	-- MusicRate Display
 	MusicRate = string.format("%.2f", MusicRate )
@@ -44,7 +45,6 @@ local t = Def.ActorFrame{
 	Def.BitmapText {
 		Font="_Medium";
 		Name="RatemodDisplay",
-		Text=MusicRate ~= 1 and MusicRate.."x rate" or "",
 		InitCommand=function(self) self:zoom(0.6):y(30) end;
 		OnCommand=function(self)
 			self:diffuse(color("#FFFFFF"));

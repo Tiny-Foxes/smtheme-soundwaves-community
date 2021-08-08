@@ -29,8 +29,7 @@ local maxheight = 60
 
 local function upref(key,default)
 	if LoadModule("Config.Exists.lua")(key,CheckIfUserOrMachineProfile(pNum-1).."/OutFoxPrefs.ini") then
-        	local cfg = LoadModule("Config.Load.lua")(key,CheckIfUserOrMachineProfile(pNum-1).."/OutFoxPrefs.ini")
-		return cfg
+		return LoadModule("Config.Load.lua")(key,CheckIfUserOrMachineProfile(pNum-1).."/OutFoxPrefs.ini")
 	end 
 	return default
 end
