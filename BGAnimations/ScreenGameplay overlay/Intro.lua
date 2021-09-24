@@ -1,4 +1,9 @@
 local playMode = GAMESTATE:GetPlayMode()
+local gm = GAMESTATE:GetCurrentGame():GetName()
+local showIntro = {
+	["beat"] = true,
+	["popn"] = true,
+}
 local sStage = ""
 sStage = GAMESTATE:GetCurrentStage()
 
@@ -110,62 +115,62 @@ local t = Def.ActorFrame {};
 		};
 	end;
 
-t[#t+1] = Def.ActorFrame {
-	InitCommand=function(self)
-		self:xy(SCREEN_RIGHT-16,SCREEN_BOTTOM-60)
-	end;
-	OnCommand=function(self)
-		self:diffusealpha(0):addx(20)
-		:sleep(titleFadeIn):decelerate(titleAnimLength):diffusealpha(1):addx(-20)
-        :sleep(titleWait):decelerate(0.5):diffusealpha(0)
-	end;
-	Def.BitmapText {
-		Font="SongSubTitle font";
+	t[#t+1] = Def.ActorFrame {
 		InitCommand=function(self)
-			self:diffuse(color("#FFFFFF")):zoom(1.25):maxwidth(SCREEN_WIDTH*0.5)
-			self:horizalign(right)
+			self:xy(SCREEN_RIGHT-16,SCREEN_BOTTOM-60)
 		end;
 		OnCommand=function(self)
-			if not GAMESTATE:IsCourseMode() then
-				local text = nativeTitle and GAMESTATE:GetCurrentSong():GetDisplayMainTitle() or GAMESTATE:GetCurrentSong():GetTranslitMainTitle()
-				self:settext( text, GAMESTATE:GetCurrentSong():GetTranslitMainTitle() )
-				if GAMESTATE:GetCurrentSong():GetDisplaySubTitle() ~= "" then
-					self:addy(-22)
+			self:diffusealpha(0):addx(20)
+			:sleep(titleFadeIn):decelerate(titleAnimLength):diffusealpha(1):addx(-20)
+			:sleep(titleWait):decelerate(0.5):diffusealpha(0)
+		end;
+		Def.BitmapText {
+			Font="SongSubTitle font";
+			InitCommand=function(self)
+				self:diffuse(color("#FFFFFF")):zoom(1.25):maxwidth(SCREEN_WIDTH*0.5)
+				self:horizalign(right)
+			end;
+			OnCommand=function(self)
+				if not GAMESTATE:IsCourseMode() then
+					local text = nativeTitle and GAMESTATE:GetCurrentSong():GetDisplayMainTitle() or GAMESTATE:GetCurrentSong():GetTranslitMainTitle()
+					self:settext( text, GAMESTATE:GetCurrentSong():GetTranslitMainTitle() )
+					if GAMESTATE:GetCurrentSong():GetDisplaySubTitle() ~= "" then
+						self:addy(-22)
+					end;
+				else
+					self:settext(GAMESTATE:GetCurrentCourse():GetDisplayFullTitle())
 				end;
-			else
-				self:settext(GAMESTATE:GetCurrentCourse():GetDisplayFullTitle())
 			end;
-		end;
-	};
-	Def.BitmapText {
-		Font="SongSubTitle font",
-		InitCommand=function(self)
-			self:diffuse(color("#FFFFFF")):zoom(0.75):maxwidth(SCREEN_WIDTH*0.5):y(2)
-			self:horizalign(right)
-		end;
-		OnCommand=function(self)
-			if not GAMESTATE:IsCourseMode() then
-				local text = nativeTitle and GAMESTATE:GetCurrentSong():GetDisplaySubTitle() or GAMESTATE:GetCurrentSong():GetTranslitSubTitle()
-				self:settext( text, GAMESTATE:GetCurrentSong():GetTranslitSubTitle() )
+		};
+		Def.BitmapText {
+			Font="SongSubTitle font",
+			InitCommand=function(self)
+				self:diffuse(color("#FFFFFF")):zoom(0.75):maxwidth(SCREEN_WIDTH*0.5):y(2)
+				self:horizalign(right)
 			end;
-		end;
-	};
-	Def.BitmapText {
-		Font="SongTitle font";
-		InitCommand=function(self)
-			self:diffuse(color("#FFFFFF")):zoom(0.8):maxwidth((SCREEN_WIDTH*0.5)/0.8):y(26)
-			self:horizalign(right)
-		end;
-		OnCommand=function(self)
-			if GAMESTATE:IsCourseMode() then
-				self:settext(ToEnumShortString( GAMESTATE:GetCurrentCourse():GetCourseType() ))
-			else
-				local text = nativeTitle and GAMESTATE:GetCurrentSong():GetDisplayArtist() or GAMESTATE:GetCurrentSong():GetTranslitArtist()
-				self:settext( text, GAMESTATE:GetCurrentSong():GetTranslitArtist() )
+			OnCommand=function(self)
+				if not GAMESTATE:IsCourseMode() then
+					local text = nativeTitle and GAMESTATE:GetCurrentSong():GetDisplaySubTitle() or GAMESTATE:GetCurrentSong():GetTranslitSubTitle()
+					self:settext( text, GAMESTATE:GetCurrentSong():GetTranslitSubTitle() )
+				end;
 			end;
-		end;
+		};
+		Def.BitmapText {
+			Font="SongTitle font";
+			InitCommand=function(self)
+				self:diffuse(color("#FFFFFF")):zoom(0.8):maxwidth((SCREEN_WIDTH*0.5)/0.8):y(26)
+				self:horizalign(right)
+			end;
+			OnCommand=function(self)
+				if GAMESTATE:IsCourseMode() then
+					self:settext(ToEnumShortString( GAMESTATE:GetCurrentCourse():GetCourseType() ))
+				else
+					local text = nativeTitle and GAMESTATE:GetCurrentSong():GetDisplayArtist() or GAMESTATE:GetCurrentSong():GetTranslitArtist()
+					self:settext( text, GAMESTATE:GetCurrentSong():GetTranslitArtist() )
+				end;
+			end;
+		};
 	};
-};
 
 -- Stage graphic
 local stage_num_actor= THEME:GetPathG("ScreenStageInformation", "Stage " .. ToEnumShortString(sStage), true)

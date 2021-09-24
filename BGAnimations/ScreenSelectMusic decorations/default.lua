@@ -104,9 +104,12 @@ t[#t+1] = Def.ActorFrame {
 			   if song then
 					self:settext( song:GetGenre() ~= "" and song:GetGenre() or "N/A" )
 					self:diffusealpha( song:GetGenre() ~= "" and 1 or 0.5 )
+			   	else
+					self:settext("N/A")
+					self:diffusealpha(0.5)
 				end
 				self:playcommand("Refresh")
-			end;
+			end,
 		};			
 		Def.BitmapText {
 			Font="_Medium";
@@ -218,6 +221,8 @@ t[#t+1] = Def.ActorFrame {
 			if song then
 				text = nativeTitle and song:GetDisplayArtist() or song:GetTranslitArtist()
 				self:settext( text, song:GetTranslitArtist() )
+			else
+				self:settext(" ")
 			end
 			self:playcommand("Refresh")
 		end;

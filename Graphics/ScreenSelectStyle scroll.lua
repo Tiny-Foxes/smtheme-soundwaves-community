@@ -1,5 +1,5 @@
 local gc = Var("GameCommand");
-local string_name = gc:GetText();
+local string_name = gc:GetStyle():GetName()
 local string_expl = THEME:GetString("StyleType", gc:GetStyle():GetStyleType());
 local item_width = 320;
 local item_height = 70;

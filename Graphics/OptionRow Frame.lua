@@ -96,7 +96,6 @@ for _, pn in ipairs(GAMESTATE:GetEnabledPlayers()) do
 			self:SetAllStateDelays(1)
 		end,
 		ChangeCommand=function(self)
-			local Sets = {"Advanced","FAPlus","ECFA"}
 			local found = nil
 			if TimingWindow[getenv("SmartTimings")]().Name then
 				found = LoadModule("Options.SmartJudgments.lua")()[

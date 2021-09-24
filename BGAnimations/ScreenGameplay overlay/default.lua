@@ -1,4 +1,8 @@
 local t = Def.ActorFrame{}
+local showIntro = {
+	["beat"] = true,
+	["popn"] = true
+}
 
 local gm = GAMESTATE:GetCurrentGame():GetName()
 t[#t+1] = LoadActor( FILEMAN:DoesFileExist( THEME:GetCurrentThemeDirectory().."BGAnimations/ScreenGameplay overlay/"..gm ..".lua" ) and gm or "Normal" )
@@ -24,7 +28,9 @@ t[#t+1] = Def.Actor {
 }
 
 -- Usually this happens on ScreenStage but we don't do that anymore.
-t[#t+1]=LoadActor("Intro")
+if showIntro[gm] ~= true then 
+	t[#t+1]=LoadActor("Intro")
+end
 	
 -- BPM display
 if LoadModule("Config.Load.lua")("GameplayBPM","Save/OutFoxPrefs.ini") then

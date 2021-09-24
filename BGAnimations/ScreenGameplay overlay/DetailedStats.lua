@@ -243,11 +243,14 @@ if UserOptions.npsscatter then
                 local calc = needsScatterPlotToMove and SongTotal*4 or maxwidth/2
                 
                 if npst then
+					local step = GAMESTATE:GetCurrentSteps(player)
                     for k,v in pairs( npst ) do 
                             -- Each NPS area is per MEASURE. not beat. So multiply the area by 4 beats.
-                            local t = GAMESTATE:GetCurrentSong():GetTimingData():GetElapsedTimeFromBeat((k-1)*4)
+                            local t = step:GetTimingData():GetElapsedTimeFromBeat((k-1)*4)
                             -- With this conversion on t, we now apply it to the x coordinate.
-                            local x = scale( t, SongMargin.Start, SongMargin.End, -calc, calc )
+                            local x = scale( t, math.min(step:GetTimingData():GetElapsedTimeFromBeat(0), 0), GAMESTATE:GetCurrentSong():GetLastSecond(),
+								-calc, calc
+							)
                             -- Now scale that position on v to the y coordinate.
                             local y = scale( v, 0, tnp, maxheight, -maxheight )
 							if y < -maxheight then y = -maxheight end

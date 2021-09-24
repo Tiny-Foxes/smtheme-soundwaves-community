@@ -24,7 +24,7 @@ local function UpdateSingleBPM(self)
 	-- BPM Display
 	 local bpm = songPosition:GetCurBPS() * 60 * (MusicRate)
 	--local bpm = MusicPitch
-	bpmDisplay:settext( string.format( "%d",bpm ) )
+	bpmDisplay:settext( string.format( "%d", round(bpm) ) )
 
 	-- MusicRate Display
 	MusicRate = string.format("%.2f", MusicRate )

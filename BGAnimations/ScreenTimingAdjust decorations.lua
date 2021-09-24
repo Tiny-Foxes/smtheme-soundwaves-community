@@ -50,6 +50,7 @@ for i=1,10 do
         SmartTimingsChangeMessageCommand=function(s,param)
             if param.choice then
                 local sm = TimingWindow[param.choice]()
+				sm.Timings = LoadModule("Gameplay.UseTimingTable.lua")(sm)
                 if sm.Timings[ "TapNoteScore_"..JudgNames[i] ] then
                     s:GetChild("Tm"..i):settext( sm.Timings[ "TapNoteScore_"..JudgNames[i] ] )
                     s:diffuse( JudgmentLineToColor("JudgmentLine_" .. JudgNames[i]) )

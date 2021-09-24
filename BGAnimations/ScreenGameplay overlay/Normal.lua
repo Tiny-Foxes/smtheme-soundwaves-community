@@ -252,11 +252,14 @@ end
 						-- Grab every instance of the NPS data.
 						verts = {}
 						if npst then
+							local step = GAMESTATE:GetCurrentSteps(pn)
 							for k,v in pairs( npst ) do
 									-- Each NPS area is per MEASURE. not beat. So multiply the area by 4 beats.
-									local t = GAMESTATE:GetCurrentSong():GetTimingData():GetElapsedTimeFromBeat((k-1)*4)
+									local t = step:GetTimingData():GetElapsedTimeFromBeat((k-1)*4)
 									-- With this conversion on t, we now apply it to the x coordinate.
-									local x = scale( t, SongMargin.Start, SongMargin.End, SctMargin.Left, SctMargin.Right )
+									local x = scale( t, math.min(step:GetTimingData():GetElapsedTimeFromBeat(0), 0), GAMESTATE:GetCurrentSong():GetLastSecond(),
+										SctMargin.Left, SctMargin.Right
+									)
 									-- Now scale that position on v to the y coordinate.
 									local y = math.round( scale( v, 0, tnp, maxheight, -maxheight ) )
 									if y < -maxheight then y = -maxheight end

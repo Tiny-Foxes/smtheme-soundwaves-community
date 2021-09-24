@@ -1,3 +1,13 @@
+local allowednotes = {
+	["TapNoteType_Tap"] = true,
+	["TapNoteType_Lift"] = true,
+	-- Support the heads of the subtypes.
+	["TapNoteSubType_Hold"] = true,
+	["TapNoteSubType_Roll"] = true,
+	-- Stamina players: you'd want to comment this out.
+	["TapNoteType_HoldTail"] = true,
+}
+
 return function(Steps)
     local chartint = 1
     local Density = {}
@@ -47,10 +57,8 @@ return function(Steps)
                 mDuration = TD:GetElapsedTimeFromBeat((measureCount+1)*4) - TD:GetElapsedTimeFromBeat(measureCount*4)
                 mMargin = (TD:GetElapsedTimeFromBeat(measureCount*4) + mDuration)
             else
-				if TD:IsJudgableAtBeat(v[1]) then
-					if (v[3] ~= "TapNoteType_Mine" and v[3] ~= "TapNoteType_Fake" and v[3] ~= "TapNoteType_AutoKeySound") then
-						measureNotes = measureNotes + 1
-					end
+				if TD:IsJudgableAtBeat(v[1]) and allowednotes[v[3]] then
+					measureNotes = measureNotes + 1
 				end
             end
         end

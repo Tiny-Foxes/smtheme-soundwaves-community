@@ -94,34 +94,35 @@ t[#t+1] = Def.ActorFrame {
 			self:align(0,0)
 			self:x(paneloffset):y(63+206+artistStripeHeight)
 			self:zoomto(p2paneoffset(),408-artistStripeHeight):diffuse(color("0,0,0,0"))
-		end;
+		end,
 		OnCommand=function(self)
 			if GAMESTATE:IsHumanPlayer(pn) == true then
 				self:smooth(0.2):diffuse(color("0,0,0,0.5"));
 			else
 				self:diffusealpha(0):smooth(0.2):diffuse(PlayerDarkColor(pn)):diffusealpha(0.2)
-			end;
-		end;
+			end
+		end,
 		PlayerJoinedMessageCommand=function(self,param)
 			if param.Player == pn then
 				self:smooth(0.2):diffuse(color("0,0,0,0.5"));
-			end;
-		end;
-	};
+			end
+		end
+	},
 	-- Difficilty pane
 	Def.ActorFrame {
-			InitCommand=function(self) self:x(paneloffset) end,
-			OnCommand=function(self) self:visible( GAMESTATE:IsHumanPlayer(pn) ) end,
-			PlayerJoinedMessageCommand=function(self,param)
-				if param.Player == pn then
-					self:visible(true):diffusealpha(0):sleep(1.3):decelerate(0.4):diffusealpha(1);
-				end
-			end,
+		InitCommand=function(self) self:x(paneloffset) end,
+		OnCommand=function(self) self:visible( GAMESTATE:IsHumanPlayer(pn) ) end,
+		["CurrentSteps"..ToEnumShortString(pn).."ChangedMessageCommand"]=function(self) self:queuecommand("Set") end,
+		CurrentSongChangedMessageCommand=function(self) self:queuecommand("Set") end,
+		PlayerJoinedMessageCommand=function(self,param)
+			if param.Player == pn then
+				self:visible(true):diffusealpha(0):sleep(1.3):decelerate(0.4):diffusealpha(1);
+			end
+		end,
 		Def.Quad {
 			InitCommand=function(self)
 				self:align(0,0):x(0):y(63+206+artistStripeHeight):zoomto(p2paneoffset(),408-artistStripeHeight):diffuse(color("0,0,0,0"))
 			end,
-			["CurrentSteps"..ToEnumShortString(pn).."ChangedMessageCommand"]=function(self) self:queuecommand("Set") end,
 			SetCommand=function(self)
 				local stepsData = GAMESTATE:GetCurrentSteps(pn)
 				local song = GAMESTATE:GetCurrentSong();
@@ -133,105 +134,99 @@ t[#t+1] = Def.ActorFrame {
 						local cd = GetCustomDifficulty(st, diff, courseType);
 						self:finishtweening():linear(0.2)
 						self:diffuse(ColorMidTone(CustomDifficultyToColor(cd))):diffuseleftedge(BoostColor(ColorMidTone(CustomDifficultyToColor(cd)),1.2)):diffusealpha(0.5);
-					else
 					end
-				else
 				end
 			end
-		};
+		},
 		-- Difficulty underlay
 		Def.Quad {
 			InitCommand=function(self)
 				self:align(0,0):x(0):y(269+artistStripeHeight+playerStripeHeight):zoomto(p2paneoffset(),90)
 			end;
 			OnCommand=function(self) self:diffuse(color("0,0,0,0.25")):fadebottom(1) end;
-		};
+		},
 		-- Difficulty name
 		Def.BitmapText {
-		  Font="_Bold";
-		  InitCommand=function(self)
-			self:zoom(1):y(380+20):x(20):maxwidth(180):horizalign(left)
-		  end;
-		  OnCommand=function(self)
-			self:diffusealpha(0):smooth(0.2):diffusealpha(1)
-		  end;
-			  ["CurrentSteps"..ToEnumShortString(pn).."ChangedMessageCommand"]=function(self) self:queuecommand("Set") end;
-			  PlayerJoinedMessageCommand=function(self,param)
-					if param.Player == pn then
-						self:queuecommand("Set"):diffusealpha(0):smooth(0.3):diffusealpha(1)
-					end;
-				end;
-			  SetCommand=function(self)
-				local stepsData = GAMESTATE:GetCurrentSteps(pn)
-				local song = GAMESTATE:GetCurrentSong();
-				self:settext("")
-				if song and stepsData ~= nil then
-					local diff = stepsData:GetDifficulty();
-						if stepsData:IsAnEdit() then
-							self:settext(ToUpper(stepsData:GetChartName()))
-						else
-							self:settext(ToUpper(THEME:GetString("CustomDifficulty",ToEnumShortString(diff))))
-						end;
-					self:diffuse(color("#FFFFFF"));
-				end
-			  end
-		};
--- Style
-		Def.BitmapText {
-		  Font="_Condensed Medium";
-		  InitCommand=function(self)
-			self:zoom(0.75):y(380+40):x(20):maxwidth(180):horizalign(left)
-		  end;
-		  OnCommand=function(self)
-			self:diffusealpha(0):smooth(0.2):diffusealpha(1)
-		  end;
-			  ["CurrentSteps"..ToEnumShortString(pn).."ChangedMessageCommand"]=function(self) self:queuecommand("Set") end;
-			  PlayerJoinedMessageCommand=function(self,param)
+			Font="_Bold",
+			InitCommand=function(self)
+				self:zoom(1):y(380+20):x(20):maxwidth(180):horizalign(left)
+			end,
+			OnCommand=function(self)
+				self:diffusealpha(0):smooth(0.2):diffusealpha(1)
+			end,
+			["CurrentSteps"..ToEnumShortString(pn).."ChangedMessageCommand"]=function(self) self:queuecommand("Set") end;
+			PlayerJoinedMessageCommand=function(self,param)
 				if param.Player == pn then
 					self:queuecommand("Set"):diffusealpha(0):smooth(0.3):diffusealpha(1)
-				end;
-			  end;
-			  SetCommand=function(self)
+				end
+			end,
+			SetCommand=function(self)
 				local stepsData = GAMESTATE:GetCurrentSteps(pn)
-				local song = GAMESTATE:GetCurrentSong();
+				local song = GAMESTATE:GetCurrentSong()
 				self:settext("")
 				if song and stepsData ~= nil then
-					local st = stepsData:GetStepsType();
-					local diff = stepsData:GetDifficulty();
-					local courseType = GAMESTATE:IsCourseMode() and SongOrCourse:GetCourseType() or nil;
-					local cd = GetCustomDifficulty(st, diff, courseType);
-					self:settext( ToUpper(THEME:GetString("StepsType",ToEnumShortString(st))) );
-					self:diffuse(color("#FFFFFF"));
+					local diff = stepsData:GetDifficulty()
+					if stepsData:IsAnEdit() then
+						self:settext(ToUpper(stepsData:GetChartName()))
+					else
+						self:settext(ToUpper(THEME:GetString("CustomDifficulty",ToEnumShortString(diff))))
+					end
+					self:diffuse(color("#FFFFFF"))
 				end
-			  end
-		};
+			end
+		},
+-- Style
+		Def.BitmapText {
+			Font="_Condensed Medium";
+			InitCommand=function(self)
+				self:zoom(0.75):y(380+40):x(20):maxwidth(180):horizalign(left)
+			end,
+			OnCommand=function(self)
+				self:diffusealpha(0):smooth(0.2):diffusealpha(1)
+			end,
+			PlayerJoinedMessageCommand=function(self,param)
+				if param.Player == pn then
+					self:queuecommand("Set"):diffusealpha(0):smooth(0.3):diffusealpha(1)
+				end
+			end,
+			SetCommand=function(self)
+				local stepsData = GAMESTATE:GetCurrentSteps(pn)
+				local song = GAMESTATE:GetCurrentSong()
+				self:settext("")
+				if song and stepsData ~= nil then
+					local st = stepsData:GetStepsType()
+					local diff = stepsData:GetDifficulty()
+					local courseType = GAMESTATE:IsCourseMode() and SongOrCourse:GetCourseType() or nil
+					local cd = GetCustomDifficulty(st, diff, courseType)
+					self:settext( ToUpper(THEME:GetString("StepsType",ToEnumShortString(st))) )
+					self:diffuse(color("#FFFFFF"))
+				end
+			end
+		},
 		-- Difficulty number
 		Def.BitmapText {
-		  Font="_Plex Numbers 60px";
-		  InitCommand=function(self)
-			self:zoom(0.75):y(391+22):maxwidth(180):horizalign(right)
-			self:x( p2paneoffset()-16 )
-		  end;
-		  OnCommand=function(self)
-			self:queuecommand("Set"):diffusealpha(0):smooth(0.2):diffusealpha(1)
-		  end;
-			  ["CurrentSteps"..ToEnumShortString(pn).."ChangedMessageCommand"]=function(self) self:queuecommand("Set") end;
-			  PlayerJoinedMessageCommand=function(self,param)
+			Font="_Plex Numbers 60px";
+			InitCommand=function(self)
+				self:zoom(0.75):y(391+22):maxwidth(180):horizalign(right)
+				self:x( p2paneoffset()-16 )
+			end,
+			OnCommand=function(self)
+				self:queuecommand("Set"):diffusealpha(0):smooth(0.2):diffusealpha(1)
+			end,
+			PlayerJoinedMessageCommand=function(self,param)
 				if param.Player == pn then
 					self:queuecommand("Set"):diffusealpha(0):sleep(0.2):smooth(0.3):diffusealpha(1)
-				end;
-			  end;
-			  SetCommand=function(self)
+				end
+			end,
+			SetCommand=function(self)
 				local stepsData = GAMESTATE:GetCurrentSteps(pn)
 				local song = GAMESTATE:GetCurrentSong();
 				self:settext("")
-				if song and stepsData ~= nil then
-					local meter = stepsData:GetMeter()
-					self:settext(meter)
-					self:diffuse(color("#FFFFFF"));
+				if song and stepsData then
+					self:settext(stepsData:GetMeter())
 				end
-			  end
-		};
+			end
+		},
 		Def.BitmapText {
 		  Font="_Condensed Medium";
 		  InitCommand=function(self)
@@ -371,6 +366,7 @@ t[#t+1] = Def.ActorFrame {
 			OnCommand=function(self) self:playcommand("Set") end;
 			["CurrentSteps".. ToEnumShortString(pn) .."ChangedMessageCommand"]=function(self) self:playcommand("Set") end,
 			CurrentSongChangedMessageCommand=function(self) self:playcommand("Set") end,
+			CloseFolderMessageCommand=function(self) self:visible(false):playcommand("Set") end;
 			PlayerJoinedMessageCommand=function(self) self:playcommand("Set") end,
 			ChangedLanguageDisplayMessageCommand=function(self) self:playcommand("Set") end,
 			SetCommand=function(self)
@@ -503,7 +499,7 @@ for Index,GraphCont in ipairs(GraphData.Contents) do
 				:diffusealpha(0):sleep(0.2):linear(0.1):diffusealpha(1)
 			end;
 			["CurrentSteps"..ToEnumShortString(pn).."ChangedMessageCommand"]=function(self) self:playcommand("Set") end;
-			CurrentSongChangedMessageCommand=function(self) self:playcommand("Set") end;
+			CloseFolderMessageCommand=function(self) self:playcommand("Set") end;
 			SetCommand=function(self)
 				local verts = {
 					{{-GraphData.Width/2, 0, 0}, Color.White},

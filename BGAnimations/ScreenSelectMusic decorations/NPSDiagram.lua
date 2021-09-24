@@ -30,15 +30,23 @@ end
 
 local verts = {}
 local amv = Def.ActorFrame{
-        ["CurrentSteps".. ToEnumShortString(pn) .."ChangedMessageCommand"]=function(s) 
-            if GAMESTATE:GetCurrentSong() then
-                s:finishtweening():sleep(2.2):queuecommand("ShowAMV")
-            end
-        end,
+		CurrentSongChangedMessageCommand=function(self) self:queuecommand("BeginTimeout") end,
+		CloseFolderMessageCommand = function(self)
+			self:playcommand("ResetComponents"):playcommand("BeginTimeout")
+		end,
+		BeginTimeoutCommand=function(self)
+			if GAMESTATE:GetCurrentSong() then
+				self:finishtweening():sleep(2.2):queuecommand("ShowAMV")
+			end
+		end,
+        ["CurrentSteps".. ToEnumShortString(pn) .."ChangedMessageCommand"]=function(self) self:queuecommand("BeginTimeout") end,
 		Def.ActorMultiVertex{
 			OnCommand=function(s)
 				s:SetDrawState{Mode="DrawMode_QuadStrip"}
 				s:xy( p2paneoffset/2 , useExperiment and 58 or 294 )
+			end,
+			ResetComponentsCommand=function(self)
+				self:SetNumVertices( 0 ):SetVertices( {} )
 			end,
 			ShowAMVCommand=function(s)
 				verts = {}
@@ -81,6 +89,9 @@ local amv = Def.ActorFrame{
                 self:zoomto( 1, 116 ):valign(0):y( useExperiment and 0 or 241 ):fadetop(1):blend("BlendMode_Add")
             end,
             CurrentSongChangedMessageCommand=function(self) self:stoptweening() end,
+			ResetComponentsCommand=function(self)
+				self:playcommand("ShowAMV")
+			end,
             ShowAMVCommand=function(self)
                 self:visible( GAMESTATE:GetCurrentSong() ~= nil )
                 if GAMESTATE:IsHumanPlayer(pn) and GAMESTATE:GetCurrentSong() then
@@ -104,6 +115,10 @@ local amv = Def.ActorFrame{
                     s.breakdown = GetStreamBreakdown(pn)
                 end
             end,
+			ResetComponentsCommand=function(self)
+				self.breakdown = ""
+				self:playcommand("ShowAMV")
+			end,
 
             Def.Quad{
                 OnCommand=function(s) s:align(0,0.5):zoomto( p2paneoffset, 30 ):y( useExperiment and 100 or 340 ):diffuse( color("#22222299") ) end,
@@ -137,6 +152,9 @@ local amv = Def.ActorFrame{
             Def.BitmapText{
                 Font="_Condensed Semibold",
                 OnCommand=function(s) s:xy( 10, useExperiment and 12 or 252 ):halign(0):zoom(0.75):diffusealpha(0.9) end,
+				ResetComponentsCommand=function(self)
+					self:settext( string.format( THEME:GetString("ScreenGameplay","MaxNPS"), 0 ) )
+				end,
                 ShowAMVCommand=function(s)
                     local curpeak = GAMESTATE:GetCurrentSong() and peak or 0
                     s:settext( string.format( THEME:GetString("ScreenGameplay","MaxNPS"), curpeak ) )

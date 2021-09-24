@@ -10,7 +10,7 @@ local player = ...
 local NoteData = {}
 local enabled = LoadModule("Config.Load.lua")("MeasureCounter",CheckIfUserOrMachineProfile(string.sub(player,-1)-1).."/OutFoxPrefs.ini")
 local HideRestCounts = not LoadModule("Config.Load.lua")("MeasureCounterBreaks",CheckIfUserOrMachineProfile(string.sub(player,-1)-1).."/OutFoxPrefs.ini")
-
+local TD
 local streams, prev_measure
 local current_count, stream_index, current_stream_length
 
@@ -21,6 +21,7 @@ local InitializeMeasureCounter = function()
 	local notes_per_measure = tonumber(LoadModule("Config.Load.lua")("MeasureCounterDivisions",CheckIfUserOrMachineProfile(string.sub(player,-1)-1).."/OutFoxPrefs.ini"))
 	local threshold = 2
 	if GAMESTATE:GetCurrentSong() then
+		TD = GAMESTATE:GetPlayerState(player):GetSongPosition()
 		if GAMESTATE:Env()["ChartData"..player] then
 			local data = GAMESTATE:Env()["ChartData"..player]
 			if data[3] then
@@ -75,7 +76,7 @@ end
 local Update = function(self, delta)
 	if not NoteData then return end
 
-    local curr_measure = (math.floor(GAMESTATE:GetSongPosition():GetSongBeatVisible()))/4
+    local curr_measure = (math.floor(TD:GetSongBeatVisible()))/4
 
 	-- if a new measure has occurred
 	if curr_measure > prev_measure then
@@ -105,12 +106,10 @@ if enabled then
 				local pos = SCREENMAN:GetTopScreen():GetChild("PlayerP"..string.sub(player,-1)):GetX()
 				self:halign(1):shadowlength(1):xy(pos+(96*2)-(8), _screen.cy)
 				InitializeMeasureCounter()
-				self:queuecommand("Update")
 			end
 		end,
-		UpdateCommand = function(self)
+		BeatCrossedMessageCommand = function(self)
 			Update(self,0)
-			self:sleep(0.02):queuecommand('Update')
 		end,
 		CurrentSongChangedMessageCommand = function(self)
 			InitializeMeasureCounter()
