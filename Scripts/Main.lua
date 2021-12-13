@@ -149,6 +149,38 @@ Branch.AfterTitleMenu = function()
 	return Branch.StartGame()
 end
 
+Branch.AfterSelectMusic = function()
+	if SCREENMAN:GetTopScreen():GetGoToOptions() then
+		return SelectFirstOptionsScreen()
+	else
+		return "ScreenLoadGameplayElements"
+	end
+end
+
+Branch.PlayerOptions = function()
+	local pm = GAMESTATE:GetPlayMode()
+	local restricted = { PlayMode_Oni= true, PlayMode_Rave= true,
+		--"PlayMode_Battle" -- ??
+	}
+	local optionsScreen = "ScreenPlayerOptions"
+	if restricted[pm] then
+		optionsScreen = "ScreenPlayerOptionsRestricted"
+	end
+	if SCREENMAN:GetTopScreen():GetGoToOptions() then
+		return optionsScreen
+	else
+		return "ScreenLoadGameplayElements"
+	end
+end
+
+Branch.SongOptions = function()
+	if SCREENMAN:GetTopScreen():GetGoToOptions() then
+		return "ScreenSongOptions"
+	else
+		return "ScreenLoadGameplayElements"
+	end
+end
+
 Branch.AfterSelectProfile = function()
 	if getenv("StartFitness") == true then
 		return "ScreenFitnessOptions"
@@ -172,8 +204,13 @@ end
 function SPOChoices( itemSet )
 	local TimingMode = GAMESTATE:GetCurrentGame():GetName() ~= "para" and "Timing," or ""
 	local GHMode = GAMESTATE:GetCurrentGame():GetName() == "gh" and "GH," or ""
+	local GDDMMode = GAMESTATE:GetCurrentGame():GetName() == "gddm" and "GDDM," or ""
+
+	-- Only GH for now.
+	local Backplates = GAMESTATE:GetCurrentGame():GetName() == "gh" and "BackPlates," or ""
+
 	local Items = {
-		["Main"] = "SPM,SPV,NS,14,Mini,SF,FilterColor,".. TimingMode .."Judg,13,LuaRate,LuaHaste,LuaSoundEffect,18",
+		["Main"] = "SPM,SPV,NS,14,Mini,SF,FilterColor,".. TimingMode .."Judg,"..Backplates.."13,LuaRate,LuaHaste,LuaSoundEffect,"..GDDMMode.."18",
 		["Special"] = "RotateFieldX,RotateFieldZ,MC,MCD,MCB,DLW,JudgImg,Combo,Toasty,ToastDraw,SP,OVG,OB,12",
 		["Effects"] = "2,3A,3B,4,5,6,7,9,R1,"..GHMode.."10,11"
 	}
@@ -204,7 +241,7 @@ function ExtraColorPreference()
 	local Modes = {
 		dance = 10,
 		pump = 21,
-		beat = 12,
+		['be-mu'] = 12,
 		kb7 = 10,
 		para = 10,
 		techno = 10,

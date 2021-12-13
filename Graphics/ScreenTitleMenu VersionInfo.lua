@@ -1,7 +1,7 @@
 return Def.ActorFrame {
 	Def.BitmapText {
 		Font="_Condensed Medium";
-		Text=string.format("%s %s", ProductFamily(), ProductVersion());
+		Text=string.format("OutFox %s", ProductVersion());
 		AltText="StepMania";
 		InitCommand=function(self) self:zoom(1):diffuse(color("#FFFFFF")) end;
 	};

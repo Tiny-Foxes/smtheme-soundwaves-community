@@ -158,7 +158,7 @@ t[#t+1] = Def.Quad{
                 local data = GAMESTATE:Env()["ChartData"..player]
                 tnp, npst = data[1], data[2]
             end
-            SongTotal = GAMESTATE:GetCurrentSong():MusicLengthSeconds()
+            SongTotal = GAMESTATE:GetCurrentSong():GetLastSecond()
             SongMargin = {
                 Start = math.min(GAMESTATE:GetCurrentSong():GetTimingData():GetElapsedTimeFromBeat(0), 0),
                 End = GAMESTATE:GetCurrentSong():GetLastSecond(),
@@ -238,7 +238,7 @@ if UserOptions.npsscatter then
                     Start = math.min(GAMESTATE:GetCurrentSong():GetTimingData():GetElapsedTimeFromBeat(0), 0),
                     End = GAMESTATE:GetCurrentSong():GetLastSecond(),
                 }
-                local SongTotal = GAMESTATE:GetCurrentSong():MusicLengthSeconds()
+                local SongTotal = GAMESTATE:GetCurrentSong():GetLastSecond()
                 local needsScatterPlotToMove = SongTotal >= 60*4
                 local calc = needsScatterPlotToMove and SongTotal*4 or maxwidth/2
                 

@@ -1,8 +1,8 @@
 local playMode = GAMESTATE:GetPlayMode()
 local gm = GAMESTATE:GetCurrentGame():GetName()
 local showIntro = {
-	["beat"] = true,
-	["popn"] = true,
+	["be-mu"] = true,
+	["po-mu"] = true,
 }
 local sStage = ""
 sStage = GAMESTATE:GetCurrentStage()

@@ -1,7 +1,7 @@
 local t = Def.ActorFrame{}
 local showIntro = {
-	["beat"] = true,
-	["popn"] = true
+	["be-mu"] = true,
+	["po-mu"] = true
 }
 
 local gm = GAMESTATE:GetCurrentGame():GetName()
@@ -14,9 +14,11 @@ for ip, pn in ipairs(GAMESTATE:GetEnabledPlayers()) do
 		local touse = {
 			[1] = "StatDisplay",
 			[2] = (Style:GetStyleType() ~= "StyleType_OnePlayerTwoSides" and Style:GetName() ~= "solo" and Style:ColumnsPerPlayer() < 7 and
-				GAMESTATE:GetNumPlayersEnabled() == 1 and (not PREFSMAN:GetPreference("Center1Player")) and "DetailedStats" or "StatDisplay") or "StatDisplay"
+			GAMESTATE:GetNumPlayersEnabled() == 1 and (not PREFSMAN:GetPreference("Center1Player")) and "DetailedStats" or "StatDisplay") or "StatDisplay"
 		}
-		t[#t+1] = LoadActor(touse[choice],pn)
+		if choice > 0 and choice <= #touse then
+			t[#t+1] = LoadActor(touse[choice],pn)
+		end
 	end
 end
 

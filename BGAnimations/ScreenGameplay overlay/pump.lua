@@ -85,6 +85,31 @@ end
 		};		
 	};
 
+	t[#t+1] =Def.ActorFrame {
+		Def.ActorFrame {
+			Def.Quad {
+				InitCommand=function(self) self:xy(SCREEN_CENTER_X,SCREEN_BOTTOM-24):align(0.5,1) end,
+				OnCommand=function(self)
+					self:zoomto(0,7):sleep(barSleepIn+0.3):decelerate(0.6):zoomto(songAreaWidth,7)
+				end,
+				SetMessageCommand=function(self)
+					local curStage = GAMESTATE:GetCurrentStage()
+					self:diffuse(ColorTable["gameplayMeter"]):diffusealpha(0.75)
+				end,		
+			}
+		},
+		Def.SongMeterDisplay {
+			InitCommand=function(self) self:xy(SCREEN_CENTER_X,SCREEN_BOTTOM-24):align(0.5,1) end,
+			StreamWidth=songAreaWidth,
+			Stream=LoadActor( THEME:GetPathG( 'SongMeterDisplay', 'stream') )..{
+				InitCommand=function(self)
+					self:valign(1):diffusealpha(0.4):zoomy(0.5)
+				end,
+			},
+			Tip=Def.ActorFrame{}
+		}
+	};
+
 	-- Score and Difficulty
 	for ip, pn in ipairs(GAMESTATE:GetEnabledPlayers()) do
 		local playerpos

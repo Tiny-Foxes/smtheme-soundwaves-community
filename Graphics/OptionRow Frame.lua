@@ -115,7 +115,7 @@ for _, pn in ipairs(GAMESTATE:GetEnabledPlayers()) do
 				if SCREENMAN:GetTopScreen() then
 					local CurNoteSkin = GAMESTATE:GetPlayerState(pn):GetPlayerOptions("ModsLevel_Preferred"):NoteSkin()
 					self:SetTarget( SCREENMAN:GetTopScreen():GetChild("NS"..string.lower(CurNoteSkin)) )
-					:zoom(0.6):x( SCREEN_CENTER_X + (pn == PLAYER_1 and -200 or 380) )
+					:zoom(0.6):x( pn == PLAYER_1 and -200 or 380 ):zoomx( GAMESTATE:GetCurrentGame():GetName() ~= "beat" and (pn == PLAYER_1 and 0.6 or -0.6) or 0 )
 				end
 			end
 		end,

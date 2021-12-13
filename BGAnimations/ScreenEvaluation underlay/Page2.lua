@@ -82,6 +82,12 @@ for i=1,numcol do
 	}
 end
 
+t[#t+1] = Def.Quad{
+	OnCommand=function(s)
+		s:zoomto( 333,78 ):xy( _screen.cx + (eval_part_offs), _screen.cy+196+30 ):diffuse(Alpha(Color.Black,0.6))
+	end,
+}
+
 t[#t+1] = Def.GraphDisplay{
 	InitCommand=function(self) self:vertalign(bottom):x(_screen.cx + (eval_part_offs)):y(_screen.cy+196+70) end;
 	BeginCommand=function(self)
@@ -167,7 +173,7 @@ t[#t+1] = Def.ActorFrameTexture{
 	};
 
 	Def.ActorFrame{
-		InitCommand=function(self) self:xy(333/2,0) end;
+		InitCommand=function(self) self:x(333/2) end;
 		LoadActor("Scatter.lua",p)..{
 			OnCommand=function(self)
 				self:vertalign(bottom)

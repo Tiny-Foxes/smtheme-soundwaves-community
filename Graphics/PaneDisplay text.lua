@@ -9,7 +9,8 @@ local DanceGames = {
 	["para"] = true,
 	["maniax"] = true,
 	["ds3ddx"] = true,
-	["ez2"] = true
+	["ez2"] = true,
+	["smx"] = true
 }
 local gm = GAMESTATE:GetCurrentGame():GetName()
 

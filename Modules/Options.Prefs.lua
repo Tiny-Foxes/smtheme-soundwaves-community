@@ -242,6 +242,13 @@ return {
 		Choices = LoadModule("Options.SmartToastieChoices.lua")("Show"),
 		Values = LoadModule("Options.SmartToastieChoices.lua")("Show")
 	},
+	BackPlates =
+	{
+		UserPref = true,
+		Default = THEME:GetMetric("Common","DefaultBackPlate"),
+		Choices = LoadModule("Options.BackPlates.lua")("Show"),
+		Values = LoadModule("Options.BackPlates.lua")("Show")
+	},
 	ToastiesDraw =
 	{
 		UserPref = true,
@@ -326,7 +333,7 @@ return {
 			THEME:GetString("OptionNames","OptionSelectMusic"),
 		},
 		Values = {
-			"ScreenStageInformation",
+			"ScreenLoadGameplayElements",
 			"ScreenPlayerOptions",
 			"ScreenPlayerOptions",
 			"ScreenPlayerOptions",

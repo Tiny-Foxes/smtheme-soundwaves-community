@@ -11,7 +11,7 @@ local Choices = {
 	{
 		Name = "restart_song",
 		Action = function( screen )
-			screen:SetPrevScreenName('ScreenStageInformation'):begin_backing_out()
+			screen:SetPrevScreenName('ScreenLoadGameplayElements'):begin_backing_out()
 		end
 	},
 	{
