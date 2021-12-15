@@ -37,6 +37,8 @@ local amv = Def.ActorFrame{
 		BeginTimeoutCommand=function(self)
 			if GAMESTATE:GetCurrentSong() then
 				self:finishtweening():sleep(2.2):queuecommand("ShowAMV")
+			else
+				self:playcommand("ResetComponents")
 			end
 		end,
         ["CurrentSteps".. ToEnumShortString(pn) .."ChangedMessageCommand"]=function(self) self:queuecommand("BeginTimeout") end,

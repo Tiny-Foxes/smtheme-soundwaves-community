@@ -386,6 +386,8 @@ t[#t+1] = Def.ActorFrame {
 					else
 						self:visible(false)
 					end
+				else
+					self:visible(false)
 				end
 			end;
 		};
@@ -498,6 +500,7 @@ for Index,GraphCont in ipairs(GraphData.Contents) do
 			end;
 			["CurrentSteps"..ToEnumShortString(pn).."ChangedMessageCommand"]=function(self) self:playcommand("Set") end;
 			CloseFolderMessageCommand=function(self) self:playcommand("Set") end;
+			CurrentSongChangedMessageCommand=function(self) self:playcommand("Set") end;
 			SetCommand=function(self)
 				local verts = {
 					{{-GraphData.Width/2, 0, 0}, Color.White},
