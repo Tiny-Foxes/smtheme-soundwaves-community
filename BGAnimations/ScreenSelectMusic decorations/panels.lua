@@ -372,21 +372,19 @@ t[#t+1] = Def.ActorFrame {
 			SetCommand=function(self)
 				local steps = GAMESTATE:GetCurrentSteps(pn)
 				local song = GAMESTATE:GetCurrentSong()
-				if song then
-					if steps ~= nil then
-						local score = PROFILEMAN:GetProfile(pn):GetHighScoreList(song,steps):GetHighScores()
-						local getscore = score[1]
-						if getscore then
-							showscore = getscore:GetGrade()
-							if showscore ~= nil then
-								self:Load(THEME:GetPathG("GradeDisplay Grade", showscore))
-								self:visible(true)
-							else
-								self:visible(false)
-							end
+				if song and steps ~= nil then
+					local score = PROFILEMAN:GetProfile(pn):GetHighScoreList(song,steps):GetHighScores()
+					local getscore = score[1]
+					if getscore then
+						showscore = getscore:GetGrade()
+						if showscore ~= nil then
+							self:Load(THEME:GetPathG("GradeDisplay Grade", showscore))
+							self:visible(true)
 						else
 							self:visible(false)
 						end
+					else
+						self:visible(false)
 					end
 				end
 			end;
@@ -406,9 +404,9 @@ t[#t+1] = Def.ActorFrame {
 
 	Def.Sprite {
 		Texture=THEME:GetPathG("ScreenSelectMusic","readyplayer"),
-		InitCommand=function(self) 
+		InitCommand=function(self)
 			self:visible(GAMESTATE:GetCurrentGame():GetName() == "pump")
-			self:zoom(0.75):horizalign(center):xy((p2paneoffset())/2,120) 
+			self:zoom(0.75):horizalign(center):xy((p2paneoffset())/2,120)
 			:diffuse(PlayerColor(pn)):diffuserightedge(PlayerCompColor(pn)):diffusealpha(0)
 		end,
 		StepsChosenMessageCommand=function(self,param)
@@ -422,7 +420,7 @@ t[#t+1] = Def.ActorFrame {
 	},
 	Def.Sprite {
 		Texture=THEME:GetPathG("ScreenSelectMusic","pumpstart"),
-		InitCommand=function(self) 
+		InitCommand=function(self)
 			self:visible(GAMESTATE:GetCurrentGame():GetName() == "pump")
 			self:zoom(1):horizalign(center):xy((p2paneoffset())/2,120):diffusealpha(0)
 		end,

@@ -13,16 +13,16 @@ local GetStreamBreakdown = function(Player)
     if GAMESTATE:GetCurrentSong() and GAMESTATE:GetCurrentSteps(Player) then
         local streams = LoadModule("Chart.GetStreamMeasure.lua")(NMeasure, 2, mcount)
         if not streams then return "" end
-        
+
         local streamLengths = {}
-        
+
         for i, stream in ipairs(streams) do
             local streamCount = tostring(stream.streamEnd - stream.streamStart)
             if not stream.isBreak then
                 streamLengths[#streamLengths + 1] = streamCount
             end
         end
-        
+
         return table.concat(streamLengths, "/")
     end
     return ""
@@ -83,7 +83,7 @@ local amv = Def.ActorFrame{
                 verts = {} -- To free some memory, let's empty the table.
 			end,
         },
-        
+
         Def.Quad{
             OnCommand=function(self)
                 self:zoomto( 1, 116 ):valign(0):y( useExperiment and 0 or 241 ):fadetop(1):blend("BlendMode_Add")
