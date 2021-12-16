@@ -345,14 +345,20 @@ t[#t+1] = Def.ActorFrame {
 	};
 	-- High score
 	Def.ActorFrame {
-	InitCommand=function(self) self:diffusealpha(0):sleep(0.96):linear(0.2):diffusealpha(1) end;
-	OffCommand=function(self) self:finishtweening():linear(0.1):diffusealpha(0) end;
-	["CurrentSteps".. ToEnumShortString(pn) .."ChangedMessageCommand"]=function(s)
-		if GAMESTATE:GetCurrentSong() then
-			s:finishtweening():linear(0.2):diffusealpha(1):sleep(2):queuecommand("ShowAMV")
-		end
-	end,
-	ShowAMVCommand=function(s) s:finishtweening():linear(0.2):diffusealpha(0) end,
+		InitCommand=function(self) self:diffusealpha(0):sleep(0.96):linear(0.2):diffusealpha(1) end;
+		OffCommand=function(self) self:finishtweening():linear(0.1):diffusealpha(0) end;
+		["CurrentSteps".. ToEnumShortString(pn) .."ChangedMessageCommand"]=function(s)
+			if GAMESTATE:GetCurrentSong() then
+				s:playcommand("Set")
+			end
+		end,
+		CurrentSongChangedMessageCommand=function(s) s:playcommand("Set") end,
+		SetCommand=function(s) s:finishtweening():linear(0.2):diffusealpha(1):sleep(2):queuecommand("ShowAMV") end,
+		ShowAMVCommand=function(s)
+			if GAMESTATE:GetCurrentSong() then
+				s:finishtweening():linear(0.2):diffusealpha(0)
+			end
+		end,
 		Def.BitmapText {
 			Font="_Bold";
 			InitCommand=function(self) self:horizalign(left):xy(25,254):zoom(0.65):diffuse(color("0.9,0.9,0.9")):shadowlength(1)  end;
@@ -396,11 +402,17 @@ t[#t+1] = Def.ActorFrame {
 	Def.ActorFrame{
 		["CurrentSteps".. ToEnumShortString(pn) .."ChangedMessageCommand"]=function(s)
 			if GAMESTATE:GetCurrentSong() then
-				s:finishtweening():linear(0.2):diffusealpha(0):sleep(2):queuecommand("ShowAMV")
+				s:playcommand("Set")
 			end
 		end,
+		CurrentSongChangedMessageCommand=function(s) s:playcommand("Set") end,
+		SetCommand=function(s) s:finishtweening():linear(0.2):diffusealpha(0):sleep(2):queuecommand("ShowAMV") end,
 		OffCommand=function(s) s:finishtweening() end,
-		ShowAMVCommand=function(s) s:linear(0.2):diffusealpha(1) end,
+		ShowAMVCommand=function(s)
+			if GAMESTATE:GetCurrentSong() then
+				s:linear(0.2):diffusealpha(1)
+			end
+		end,
 		LoadActor("NPSDiagram.lua",{pn,p2paneoffset()}),
 	},
 
@@ -476,9 +488,11 @@ for Index,GraphCont in ipairs(GraphData.Contents) do
     t[#t+1] = Def.ActorFrame{
 		["CurrentSteps".. ToEnumShortString(pn) .."ChangedMessageCommand"]=function(s)
 			if GAMESTATE:GetCurrentSong() then
-				s:finishtweening():linear(0.2):diffusealpha(1):sleep(2):queuecommand("ShowAMV")
+				s:playcommand("Set")
 			end
 		end,
+		CurrentSongChangedMessageCommand=function(s) s:playcommand("Set") end,
+		SetCommand=function(s) s:finishtweening():linear(0.2):diffusealpha(1):sleep(2):queuecommand("ShowAMV") end,
 		InitCommand=function(self)
 			self:horizalign(center):vertalign(middle)
 			:x( (SCREEN_WIDTH > 1152 and paneloffset+80 or paneloffset+85) + GraphData.Spacing*Index )
@@ -491,7 +505,11 @@ for Index,GraphCont in ipairs(GraphData.Contents) do
 				self:visible(true):diffusealpha(0):sleep(1.3):decelerate(0.4):diffusealpha(1);
 			end;
 		end;
-		ShowAMVCommand=function(s) s:linear(0.2):diffusealpha(0) end,
+		ShowAMVCommand=function(s)
+			if GAMESTATE:GetCurrentSong() then
+				s:linear(0.2):diffusealpha(0)
+			end
+		end,
 		Def.ActorMultiVertex{
 			OnCommand=function(self)
 				-- Set Triangle state
