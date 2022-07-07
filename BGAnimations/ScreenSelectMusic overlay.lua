@@ -51,7 +51,22 @@ t[#t+1] = Def.ActorFrame {
 if not GAMESTATE:IsCourseMode() then
 t[#t+1] = Def.ActorFrame {
 	LoadActor(THEME:GetPathG("ScreenWithMenuElements", "StageDisplay")) .. {
-		InitCommand=function(self) self:xy( isUltraWide and SCREEN_CENTER_X+120 or SCREEN_RIGHT-520,SCREEN_TOP+32) end,
+		InitCommand=function(self) self:xy( isUltraWide and SCREEN_CENTER_X+120 or SCREEN_RIGHT-520,SCREEN_TOP+32-12) end,
+		OnCommand=function(self)
+			if PREFSMAN:GetPreference("MenuTimer") == true then
+				self:addx(-220)
+			end
+			self:addy(-105):decelerate(0.3):addy(105)
+		end,
+		OffCommand=function(self) self:decelerate(0.175):addy(-105) end,
+	},
+	Def.BitmapText {
+		Text=ToUpper(GAMESTATE:GetCurrentGame():GetName()),
+		Font="_Bold",
+		InitCommand=function(self) 
+			self:xy( isUltraWide and SCREEN_CENTER_X+120 or SCREEN_RIGHT-520,SCREEN_TOP+32+12):zoom(1) 
+				:diffuse( ColorTable["headerTextColor"] ):diffusebottomedge( ColorTable["headerTextGradient"] )
+		end,
 		OnCommand=function(self)
 			if PREFSMAN:GetPreference("MenuTimer") == true then
 				self:addx(-220)

@@ -340,10 +340,11 @@ end
 						:diffuse(ColorLightTone(PlayerCompColor(pn))):diffusebottomedge(PlayerColor(pn)):maxwidth(SCREEN_WIDTH*0.2234375)
 						:settext(PREFSMAN:GetPreference("PercentageScoring") and " 0.00%" or 0)
 					end,
-					JudgmentMessageCommand=function(self,p) if p.Player == pn then
-						self:finishtweening():sleep(0.01):queuecommand("RedrawScore") end
+					JudgmentMessageCommand=function(self,p)
+						if p.Player == pn then
+							self:settext(GetPlScore(pn))
+						end
 					end,
-					RedrawScoreCommand=function(self) self:settext(GetPlScore(pn)) end,
 					OffCommand=function(self) self:sleep(0.15):decelerate(0.3):addy(-75) end
 				},
 
@@ -403,7 +404,7 @@ end
 					SetCommand=function(self)
 						local steps_data = GAMESTATE:GetCurrentSteps(pn)
 						if GAMESTATE:GetCurrentSong() and steps_data then
-							self:settext(steps_data:GetMeter())
+							self:settext(string.format("%.4g",steps_data:GetMeter()))
 						end
 					end
 				};

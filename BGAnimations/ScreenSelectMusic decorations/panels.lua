@@ -223,7 +223,7 @@ t[#t+1] = Def.ActorFrame {
 				local song = GAMESTATE:GetCurrentSong();
 				self:settext("")
 				if song and stepsData then
-					self:settext(stepsData:GetMeter())
+					self:settext(string.format("%.4g",stepsData:GetMeter()))
 				end
 			end
 		},
@@ -345,20 +345,14 @@ t[#t+1] = Def.ActorFrame {
 	};
 	-- High score
 	Def.ActorFrame {
-		InitCommand=function(self) self:diffusealpha(0):sleep(0.96):linear(0.2):diffusealpha(1) end;
-		OffCommand=function(self) self:finishtweening():linear(0.1):diffusealpha(0) end;
-		["CurrentSteps".. ToEnumShortString(pn) .."ChangedMessageCommand"]=function(s)
-			if GAMESTATE:GetCurrentSong() then
-				s:playcommand("Set")
-			end
-		end,
-		CurrentSongChangedMessageCommand=function(s) s:playcommand("Set") end,
-		SetCommand=function(s) s:finishtweening():linear(0.2):diffusealpha(1):sleep(2):queuecommand("ShowAMV") end,
-		ShowAMVCommand=function(s)
-			if GAMESTATE:GetCurrentSong() then
-				s:finishtweening():linear(0.2):diffusealpha(0)
-			end
-		end,
+	InitCommand=function(self) self:diffusealpha(0):sleep(0.96):linear(0.2):diffusealpha(1) end;
+	OffCommand=function(self) self:finishtweening():linear(0.1):diffusealpha(0) end;
+	["CurrentSteps".. ToEnumShortString(pn) .."ChangedMessageCommand"]=function(s)
+		if GAMESTATE:GetCurrentSong() then
+			s:finishtweening():linear(0.2):diffusealpha(1):sleep(2):queuecommand("ShowAMV")
+		end
+	end,
+	ShowAMVCommand=function(s) s:finishtweening():linear(0.2):diffusealpha(0) end,
 		Def.BitmapText {
 			Font="_Bold";
 			InitCommand=function(self) self:horizalign(left):xy(25,254):zoom(0.65):diffuse(color("0.9,0.9,0.9")):shadowlength(1)  end;
@@ -378,22 +372,22 @@ t[#t+1] = Def.ActorFrame {
 			SetCommand=function(self)
 				local steps = GAMESTATE:GetCurrentSteps(pn)
 				local song = GAMESTATE:GetCurrentSong()
-				if song and steps ~= nil then
-					local score = PROFILEMAN:GetProfile(pn):GetHighScoreList(song,steps):GetHighScores()
-					local getscore = score[1]
-					if getscore then
-						showscore = getscore:GetGrade()
-						if showscore ~= nil then
-							self:Load(THEME:GetPathG("GradeDisplay Grade", showscore))
-							self:visible(true)
+				if song then
+					if steps ~= nil then
+						local score = PROFILEMAN:GetProfile(pn):GetHighScoreList(song,steps):GetHighScores()
+						local getscore = score[1]
+						if getscore then
+							showscore = getscore:GetGrade()
+							if showscore ~= nil then
+								self:Load(THEME:GetPathG("GradeDisplay Grade", showscore))
+								self:visible(true)
+							else
+								self:visible(false)
+							end
 						else
 							self:visible(false)
 						end
-					else
-						self:visible(false)
 					end
-				else
-					self:visible(false)
 				end
 			end;
 		};
@@ -402,25 +396,19 @@ t[#t+1] = Def.ActorFrame {
 	Def.ActorFrame{
 		["CurrentSteps".. ToEnumShortString(pn) .."ChangedMessageCommand"]=function(s)
 			if GAMESTATE:GetCurrentSong() then
-				s:playcommand("Set")
+				s:finishtweening():linear(0.2):diffusealpha(0):sleep(2):queuecommand("ShowAMV")
 			end
 		end,
-		CurrentSongChangedMessageCommand=function(s) s:playcommand("Set") end,
-		SetCommand=function(s) s:finishtweening():linear(0.2):diffusealpha(0):sleep(2):queuecommand("ShowAMV") end,
 		OffCommand=function(s) s:finishtweening() end,
-		ShowAMVCommand=function(s)
-			if GAMESTATE:GetCurrentSong() then
-				s:linear(0.2):diffusealpha(1)
-			end
-		end,
+		ShowAMVCommand=function(s) s:linear(0.2):diffusealpha(1) end,
 		LoadActor("NPSDiagram.lua",{pn,p2paneoffset()}),
 	},
 
 	Def.Sprite {
 		Texture=THEME:GetPathG("ScreenSelectMusic","readyplayer"),
-		InitCommand=function(self)
+		InitCommand=function(self) 
 			self:visible(GAMESTATE:GetCurrentGame():GetName() == "pump")
-			self:zoom(0.75):horizalign(center):xy((p2paneoffset())/2,120)
+			self:zoom(0.75):horizalign(center):xy((p2paneoffset())/2,120) 
 			:diffuse(PlayerColor(pn)):diffuserightedge(PlayerCompColor(pn)):diffusealpha(0)
 		end,
 		StepsChosenMessageCommand=function(self,param)
@@ -434,7 +422,7 @@ t[#t+1] = Def.ActorFrame {
 	},
 	Def.Sprite {
 		Texture=THEME:GetPathG("ScreenSelectMusic","pumpstart"),
-		InitCommand=function(self)
+		InitCommand=function(self) 
 			self:visible(GAMESTATE:GetCurrentGame():GetName() == "pump")
 			self:zoom(1):horizalign(center):xy((p2paneoffset())/2,120):diffusealpha(0)
 		end,
@@ -488,11 +476,9 @@ for Index,GraphCont in ipairs(GraphData.Contents) do
     t[#t+1] = Def.ActorFrame{
 		["CurrentSteps".. ToEnumShortString(pn) .."ChangedMessageCommand"]=function(s)
 			if GAMESTATE:GetCurrentSong() then
-				s:playcommand("Set")
+				s:finishtweening():linear(0.2):diffusealpha(1):sleep(2):queuecommand("ShowAMV")
 			end
 		end,
-		CurrentSongChangedMessageCommand=function(s) s:playcommand("Set") end,
-		SetCommand=function(s) s:finishtweening():linear(0.2):diffusealpha(1):sleep(2):queuecommand("ShowAMV") end,
 		InitCommand=function(self)
 			self:horizalign(center):vertalign(middle)
 			:x( (SCREEN_WIDTH > 1152 and paneloffset+80 or paneloffset+85) + GraphData.Spacing*Index )
@@ -505,11 +491,7 @@ for Index,GraphCont in ipairs(GraphData.Contents) do
 				self:visible(true):diffusealpha(0):sleep(1.3):decelerate(0.4):diffusealpha(1);
 			end;
 		end;
-		ShowAMVCommand=function(s)
-			if GAMESTATE:GetCurrentSong() then
-				s:linear(0.2):diffusealpha(0)
-			end
-		end,
+		ShowAMVCommand=function(s) s:linear(0.2):diffusealpha(0) end,
 		Def.ActorMultiVertex{
 			OnCommand=function(self)
 				-- Set Triangle state
@@ -518,7 +500,6 @@ for Index,GraphCont in ipairs(GraphData.Contents) do
 			end;
 			["CurrentSteps"..ToEnumShortString(pn).."ChangedMessageCommand"]=function(self) self:playcommand("Set") end;
 			CloseFolderMessageCommand=function(self) self:playcommand("Set") end;
-			CurrentSongChangedMessageCommand=function(self) self:playcommand("Set") end;
 			SetCommand=function(self)
 				local verts = {
 					{{-GraphData.Width/2, 0, 0}, Color.White},

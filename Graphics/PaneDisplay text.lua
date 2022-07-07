@@ -9,6 +9,7 @@ local DanceGames = {
 	["para"] = true,
 	["maniax"] = true,
 	["ds3ddx"] = true,
+	["stepstage"] = true,
 	["ez2"] = true,
 	["smx"] = true
 }
@@ -177,7 +178,12 @@ if DanceGames[gm] == true then
 			InitCommand=function(self) self:x(50):y(-14) end;
 			OnCommand=function(self) self:zoomy(0.8):diffusealpha(0):sleep(0.6):linear(0.3):diffusealpha(1):zoomy(1) end;
 			OffCommand=function(self) self:linear(0.1):diffusealpha(0):zoomy(0.8) end;
-		}
+		},
+		CreatePaneDisplayItem( iPN, "Mines", 'RadarCategory_Mines' ) .. {
+			InitCommand=function(self) self:x(-128+16+8):y(-14+24*1) end;
+			OnCommand=function(self) self:zoomy(0.8):diffusealpha(0):sleep(0.7):linear(0.3):diffusealpha(1):zoomy(1) end;
+			OffCommand=function(self) self:linear(0.1):diffusealpha(0):zoomy(0.8) end;
+		},
 	}
 	end
 	

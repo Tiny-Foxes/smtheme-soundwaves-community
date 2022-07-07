@@ -139,8 +139,6 @@ local mid_pane = Def.ActorFrame {
 				else
 					if target and target:HasJacket() then
 						self:LoadFromCached("jacket",target:GetJacketPath()):scaletoclipped(256,256)
-					elseif target and target:HasBackground() then			
-						self:LoadFromCached("background",target:GetBackgroundPath()):scaletoclipped(256,256)
 					elseif target and target:HasBanner() then			
 						self:LoadFromCached("banner",target:GetBannerPath()):scaletoclipped(256,80)
 					else
@@ -427,7 +425,7 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 					if song and stepsData ~= nil then
 						local st = stepsData:GetStepsType();
 						local diff = stepsData:GetDifficulty();
-						local path = THEME:GetPathG("","_StepsType/" .. ToEnumShortString(st) .. " (res 32x16).png") 
+						local path = THEME:GetPathG("","_StepTypeVectors/" .. ToEnumShortString(st) .. ".svg") 
 						local missing = self:Load( THEME:GetPathG("","_StepsType/missing") )
 						self:Load( FILEMAN:DoesFileExist(path) and path or missing  ):zoom(1.0)
 					end
@@ -443,7 +441,7 @@ for ip, p in ipairs(GAMESTATE:GetHumanPlayers()) do
 					local song = GAMESTATE:GetCurrentSong();
 					if song and steps_data ~= nil then
 						local diff = steps_data:GetDifficulty();
-						self:settext( ToUpper(THEME:GetString("CustomDifficulty",ToEnumShortString(diff)) .. "  " .. steps_data:GetMeter()) )
+						self:settext( ToUpper(THEME:GetString("CustomDifficulty",ToEnumShortString(diff)) .. "  " .. string.format("%.4g",steps_data:GetMeter())) )
 					  	end
 					end
 				};		

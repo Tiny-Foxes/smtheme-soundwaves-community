@@ -107,7 +107,7 @@ for i=1,9 do
             local diff = pStageStats:GetPlayedSteps()[1]:GetDifficulty();
             local courseType = GAMESTATE:IsCourseMode() and SongOrCourse:GetCourseType() or nil;
             local cd = GetCustomDifficulty(st, diff, courseType);
-            self:settext(THEME:GetString("CustomDifficulty",ToEnumShortString(diff)) .. "  " .. pStageStats:GetPlayedSteps()[1]:GetMeter());
+            self:settext(THEME:GetString("CustomDifficulty",ToEnumShortString(diff)) .. "  " .. string.format("%.4g",pStageStats:GetPlayedSteps()[1]:GetMeter()));
             self:diffuse(CustomDifficultyToColor(cd));
             self:diffusealpha(0):sleep(0.1*(i-1)):decelerate(0.3):diffusealpha( 1 - (i*0.06) )
             end,

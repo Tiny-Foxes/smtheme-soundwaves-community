@@ -187,6 +187,10 @@ Branch.AfterSelectProfile = function()
 	end
 	if ( THEME:GetMetric("Common","AutoSetStyle") == true ) then
 		-- use SelectStyle in online...
+		-- If we're on kbx, skip, as we don't need this.
+		if IsGame("kbx") then
+			return "ScreenSelectPlayMode"
+		end
 		return IsNetConnected() and "ScreenSelectStyle" or "ScreenSelectPlayMode"
 	else
 		return "ScreenSelectStyle"

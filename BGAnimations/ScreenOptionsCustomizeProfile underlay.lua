@@ -147,7 +147,7 @@ local function exit_screen(newscreen)
 		SCREENMAN:GetTopScreen():SetNextScreenName( newscreen )
 	end
 	SCREENMAN:GetTopScreen():StartTransitioningScreen("SM_GoToNextScreen")
-	SOUND:PlayOnce(THEME:GetPathS("Common", "Start"))
+	SOUND:PlayOnce(THEME:GetPathS("Common", "Start"), true)
 end
 
 local function input(event)

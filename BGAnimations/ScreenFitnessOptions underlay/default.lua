@@ -259,7 +259,7 @@ local function CheckValueOffsets(pn)
 	
 	SetNewGoalType(pn)
 	setenv("APNow", pn)
-	SOUND:PlayOnce( THEME:GetPathS("","click") )
+	SOUND:PlayOnce( THEME:GetPathS("","click"), true)
 	MESSAGEMAN:Broadcast("PageUpdated")
 	return
 end

@@ -4,6 +4,7 @@ local showIntro = {
 	["be-mu"] = true,
 	["po-mu"] = true,
 	["gddm"] = true,
+	["kbx"] = true,
 	["gdgf"] = true
 }
 
@@ -11,6 +12,7 @@ local showBar = {
 	["be-mu"] = true,
 	["gddm"] = true,
 	["gdgf"] = true,
+	["kbx"] = true,
 	["po-mu"] = true
 }
 

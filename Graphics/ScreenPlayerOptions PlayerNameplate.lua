@@ -88,7 +88,7 @@ return Def.ActorFrame {
 							format_bpm(song_bpms[2] * param.speed*.01)
 					end
 					no_change= param.speed == 100
-				elseif param.mode == "c" or param.mode == "m" or param.mode == "a" then
+				elseif param.mode == "c" or param.mode == "m" or param.mode == "a" or param.mode == "ca" then
 					text= param.mode .. param.speed
 					no_change= param.speed == song_bpms[2] and song_bpms[1] == song_bpms[2]
 				else

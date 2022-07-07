@@ -157,15 +157,12 @@ end
 				if GAMESTATE:GetPlayMode() == "PlayMode_Endless" then
 					self:queuecommand("UpdateTimer")
 				else
-					self:queuecommand("RedrawScore")
+					self:settext(GetPlScore(pn, "primary"))
 				end
 			end,
 			UpdateTimerCommand=function(self)
 				self:finishtweening():settext( SecondsToMMSSMsMs( vStats:GetAliveSeconds() ) )
 				:sleep(1/60):queuecommand("UpdateTimer")
-			end;
-            RedrawScoreCommand=function(self)
-				self:settext(GetPlScore(pn, "primary"))
 			end;
 			OffCommand=function(self) self:sleep(0.15):decelerate(0.3):addy(-75) end;
 		};

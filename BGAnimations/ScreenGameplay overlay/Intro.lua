@@ -74,19 +74,20 @@ local t = Def.ActorFrame {};
 						local diff = steps_data:GetDifficulty();
 						local courseType = GAMESTATE:IsCourseMode() and SongOrCourse:GetCourseType() or nil;
 						local cd = GetCustomDifficulty(st, diff, courseType);
-							if steps_data:IsAnEdit() then
-								self:settext(steps_data:GetChartName() .. "  " .. steps_data:GetMeter());
-							else
-								self:settext(THEME:GetString("CustomDifficulty",ToEnumShortString(diff)) .. "  " .. steps_data:GetMeter());
-							end;
-						self:diffuse(ColorLightTone(CustomDifficultyToColor(cd)));
+						local meter = string.format("%.4g", steps_data:GetMeter())
+						if steps_data:IsAnEdit() then
+							self:settext(steps_data:GetChartName() .. "  " .. meter);
+						else
+							self:settext(THEME:GetString("CustomDifficulty",ToEnumShortString(diff)) .. "  " .. meter);
+						end
+						self:diffuse(ColorLightTone(CustomDifficultyToColor(cd)))
 					else
 						self:settext("")
 					end
 				else
 					self:settext("")
 				end
-			 end;
+			 end
 			};
 			Def.BitmapText {
 				Font="_Condensed MedBold";

@@ -1,7 +1,7 @@
 local MascotEnabled = LoadModule("Config.Load.lua")("ShowMascotCharacter","Save/OutFoxPrefs.ini")
 return Def.ActorFrame{	
 	Def.Sprite {
-		Texture=HOOKS:GetArchName() == "Windows XP" and "_xp" or "_text",
+		Texture="_text",
 		InitCommand=function(self) 
 			self:x(MascotEnabled and 110 or 0)
 			:zoom(MascotEnabled and 0.6 or 0.75) 

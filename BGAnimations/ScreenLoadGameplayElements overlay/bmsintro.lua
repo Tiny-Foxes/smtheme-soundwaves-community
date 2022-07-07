@@ -54,43 +54,67 @@ LoadIntro[#LoadIntro+1] = Def.ActorFrame {
         Def.BitmapText {
             Font="SongSubTitle font";
             InitCommand=function(self)
-                self:diffuse(color("#FFFFFF")):zoom(1):maxwidth((SCREEN_WIDTH*0.5)/0.8):y(-36)
+                self:diffuse(color("#FFFFFF")):zoom(1):maxwidth((SCREEN_WIDTH*0.5)/0.8):y(-30)
                 self:horizalign(center)
             end,
             OnCommand=function(self)
                 if not GAMESTATE:IsCourseMode() then
-                    self:settext(ToUpper(GAMESTATE:GetCurrentSong():GetGenre()))
+                    local song = GAMESTATE:GetCurrentSong()
+                    self:settext(song:GetGenre())
+                    if song:GetDisplaySubTitle() ~= "" then
+                        self:addy(-12)
+                    end
+                end
+            end
+        },
+        Def.BitmapText {
+            Font="SongTitle font",
+            InitCommand=function(self)
+                self:diffuse(color("#FFFFFF")):zoom(2):maxwidth((SCREEN_WIDTH*0.75)/2)
+                self:horizalign(center)
+            end,
+            OnCommand=function(self)
+                if not GAMESTATE:IsCourseMode() then
+                    local song = GAMESTATE:GetCurrentSong()
+                    local text = nativeTitle and song:GetDisplayMainTitle() or song:GetTranslitMainTitle()
+                    self:settext( text, song:GetTranslitMainTitle() )
+                    if song:GetDisplaySubTitle() ~= "" then
+                        self:addy(-12)
+                    end
+                else
+                    self:settext(GAMESTATE:GetCurrentCourse():GetDisplayMainTitle())
                 end
             end
         },
         Def.BitmapText {
             Font="SongSubTitle font",
             InitCommand=function(self)
-                self:diffuse(color("#FFFFFF")):zoom(2):maxwidth(SCREEN_WIDTH*0.5)
+                self:diffuse(color("#FFFFFF")):zoom(1):maxwidth(SCREEN_WIDTH*0.75):y(28)
                 self:horizalign(center)
             end,
             OnCommand=function(self)
                 if not GAMESTATE:IsCourseMode() then
-                    local text = nativeTitle and GAMESTATE:GetCurrentSong():GetDisplayFullTitle() or GAMESTATE:GetCurrentSong():GetTranslitFullTitle()
-                    self:settext( text, GAMESTATE:GetCurrentSong():GetTranslitFullTitle() )
-
-                else
-                    self:settext(GAMESTATE:GetCurrentCourse():GetDisplayFullTitle())
+                    local song = GAMESTATE:GetCurrentSong()
+                    local text = nativeTitle and song:GetDisplaySubTitle() or song:GetTranslitSubTitle()
+                    self:settext( text, song:GetTranslitSubTitle() )
                 end
             end
         },
         Def.BitmapText {
             Font="SongTitle font";
             InitCommand=function(self)
-                self:diffuse(color("#FFFFFF")):zoom(1):maxwidth((SCREEN_WIDTH*0.5)/0.8):y(44)
-                self:horizalign(center)
+                self:diffuse(color("#FFFFFF")):zoom(1):maxwidth(SCREEN_WIDTH*0.75):y(44):horizalign(center)
             end,
             OnCommand=function(self)
                 if GAMESTATE:IsCourseMode() then
                     self:settext(ToEnumShortString( GAMESTATE:GetCurrentCourse():GetCourseType() ))
                 else
-                    local text = nativeTitle and GAMESTATE:GetCurrentSong():GetDisplayArtist() or GAMESTATE:GetCurrentSong():GetTranslitArtist()
-                    self:settext( text, GAMESTATE:GetCurrentSong():GetTranslitArtist() )
+                    local song = GAMESTATE:GetCurrentSong()
+                    local text = nativeTitle and song:GetDisplayArtist() or song:GetTranslitArtist()
+                    self:settext( text, song:GetTranslitArtist() )
+                    if song:GetDisplaySubTitle() ~= "" then
+                        self:addy(12)
+                    end
                 end
             end
         }
