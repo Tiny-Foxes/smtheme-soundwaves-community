@@ -90,19 +90,39 @@ return Def.ActorFrame
             end
         end,
         OffCommand=function(s)
-            local playeroptions = GAMESTATE:GetPlayerState(pn):GetPlayerOptions("ModsLevel_Preferred")
-            playeroptions:XMod(1.00)
-    
+            local playerOptionsPreffered = GAMESTATE:GetPlayerState(pn):GetPlayerOptions("ModsLevel_Preferred")
+            playerOptionsPreffered:XMod(1.00)
+
             if speed[pn][2] == "x" then
-                playeroptions:XMod(speed[pn][1]*0.01)
+                playerOptionsPreffered:XMod(speed[pn][1]*0.01)
             elseif speed[pn][2] == "c" then
-                playeroptions:CMod(speed[pn][1])
+                playerOptionsPreffered:CMod(speed[pn][1])
             elseif speed[pn][2] == "m" then
-                playeroptions:MMod(speed[pn][1])
+                playerOptionsPreffered:MMod(speed[pn][1])
             elseif speed[pn][2] == "a" then
-                playeroptions:AMod(speed[pn][1])
+                playerOptionsPreffered:AMod(speed[pn][1])
             elseif speed[pn][2] == "ca" then
-                playeroptions:CAMod(speed[pn][1])
+                playerOptionsPreffered:CAMod(speed[pn][1])
+            end
+
+            -- We need to set the speeds for ModsLevel_stage, otherwise it does not get applied in Edit/Practice mode
+            local isInEditOptions = SCREENMAN:GetTopScreen() and SCREENMAN:GetTopScreen():GetName() == "ScreenEditOptions"
+
+			if isInEditOptions then
+                local playerOptionsStage = GAMESTATE:GetPlayerState(pn):GetPlayerOptions("ModsLevel_Stage")
+                playerOptionsStage:XMod(1.00)
+
+                if speed[pn][2] == "x" then
+                    playerOptionsStage:XMod(speed[pn][1]*0.01)
+                elseif speed[pn][2] == "c" then
+                    playerOptionsStage:CMod(speed[pn][1])
+                elseif speed[pn][2] == "m" then
+                    playerOptionsStage:MMod(speed[pn][1])
+                elseif speed[pn][2] == "a" then
+                    playerOptionsStage:AMod(speed[pn][1])
+                elseif speed[pn][2] == "ca" then
+                    playerOptionsStage:CAMod(speed[pn][1])
+                end
             end
         end,
     }
