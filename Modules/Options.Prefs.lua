@@ -527,6 +527,13 @@ return {
 			if( isInPlayerOptions ) then
 				GAMESTATE:GetSongOptionsObject("ModsLevel_Preferred"):PitchRate( self.Values[choice] )
 			end
+
+			-- The rate change needs to be set in ModsLevel_Song for it to work in Edit/Practice modes
+			local isInEditOptions = SCREENMAN:GetTopScreen() and SCREENMAN:GetTopScreen():GetName() == "ScreenEditOptions"
+			if isInEditOptions then
+				GAMESTATE:GetSongOptionsObject("ModsLevel_Song"):MusicRate( self.Values[choice] )
+				GAMESTATE:GetSongOptionsObject("ModsLevel_Song"):PitchRate( self.Values[choice] )
+			end
 		end,
 	},
 	Pitch =
