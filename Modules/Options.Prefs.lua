@@ -528,11 +528,17 @@ return {
 				GAMESTATE:GetSongOptionsObject("ModsLevel_Preferred"):PitchRate( self.Values[choice] )
 			end
 
-			-- The rate change needs to be set in ModsLevel_Song for it to work in Edit/Practice modes
+			-- The rate change needs to be set in ModsLevel_Song for it to work in Edit/Practice modes.
+			-- It needs to be set in ModsLevel_Stage too, otherwise the rate gets reset when playing
+			-- the song a second time. If it is set only in ModsLevel_Stage, it gets applied only
+			-- on the second playback of the song and the first one gets weirdly modified going in the
+			-- opposite direction, e.g. set a song to 0.50x and you get the arrows going double the speed.
 			local isInEditOptions = SCREENMAN:GetTopScreen() and SCREENMAN:GetTopScreen():GetName() == "ScreenEditOptions"
 			if isInEditOptions then
 				GAMESTATE:GetSongOptionsObject("ModsLevel_Song"):MusicRate( self.Values[choice] )
 				GAMESTATE:GetSongOptionsObject("ModsLevel_Song"):PitchRate( self.Values[choice] )
+				GAMESTATE:GetSongOptionsObject("ModsLevel_Stage"):MusicRate( self.Values[choice] )
+				GAMESTATE:GetSongOptionsObject("ModsLevel_Stage"):PitchRate( self.Values[choice] )
 			end
 		end,
 	},
