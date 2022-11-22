@@ -33,17 +33,14 @@ local background = Def.ActorFrame { Name="YOU_WISH_YOU_WERE_PLAYING_BEATMANIA_RI
 		for pn = 1,2 do
 			if GAMESTATE:IsPlayerEnabled("PlayerNumber_P"..pn) then
 				if SCREENMAN:GetTopScreen():GetChild("PlayerP"..pn) and SCREENMAN:GetTopScreen():GetChild("PlayerP"..pn):GetChild("NoteField") then
-					SCREENMAN:GetTopScreen():GetChild("PlayerP"..pn):GetChild("NoteField"):rotationz(LoadModule("Config.Load.lua")("RotateFieldZ",CheckIfUserOrMachineProfile(pn-1).."/OutFoxPrefs.ini") or 0)
+					SCREENMAN:GetTopScreen():GetChild("PlayerP"..pn):baserotationz(LoadModule("Config.Load.lua")("RotateFieldZ",CheckIfUserOrMachineProfile(pn-1).."/OutFoxPrefs.ini") or 0)
 					local Reverse = GAMESTATE:GetPlayerState(pn-1):GetPlayerOptions('ModsLevel_Preferred'):UsingReverse() and -1 or 1
 					local recepoffset = (Reverse == -1) and THEME:GetMetric("Player","ReceptorArrowsYReverse") or THEME:GetMetric("Player","ReceptorArrowsYStandard")
 					local Zoom = (LoadModule("Config.Load.lua")("MiniSelector",CheckIfUserOrMachineProfile(pn-1).."/OutFoxPrefs.ini") or 100)
 					recepoffset = recepoffset * (1-(Zoom/100))
 					recepoffset = GAMESTATE:GetIsFieldReversed() and recepoffset*-1 or recepoffset
-					for _,col in ipairs(SCREENMAN:GetTopScreen():GetChild("PlayerP"..pn):GetChild("NoteField"):get_column_actors()) do
-						col:rotationx(LoadModule("Config.Load.lua")("RotateFieldX",CheckIfUserOrMachineProfile(pn-1).."/OutFoxPrefs.ini") or 0)
-						:addy((Zoom == 0) and 0 or recepoffset/(Zoom/100))
-					end
-					SCREENMAN:GetTopScreen():GetChild("PlayerP"..pn):zoom(Zoom/(200/3))
+					SCREENMAN:GetTopScreen():GetChild("PlayerP"..pn):baserotationx(LoadModule("Config.Load.lua")("RotateFieldX",CheckIfUserOrMachineProfile(pn-1).."/OutFoxPrefs.ini") or 0):addy((Zoom == 0) and 0 or recepoffset/(Zoom/100))
+					SCREENMAN:GetTopScreen():GetChild("PlayerP"..pn):basezoom((Zoom/1.5)/(200/3))
 				end
 			end
 		end

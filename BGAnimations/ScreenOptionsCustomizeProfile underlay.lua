@@ -417,6 +417,7 @@ args[#args+1]= Def.Quad{
 
 args[#args+1] = Def.Sound{
 	File=THEME:GetPathS("Common","value"),
+	IsAction=true,
 	UpdateSoundMessageCommand=function(s)
 		s:play()
 	end,

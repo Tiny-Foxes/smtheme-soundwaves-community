@@ -50,6 +50,7 @@ return Def.ActorFrame
             if playeroptions:MMod() then speed[pn][1] = math.floor(playeroptions:MMod()) speed[pn][2] = "m" end
             if playeroptions:AMod() then speed[pn][1] = math.floor(playeroptions:AMod()) speed[pn][2] = "a" end
             if playeroptions:CAMod() then speed[pn][1] = math.floor(playeroptions:CAMod()) speed[pn][2] = "ca" end
+            if playeroptions:AVMod() then speed[pn][1] = math.floor(playeroptions:AVMod()) speed[pn][2] = "av" end
             if speed[pn][1] > 1000*10 then
                 speed[pn][1] = 100
             end
@@ -103,6 +104,8 @@ return Def.ActorFrame
                 playeroptions:AMod(speed[pn][1])
             elseif speed[pn][2] == "ca" then
                 playeroptions:CAMod(speed[pn][1])
+            elseif speed[pn][2] == "av" then
+                playeroptions:AVMod(speed[pn][1])
             end
         end,
     }
