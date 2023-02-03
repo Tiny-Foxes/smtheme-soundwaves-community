@@ -1,4 +1,4 @@
-local allowednotes = {
+local allowedNotes = {
 	["TapNoteType_Tap"] = true,
 	["TapNoteType_Lift"] = true,
 	-- Support the heads of the subtypes.
@@ -8,63 +8,75 @@ local allowednotes = {
 	["TapNoteType_HoldTail"] = true,
 }
 
-return function(Steps)
-    local chartint = 1
-    local Density = {}
-    local streamMeasures = {}
-    local PeakNPS = 0
-    -- Keep track of the measure
-    local measureCount = 0
-    
-    if Steps then
-        for k,v in pairs( GAMESTATE:GetCurrentSong():GetAllSteps() ) do
-            if v == Steps then chartint = k break end
-        end
-        -- Trace("[GetNPS] Loading Chart... ".. chartint)
-        local TD = Steps:GetTimingData()
-        -- Keep track of the number of notes in the current measure while we iterate
-        local measureNotes = 0
-        local measureNPS = 0
-        local mDuration = TD:GetElapsedTimeFromBeat((measureCount+1)*4) - TD:GetElapsedTimeFromBeat(measureCount*4)
-        local mMargin = (TD:GetElapsedTimeFromBeat(measureCount*4) + mDuration)
+local minimumNotesInStreamMeasure = 16
 
-		local function CalcNPS( notes, duration )
-			local res = 0
+return function(steps)
+	local chartInt = 1
+	local density = {}
+	local streamMeasures = {}
+	local peakNPS = 0
+	-- Keep track of processed measures
+	local measureCount = 0
 
+	if steps then
+		for k, v in pairs(GAMESTATE:GetCurrentSong():GetAllSteps()) do
+			if v == steps then
+				chartInt = k
+				break
+			end
+		end
+		-- Trace("[GetNPS] Loading Chart... ".. chartInt)
+		local timingData = steps:GetTimingData()
+
+		local function CalcNPS(measure)
 			-- Some Warp segments can fall into parts where the duration of the lasting beat before its next one
 			-- is miniscule, so lets just skip those.
-			if duration <= 0.05 then
-				return res
+			if measure.duration <= 0.05 then
+				return 0
 			end
 
-			return notes/duration
+			return measure.notes / measure.duration
 		end
 
-        for k,v in pairs( GAMESTATE:GetCurrentSong():GetNoteData(chartint) ) do
-            if TD:GetElapsedTimeFromBeat(v[1]) > mMargin then
-                local originalval = mDuration == 0 and 0 or CalcNPS(measureNotes,mDuration)
-                measureNPS = math.round(originalval)
-                PeakNPS = (measureNPS > PeakNPS or originalval > PeakNPS) and originalval or PeakNPS
-                if(measureNotes >= 15) then
-                    streamMeasures[#streamMeasures+1] = measureCount+1
-                end
+		-- Keep track of the number of notes in the current measure while we iterate
+		local function NewMeasure(index)
+			local endingTime = timingData:GetElapsedTimeFromBeat(index * 4)
+			return {
+				notes = 0,
+				NPS = 0,
+				endingTime = endingTime,
+				duration = endingTime - timingData:GetElapsedTimeFromBeat((index - 1) * 4)
+			}
+		end
 
-                -- Reset stuff
-                measureNotes = 0
-                Density[measureCount+1] = measureNPS
-                
-                measureCount = measureCount + 1
-                mDuration = TD:GetElapsedTimeFromBeat((measureCount+1)*4) - TD:GetElapsedTimeFromBeat(measureCount*4)
-                mMargin = (TD:GetElapsedTimeFromBeat(measureCount*4) + mDuration)
-            else
-				if TD:IsJudgableAtBeat(v[1]) and allowednotes[v[3]] then
-					measureNotes = measureNotes + 1
+		local currentMeasure = NewMeasure(measureCount + 1)
+
+		for _, noteData in pairs(GAMESTATE:GetCurrentSong():GetNoteData(chartInt)) do
+			noteBeat, _, noteType = unpack(noteData)
+
+			while timingData:GetElapsedTimeFromBeat(noteBeat) > currentMeasure.endingTime do
+				local originalValue = currentMeasure.notes == 0 and 0 or CalcNPS(currentMeasure)
+				currentMeasure.NPS = math.round(originalValue)
+				peakNPS = (currentMeasure.NPS > peakNPS or originalValue > peakNPS) and originalValue or peakNPS
+
+				if (currentMeasure.notes >= minimumNotesInStreamMeasure) then
+					streamMeasures[#streamMeasures + 1] = measureCount + 1
 				end
-            end
-        end
 
-        Density[measureCount+1] = measureNPS
-        Density[measureCount+2] = 0
-    end
-    return PeakNPS,Density,streamMeasures,measureCount
+				-- Reset stuff
+				density[measureCount + 1] = currentMeasure.NPS
+				measureCount = measureCount + 1
+				currentMeasure = NewMeasure(measureCount + 1)
+			end
+
+			if timingData:IsJudgableAtBeat(noteBeat) and allowedNotes[noteType] then
+				currentMeasure.notes = currentMeasure.notes + 1
+			end
+		end
+
+		density[measureCount + 1] = currentMeasure.NPS
+		density[measureCount + 2] = 0
+	end
+
+	return peakNPS, density, streamMeasures, measureCount
 end
